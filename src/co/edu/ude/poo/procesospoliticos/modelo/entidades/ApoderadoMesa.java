@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
-/**
- *
- * @author camil
- */
 public class ApoderadoMesa extends Ciudadano {
     protected Integer RUT;
 

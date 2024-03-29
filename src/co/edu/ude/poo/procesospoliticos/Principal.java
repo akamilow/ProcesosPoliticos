@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package co.edu.ude.poo.procesospoliticos;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoMesa;
@@ -16,10 +12,6 @@ import co.edu.ude.poo.procesospoliticos.modelo.entidades.Voto;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author camil
- */
 public class Principal {
 
     /**

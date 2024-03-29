@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author camil
- */
 public class MesaVotacion {
     // Asociancion con LocalVotacion, VocalMesa, ApoderadoMesa, Voto
     protected LocalVotacion localVotacion;
