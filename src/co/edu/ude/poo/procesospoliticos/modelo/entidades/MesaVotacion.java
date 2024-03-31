@@ -21,6 +21,9 @@ public class MesaVotacion {
         this.generoMesa = generoMesa;
         this.cantidadVotantes = cantidadVotantesMesa;
         this.estadoMesa = estadoMesa;
+        this.localVotacion = localVotacion;
+        this.vocalMesa = vocalMesa;
+        this.apoderadoMesa = apoderadoMesa;
     }
 
     public void setNumeroMesa(Integer numeroMesa) {
@@ -57,10 +60,16 @@ public class MesaVotacion {
 
     @Override
     public String toString() {
-        return "\tID de mesa: " + numeroMesa + "\n" +
+        return  "\tDatos de la mesa de votacion:" + "\n" +
+                "\tID de mesa: " + numeroMesa + "\n" +
                 "\tGénero de mesa: " + generoMesa + "\n" +
                 "\tCantidad de votantes: " + cantidadVotantes + "\n" +
-                "\tEstado de la mesa: " + estadoMesa;
+                "\tEstado de la mesa: " + estadoMesa + "\n" +
+                "\n" +
+                localVotacion.toString() + "\n" +
+                "\n" +
+                vocalMesa.toString() + "\n" +
+                "\n" +
+                "\tApoderados de mesa: " + apoderadoMesa.toString();
         }
-
 }

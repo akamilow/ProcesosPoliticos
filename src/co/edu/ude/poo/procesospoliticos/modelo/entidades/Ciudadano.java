@@ -47,7 +47,7 @@ public class Ciudadano {
 
     @Override
     public String toString() {
-        return  "\tDatos del CIudadano:" + "\n" +
+        return  "\tDatos del Ciudadano:" + "\n" +
                 "\tIdentificación: " + DNI + "\n" +
                 "\tEdad: " + edad + "\n" +
                 "\tNombre: " + nombreCompleto + "\n" +

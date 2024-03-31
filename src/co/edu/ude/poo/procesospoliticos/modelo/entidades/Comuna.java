@@ -17,6 +17,7 @@ public class Comuna {
 
     @Override
     public String toString() {
-        return "\tNombre de la comuna: " + nombreComuna;
+        return  "\tDatos de la comuna:" + "\n" +
+                "\tNombre: " + nombreComuna;
     }
 }

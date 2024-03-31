@@ -28,7 +28,8 @@ public class VocalMesa extends Ciudadano {
 
     @Override 
     public String toString() {
-        return "\tIdentificación: " + DNI + "\n" +
+        return  "\tDatos del vocal de mesa:" + "\n" +
+                "\tIdentificación: " + DNI + "\n" +
                 "\tEdad: " + edad + "\n" +
                 "\tNombre: " + nombreCompleto + "\n" +
                 "\tGénero: " + genero + "\n" +

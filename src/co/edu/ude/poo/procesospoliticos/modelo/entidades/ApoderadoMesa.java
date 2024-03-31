@@ -18,10 +18,11 @@ public class ApoderadoMesa extends Ciudadano {
 
     @Override
     public String toString() {
-        return "\tIdentificación: " + DNI + "\n" +
+        return  "\n" +"\tDatos del apoderado de mesa:" + "\n" +
+                "\tIdentificación: " + DNI + "\n" +
                 "\tEdad: " + edad + "\n" +
                 "\tNombre: " + nombreCompleto + "\n" +
                 "\tGénero: " + genero + "\n" +
-                "\tRUT: " + RUT;
+                "\tRUT: " + RUT + "\n";
     }
 }

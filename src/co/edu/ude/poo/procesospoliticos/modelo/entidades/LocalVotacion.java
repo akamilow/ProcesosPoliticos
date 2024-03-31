@@ -18,7 +18,8 @@ public class LocalVotacion extends Comuna {
 
     @Override
     public String toString() {
-        return  "\tComuna: " + nombreComuna + "\n" +
-                "\tUbicación: " + ubicacion;
+        return  "\tDatos del local de votación:" + "\n" +
+                "\tUbicación: " + ubicacion + "\n" +
+                super.toString();
     }
 }
