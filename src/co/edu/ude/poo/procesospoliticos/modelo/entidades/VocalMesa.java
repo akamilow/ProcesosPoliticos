@@ -4,6 +4,9 @@ public class VocalMesa extends Ciudadano {
     protected Integer id;
     protected String rol;
 
+    public VocalMesa() {
+    }
+
     public VocalMesa(Ciudadano ciudadano, Integer id, String rol) {
         super(ciudadano.DNI, ciudadano.edad, ciudadano.nombreCompleto, ciudadano.genero);
         this.id = id;
@@ -14,7 +17,7 @@ public class VocalMesa extends Ciudadano {
         this.id = id;
     }
 
-    public Integer getVocal() {
+    public Integer getIdVocal() {
         return id;
     }
 
@@ -24,6 +27,17 @@ public class VocalMesa extends Ciudadano {
 
     public String getRolVocal() {
         return rol;
+    }
+
+    public void setCiudadano(Ciudadano ciudadano) {
+        this.DNI = ciudadano.DNI;
+        this.edad = ciudadano.edad;
+        this.nombreCompleto = ciudadano.nombreCompleto;
+        this.genero = ciudadano.genero;
+    }
+
+    public Ciudadano getCiudadano() {
+        return new Ciudadano(DNI, edad, nombreCompleto, genero);
     }
 
     @Override 

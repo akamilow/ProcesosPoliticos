@@ -7,13 +7,18 @@ public class MesaVotacion {
     protected LocalVotacion localVotacion;
     protected VocalMesa vocalMesa;
     protected ArrayList<ApoderadoMesa> apoderadoMesa;
-    protected ArrayList<Voto> votosEmitidosMesa;
+    //hasmap votosEmitidosMesa
+
+    protected   ArrayList<Voto> votosEmitidosMesa = new ArrayList<Voto>();
 
     // Atributos
     protected Integer numeroMesa;
     protected String generoMesa;
     protected Integer cantidadVotantes;
     protected Boolean estadoMesa;
+
+    public MesaVotacion() {
+    }
 
 
     public MesaVotacion(Integer numeroMesa, String generoMesa, Integer cantidadVotantesMesa, Boolean estadoMesa, LocalVotacion localVotacion, VocalMesa vocalMesa, ArrayList<ApoderadoMesa> apoderadoMesa) {
@@ -56,6 +61,62 @@ public class MesaVotacion {
 
     public Boolean getEstadoMesa() {
         return estadoMesa;
+    }
+
+    public void setLocalVotacion(LocalVotacion localVotacion) {
+        this.localVotacion = localVotacion;
+    }
+
+    public LocalVotacion getLocalVotacion() {
+        return localVotacion;
+    }
+
+    public void setVocalMesa(VocalMesa vocalMesa) {
+        this.vocalMesa = vocalMesa;
+    }
+
+    public VocalMesa getVocalMesa() {
+        return vocalMesa;
+    }
+
+    public void setApoderadoMesa(ArrayList<ApoderadoMesa> apoderadoMesa) {
+        this.apoderadoMesa = apoderadoMesa;
+    }
+
+    public ArrayList<ApoderadoMesa> getApoderadoMesa() {
+        return apoderadoMesa;
+    }
+
+    public void setVotosEmitidosMesa(ArrayList<Voto> votosEmitidosMesa) {
+        this.votosEmitidosMesa = votosEmitidosMesa;
+    }
+
+    public ArrayList<Voto> getVotosEmitidosMesa() {
+        return votosEmitidosMesa;
+    }
+
+    public void addVocalMesa(VocalMesa vocalMesa) {
+        this.vocalMesa = vocalMesa;
+    }
+
+    public void removeVocalMesa(VocalMesa vocalMesa) {
+        this.vocalMesa = null;
+    }
+
+    public void addApoderadoMesa(ApoderadoMesa apoderadoMesa) {
+        this.apoderadoMesa.add(apoderadoMesa);
+    }
+
+    public void removeApoderadoMesa(ApoderadoMesa apoderadoMesa) {
+        this.apoderadoMesa.remove(apoderadoMesa);
+    }
+
+    public void addVoto(Voto voto) {
+        this.votosEmitidosMesa.add(voto);
+    }
+
+    public void removeVoto(Voto voto) {
+        this.votosEmitidosMesa.remove(voto);
     }
 
     @Override

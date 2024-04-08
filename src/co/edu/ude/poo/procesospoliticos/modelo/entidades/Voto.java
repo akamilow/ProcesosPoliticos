@@ -7,10 +7,29 @@ public class Voto {
     protected Ciudadano ciudadano;
     protected Date fechaEmision;
 
+    public Voto() {
+    }
+
     public Voto(Ciudadano ciudadano, Candidato candidato, Date fechaEmision) {
         this.ciudadano = ciudadano;
         this.candidato = candidato;
         this.fechaEmision = fechaEmision;
+    }
+
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
+    public Date getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public Candidato getCandidato() {
+        return candidato;
+    }
+
+    public Ciudadano getCiudadano() {
+        return ciudadano;
     }
 
     @Override

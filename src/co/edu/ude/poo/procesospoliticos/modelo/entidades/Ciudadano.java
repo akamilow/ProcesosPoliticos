@@ -6,6 +6,9 @@ public class Ciudadano {
     protected String nombreCompleto;
     protected String genero;
 
+    public Ciudadano() {
+    }
+
     public Ciudadano(Integer DNI, Integer edad, String nombreCompleto, String genero) {
         this.DNI = DNI;
         this.edad = edad;

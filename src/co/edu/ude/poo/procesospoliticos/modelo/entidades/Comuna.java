@@ -3,6 +3,9 @@ package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 public class Comuna {
     protected String nombreComuna;
 
+    public Comuna() {
+    }
+
     public Comuna(String nombreComuna) {
         this.nombreComuna = nombreComuna;
     }
