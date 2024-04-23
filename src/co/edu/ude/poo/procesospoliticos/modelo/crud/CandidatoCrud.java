@@ -1,9 +1,6 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
 
 import java.util.HashMap;
 
@@ -25,11 +22,11 @@ public class CandidatoCrud {
         return candidatos.get(DNI);
     }
 
-    public void actualizarCandidato(Ciudadano ciudadano, Partido partido, Comuna comuna, String categoria) throws Exception {
-        if (!candidatos.containsKey(ciudadano.getDNICiudadano())) {
+    public void actualizarCandidato(Candidato candidato, Candidato nuevoCandidato) throws Exception {
+        if (!candidatos.containsKey(candidato.getDNICiudadano())) {
             throw new Exception("El candidato no existe");
         }
-        candidatos.put(ciudadano.getDNICiudadano(), new Candidato(ciudadano, partido, comuna, categoria));
+        candidatos.put(candidato.getDNICiudadano(), nuevoCandidato);
     }
 
     public void eliminarCandidato(Integer DNI) throws Exception {

@@ -1,6 +1,7 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
+
 import java.util.HashMap;
 
 public class CiudadanoCrud {
@@ -23,7 +24,7 @@ public class CiudadanoCrud {
     
     public void actualizarCiudadano(Ciudadano ciudadano, Ciudadano nuevoCiudadano) throws Exception{
         if(ciudadanos.containsKey(ciudadano.getDNICiudadano())){
-            ciudadanos.put(ciudadano.getDNICiudadano(), new Ciudadano(nuevoCiudadano.getDNICiudadano(), nuevoCiudadano.getEdadCiudadano(), nuevoCiudadano.getNombreCompletoCiudadano(), nuevoCiudadano.getGeneroCiudadano()));
+            ciudadanos.put(ciudadano.getDNICiudadano(), nuevoCiudadano);
             return;
         }
         throw new Exception("El ciudadano no existe");

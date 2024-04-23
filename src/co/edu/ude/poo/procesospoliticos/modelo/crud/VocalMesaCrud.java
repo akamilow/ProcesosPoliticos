@@ -1,7 +1,6 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalMesa;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
 
 import java.util.HashMap;
 
@@ -23,11 +22,11 @@ public class VocalMesaCrud {
         return vocales.get(DNI);
     }
 
-    public void actualizarVocalMesa(Ciudadano ciudadano, Integer id, String rol) throws Exception {
-        if (!vocales.containsKey(ciudadano.getDNICiudadano())) {
+    public void actualizarVocalMesa(VocalMesa vocalMesa, VocalMesa nuevoVocalMesa) throws Exception {
+        if (!vocales.containsKey(vocalMesa.getCiudadano().getDNICiudadano())) {
             throw new Exception("El vocal no existe");
         }
-        vocales.put(ciudadano.getDNICiudadano(), new VocalMesa(ciudadano, id, rol));
+        vocales.put(vocalMesa.getCiudadano().getDNICiudadano(), nuevoVocalMesa);
     }
 
     public void eliminarVocalMesa(Integer DNI) throws Exception {
