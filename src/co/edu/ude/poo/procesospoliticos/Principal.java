@@ -25,8 +25,8 @@ public class Principal {
         v1.setVisible(true);
         */
         
-        Partido partido1 = new Partido(1, "Partido liberal");
-        Partido partido2 = new Partido(2, "Partido conservador");
+        Partido partido1 = new Partido("Partido liberal");
+        Partido partido2 = new Partido("Partido conservador");
 
         // CRUD Partido
         PartidoCrud partido = new PartidoCrud();
@@ -38,6 +38,7 @@ public class Principal {
             System.out.println(e.getMessage());
         }
 
+
         Comuna comuna1 = new Comuna("Cali");
         Comuna comuna2 = new Comuna("Bogota");
 
@@ -45,11 +46,12 @@ public class Principal {
         ComunaCrud comuna = new ComunaCrud();
 
         try {
-            comuna.agregarComuna(comuna1);
-            comuna.agregarComuna(comuna2);
+            comuna.agregarComuna(1, comuna1);
+            comuna.agregarComuna(2, comuna2);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
         
         Ciudadano ciudadano1 = new Ciudadano(1001, 25, "Juan Perez", "Masculino");
         Ciudadano ciudadano2 = new Ciudadano(1002, 30, "Maria Gonzales", "Femenino");
@@ -65,33 +67,7 @@ public class Principal {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-        Candidato candidato1 = new Candidato(ciudadano1, partido1, comuna1, "Alcalde");
-        Candidato candidato2 = new Candidato(ciudadano2, partido2, comuna2, "Senador");
 
-        //CRUD Candidato
-        CandidatoCrud candidatoCrud = new CandidatoCrud();
 
-        try {
-            candidatoCrud.agregarCandidato(candidato1);
-            candidatoCrud.agregarCandidato(candidato2);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        /*
-        try {
-            candidatoCrud.actualizarCandidato(candidato1, candidato3);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            System.out.println(candidatoCrud.listarCandidatos());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        */
-        
     }
 }

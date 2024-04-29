@@ -2,55 +2,49 @@ package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ComunaCrud {
         
-    private ArrayList<Comuna> comunas = new ArrayList<>();
+    private HashMap<Integer, Comuna> comunas = new HashMap<>();
 
-    public void agregarComuna(Comuna nombreComuna) throws Exception{
-        for (Comuna comuna : comunas) {
-            if(comuna.getComuna().equals(nombreComuna.getComuna())){
-                throw new Exception("La comuna ya existe en la lista");
-            }
+    public void agregarComuna(Integer id, Comuna nombreComuna) throws Exception{
+        if(comunas.containsKey(id) || comunas.containsValue(nombreComuna)) {
+            throw new Exception("La comuna ya existe");
         }
-        comunas.add(new Comuna(nombreComuna.getComuna()));
+        comunas.put(id, nombreComuna);
     }
     
-    public Comuna buscarComuna(String nombre) throws Exception{
-        for (Comuna comuna : comunas) {
-            if(comuna.getComuna().equals(nombre)){
-                return comuna;
-            }
+    public Comuna buscarComuna(Integer id) throws Exception{
+        if(comunas.containsKey(id)){
+            return comunas.get(id);
         }
         throw new Exception("La comuna no existe");
     }
 
-    public void actualizarComuna(String nombre, String nuevoNombre) throws Exception{
-        for (Comuna comuna : comunas) {
-            if(comuna.getComuna().equals(nombre)){
-                comuna.setComuna(nuevoNombre);
-                return;
-            }
+    public void actualizarComuna(Integer id, String nuevoNombre) throws Exception{
+        if(comunas.containsKey(id)){
+            comunas.get(id).setComuna(nuevoNombre);
+            return;
         }
         throw new Exception("La comuna no existe");
     }
 
-    public void eliminarComuna(String nombre) throws Exception{
-        for (Comuna comuna : comunas) {
-            if(comuna.getComuna().equals(nombre)){
-                comunas.remove(comuna);
-                return;
-            }
+    public void eliminarComuna(Integer id) throws Exception{
+        if(comunas.containsKey(id)){
+            comunas.remove(id);
+            return;
         }
         throw new Exception("La comuna no existe");
     }
 
-    public ArrayList<Comuna> listarComunas(){
-        return comunas;
+    public void mostrarComunas(){
+        for (Comuna comuna : comunas.values()) {
+            System.out.println(comuna);
+        }
     }
 
-    public int contarComunas(){
+    public int numeroComunas(){
         return comunas.size();
     }
 }

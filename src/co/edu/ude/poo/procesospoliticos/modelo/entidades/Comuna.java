@@ -20,7 +20,6 @@ public class Comuna {
 
     @Override
     public String toString() {
-        return  "\tDatos de la comuna:" + "\n" +
-                "\tNombre: " + nombreComuna;
+        return "Nombre de comuna: " + nombreComuna;
     }
 }
