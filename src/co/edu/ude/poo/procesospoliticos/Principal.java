@@ -5,11 +5,13 @@ import co.edu.ude.poo.procesospoliticos.vistas.gui.VentanaPrincipal;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalMesa;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoCrud;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalVotacionCrud;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalMesaCrud;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoCrud;
 
@@ -52,6 +54,32 @@ public class Principal {
             System.out.println(e.getMessage());
         }
 
+        LocalVotacion localVotacion1 = new LocalVotacion(comuna1, "Calle 1 # 1-1");
+        LocalVotacion localVotacion2 = new LocalVotacion(comuna2, "Calle 2 # 2-2");
+
+        // CRUD LocalVotacion
+        LocalVotacionCrud localVotacion = new LocalVotacionCrud();
+
+        try {
+            localVotacion.agregarLocalVotacion(1, localVotacion1);
+            localVotacion.agregarLocalVotacion(2, localVotacion2);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //actualizar local de votacion
+        try {
+            localVotacion.actualizarLocalVotacion(1, "Calle 3 # 3-3");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // buscar local de votacion
+        try {
+            System.out.println(localVotacion.buscarLocalVotacion(1));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
         Ciudadano ciudadano1 = new Ciudadano(1001, 25, "Juan Perez", "Masculino");
         Ciudadano ciudadano2 = new Ciudadano(1002, 30, "Maria Gonzales", "Femenino");

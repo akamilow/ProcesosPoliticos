@@ -1,55 +1,50 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 public class LocalVotacionCrud {
             
-    private ArrayList<LocalVotacion> localVotaciones = new ArrayList<>();
+    private HashMap<Integer, LocalVotacion> localVotaciones = new HashMap<>();
 
-    public void agregarLocalVotacion(LocalVotacion localVotacion) throws Exception{
-        for (LocalVotacion localVotacion1 : localVotaciones) {
-            if(localVotacion1.getLocalVotacion().equals(localVotacion.getLocalVotacion())){
-                throw new Exception("El local de votación ya existe");
-            }
+    public void agregarLocalVotacion(Integer id, LocalVotacion localVotacion) throws Exception{
+        if(localVotaciones.containsKey(id) || localVotaciones.containsValue(localVotacion)) {
+            throw new Exception("El local de votación ya existe");
         }
-        localVotaciones.add(localVotacion);
+        localVotaciones.put(id, localVotacion);
     }
 
-    public String buscarLocalVotacion(String ubicacion) throws Exception{
-        for (LocalVotacion localVotacion : localVotaciones) {
-            if(localVotacion.getLocalVotacion().equals(ubicacion)){
-                return localVotacion.getLocalVotacion();
-            }
+    public String buscarLocalVotacion(Integer id) throws Exception{
+        if(localVotaciones.containsKey(id)){
+            return localVotaciones.get(id).toString();
         }
         throw new Exception("El local de votación no existe");
     }
 
-    public void actualizarLocalVotacion(LocalVotacion localVotacion, LocalVotacion nuevolocalVotacion) throws Exception{
-        for (LocalVotacion localVotacion1 : localVotaciones) {
-            if(localVotacion1.getLocalVotacion().equals(localVotacion.getLocalVotacion())){
-                localVotacion1.setLocalVotacion(nuevolocalVotacion.getLocalVotacion());
-                return;
-            }
+    public void actualizarLocalVotacion(Integer id, String nuevaUbicacion) throws Exception{
+        if(localVotaciones.containsKey(id)){
+            localVotaciones.get(id).setLocalVotacion(nuevaUbicacion);
+            return;
         }
         throw new Exception("El local de votación no existe");
     }
 
-    public void eliminarLocalVotacion(String ubicacion) throws Exception{
-        for (LocalVotacion localVotacion : localVotaciones) {
-            if(localVotacion.getLocalVotacion().equals(ubicacion)){
-                localVotaciones.remove(localVotacion);
-                return;
-            }
+    public void eliminarLocalVotacion(Integer id) throws Exception{
+        if(localVotaciones.containsKey(id)){
+            localVotaciones.remove(id);
+            return;
         }
         throw new Exception("El local de votación no existe");
     }
 
-    public ArrayList<LocalVotacion> listarLocalVotaciones(){
-        return localVotaciones;
+    public void mostrarLocalVotaciones(){
+        for (LocalVotacion localVotacion : localVotaciones.values()) {
+            System.out.println(localVotacion);
+        }
     }
 
-    public int contarLocalVotaciones(){
+    public int numeroLocalVotaciones(){
         return localVotaciones.size();
     }
 }
