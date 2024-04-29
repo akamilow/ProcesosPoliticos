@@ -9,33 +9,51 @@
             <Property name="text" type="java.lang.String" value="Partido"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarPartido">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Partido..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarPartidoActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarPartido">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Partido..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarPartido">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Partido..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarPartido">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Partido..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu2">
+            <Menu class="javax.swing.JMenu" name="submenuPartido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem22">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarPartido">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -48,33 +66,48 @@
             <Property name="text" type="java.lang.String" value="Comuna"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarComuna">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Comuna..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarComuna">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Comuna..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModiificarComuna">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Comuna..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarComuna">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Comuna..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu3">
+            <Menu class="javax.swing.JMenu" name="submenuComuna">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem23">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarComuna">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -87,33 +120,48 @@
             <Property name="text" type="java.lang.String" value="Local Votaci&#xf3;n"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarLocalVotacion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Local Votaci&#xf3;n..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarLocalVotacion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Local Votaci&#xf3;n..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarLocalVotacion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Local Votaci&#xf3;n..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarLocalVotacion">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Local Votaci&#xf3;n..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+            <Menu class="javax.swing.JMenu" name="submenuLocalVotacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem24">
+                <MenuItem class="javax.swing.JMenuItem" name="itemLIstarLocalVotacion">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo.."/>
                   </Properties>
                 </MenuItem>
@@ -126,33 +174,48 @@
             <Property name="text" type="java.lang.String" value="Ciudadano"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarCiudadano">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Ciudadano..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarCiudadano">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar CIudadano..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarCiudadano">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Ciudadano..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarCiudadano">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Ciudadano..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
+            <Menu class="javax.swing.JMenu" name="submenuCiudadano">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem25">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarCiudadano">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -165,33 +228,48 @@
             <Property name="text" type="java.lang.String" value="Apoderado de Mesa"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem17">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarApoderado">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Apoderado..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem18">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarApoderado">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Apoderado..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarApoderado">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Apoderado..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem20">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarApoderado">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Apoderado..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu1">
+            <Menu class="javax.swing.JMenu" name="submenuApoderado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem21">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarApoderado">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -204,33 +282,48 @@
             <Property name="text" type="java.lang.String" value="Candidato"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarCandidato">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Candidato..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem27">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarCandidato">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Candidato..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem28">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarCandidato">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Candidato..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarCandidato">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Elimiinar Candidato..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu6">
+            <Menu class="javax.swing.JMenu" name="submenuCandidato">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem30">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarCandidato">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -243,33 +336,48 @@
             <Property name="text" type="java.lang.String" value="Vocal de Mesa"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem31">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarVocal">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Vocal Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem32">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarVocal">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Vocal Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem33">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarVocal">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Vocal Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem34">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarVocal">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Vocal Mesa..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu7">
+            <Menu class="javax.swing.JMenu" name="submenuVocal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem35">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarVocal">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -279,36 +387,51 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuMesa">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Mesa"/>
+            <Property name="text" type="java.lang.String" value="Mesa de Votaci&#xf3;n"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem36">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarMesa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem37">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarMesa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem38">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarMesa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Mesa..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem39">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarMesa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Mesa..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu8">
+            <Menu class="javax.swing.JMenu" name="submenuMesa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem40">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarMesa">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -321,33 +444,48 @@
             <Property name="text" type="java.lang.String" value="Voto"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem41">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAgregarVoto">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Voto..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem42">
+            <MenuItem class="javax.swing.JMenuItem" name="itemBuscarVoto">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Voto..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem43">
+            <MenuItem class="javax.swing.JMenuItem" name="itemModificarVoto">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Voto..."/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem44">
+            <MenuItem class="javax.swing.JMenuItem" name="itemEliminarVoto">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Voto..."/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenu9">
+            <Menu class="javax.swing.JMenu" name="submenuVoto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem45">
+                <MenuItem class="javax.swing.JMenuItem" name="itemListarVoto">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
                 </MenuItem>
@@ -360,6 +498,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="APLICACI&#xd3;N PARA GESTIONAR PROCESOS POLITICOS"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="BarraMenu"/>
@@ -381,13 +520,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="750" max="32767" attributes="0"/>
+          <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="191" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="286" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"/>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

@@ -26,277 +26,331 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         BarraMenu = new javax.swing.JMenuBar();
         menuPartido = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem22 = new javax.swing.JMenuItem();
+        itemAgregarPartido = new javax.swing.JMenuItem();
+        itemBuscarPartido = new javax.swing.JMenuItem();
+        itemModificarPartido = new javax.swing.JMenuItem();
+        itemEliminarPartido = new javax.swing.JMenuItem();
+        submenuPartido = new javax.swing.JMenu();
+        itemListarPartido = new javax.swing.JMenuItem();
         menuComuna = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem23 = new javax.swing.JMenuItem();
+        itemAgregarComuna = new javax.swing.JMenuItem();
+        itemBuscarComuna = new javax.swing.JMenuItem();
+        itemModiificarComuna = new javax.swing.JMenuItem();
+        itemEliminarComuna = new javax.swing.JMenuItem();
+        submenuComuna = new javax.swing.JMenu();
+        itemListarComuna = new javax.swing.JMenuItem();
         menuLocalVotacion = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem24 = new javax.swing.JMenuItem();
+        itemAgregarLocalVotacion = new javax.swing.JMenuItem();
+        itemBuscarLocalVotacion = new javax.swing.JMenuItem();
+        itemModificarLocalVotacion = new javax.swing.JMenuItem();
+        itemEliminarLocalVotacion = new javax.swing.JMenuItem();
+        submenuLocalVotacion = new javax.swing.JMenu();
+        itemLIstarLocalVotacion = new javax.swing.JMenuItem();
         menuCiudadano = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem25 = new javax.swing.JMenuItem();
+        itemAgregarCiudadano = new javax.swing.JMenuItem();
+        itemBuscarCiudadano = new javax.swing.JMenuItem();
+        itemModificarCiudadano = new javax.swing.JMenuItem();
+        itemEliminarCiudadano = new javax.swing.JMenuItem();
+        submenuCiudadano = new javax.swing.JMenu();
+        itemListarCiudadano = new javax.swing.JMenuItem();
         menuApoderadoMesa = new javax.swing.JMenu();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenuItem19 = new javax.swing.JMenuItem();
-        jMenuItem20 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
+        itemAgregarApoderado = new javax.swing.JMenuItem();
+        itemBuscarApoderado = new javax.swing.JMenuItem();
+        itemModificarApoderado = new javax.swing.JMenuItem();
+        itemEliminarApoderado = new javax.swing.JMenuItem();
+        submenuApoderado = new javax.swing.JMenu();
+        itemListarApoderado = new javax.swing.JMenuItem();
         menuCandidato = new javax.swing.JMenu();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem27 = new javax.swing.JMenuItem();
-        jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem30 = new javax.swing.JMenuItem();
+        itemAgregarCandidato = new javax.swing.JMenuItem();
+        itemBuscarCandidato = new javax.swing.JMenuItem();
+        itemModificarCandidato = new javax.swing.JMenuItem();
+        itemEliminarCandidato = new javax.swing.JMenuItem();
+        submenuCandidato = new javax.swing.JMenu();
+        itemListarCandidato = new javax.swing.JMenuItem();
         menuVocalMesa = new javax.swing.JMenu();
-        jMenuItem31 = new javax.swing.JMenuItem();
-        jMenuItem32 = new javax.swing.JMenuItem();
-        jMenuItem33 = new javax.swing.JMenuItem();
-        jMenuItem34 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem35 = new javax.swing.JMenuItem();
+        itemAgregarVocal = new javax.swing.JMenuItem();
+        itemBuscarVocal = new javax.swing.JMenuItem();
+        itemModificarVocal = new javax.swing.JMenuItem();
+        itemEliminarVocal = new javax.swing.JMenuItem();
+        submenuVocal = new javax.swing.JMenu();
+        itemListarVocal = new javax.swing.JMenuItem();
         menuMesa = new javax.swing.JMenu();
-        jMenuItem36 = new javax.swing.JMenuItem();
-        jMenuItem37 = new javax.swing.JMenuItem();
-        jMenuItem38 = new javax.swing.JMenuItem();
-        jMenuItem39 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem40 = new javax.swing.JMenuItem();
+        itemAgregarMesa = new javax.swing.JMenuItem();
+        itemBuscarMesa = new javax.swing.JMenuItem();
+        itemModificarMesa = new javax.swing.JMenuItem();
+        itemEliminarMesa = new javax.swing.JMenuItem();
+        submenuMesa = new javax.swing.JMenu();
+        itemListarMesa = new javax.swing.JMenuItem();
         menuVoto = new javax.swing.JMenu();
-        jMenuItem41 = new javax.swing.JMenuItem();
-        jMenuItem42 = new javax.swing.JMenuItem();
-        jMenuItem43 = new javax.swing.JMenuItem();
-        jMenuItem44 = new javax.swing.JMenuItem();
-        jMenu9 = new javax.swing.JMenu();
-        jMenuItem45 = new javax.swing.JMenuItem();
+        itemAgregarVoto = new javax.swing.JMenuItem();
+        itemBuscarVoto = new javax.swing.JMenuItem();
+        itemModificarVoto = new javax.swing.JMenuItem();
+        itemEliminarVoto = new javax.swing.JMenuItem();
+        submenuVoto = new javax.swing.JMenu();
+        itemListarVoto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("APLICACIÓN PARA GESTIONAR PROCESOS POLITICOS");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"))); // NOI18N
 
         menuPartido.setText("Partido");
 
-        jMenuItem1.setText("Agregar Partido...");
-        menuPartido.add(jMenuItem1);
+        itemAgregarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarPartido.setText("Agregar Partido...");
+        itemAgregarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarPartidoActionPerformed(evt);
+            }
+        });
+        menuPartido.add(itemAgregarPartido);
 
-        jMenuItem2.setText("Buscar Partido...");
-        menuPartido.add(jMenuItem2);
+        itemBuscarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarPartido.setText("Buscar Partido...");
+        menuPartido.add(itemBuscarPartido);
 
-        jMenuItem3.setText("Modificar Partido...");
-        menuPartido.add(jMenuItem3);
+        itemModificarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarPartido.setText("Modificar Partido...");
+        menuPartido.add(itemModificarPartido);
 
-        jMenuItem4.setText("Eliminar Partido...");
-        menuPartido.add(jMenuItem4);
+        itemEliminarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarPartido.setText("Eliminar Partido...");
+        menuPartido.add(itemEliminarPartido);
 
-        jMenu2.setText("Reportes");
+        submenuPartido.setText("Reportes");
 
-        jMenuItem22.setText("Listar Todo...");
-        jMenu2.add(jMenuItem22);
+        itemListarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarPartido.setText("Listar Todo...");
+        submenuPartido.add(itemListarPartido);
 
-        menuPartido.add(jMenu2);
+        menuPartido.add(submenuPartido);
 
         BarraMenu.add(menuPartido);
 
         menuComuna.setText("Comuna");
 
-        jMenuItem5.setText("Agregar Comuna...");
-        menuComuna.add(jMenuItem5);
+        itemAgregarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarComuna.setText("Agregar Comuna...");
+        menuComuna.add(itemAgregarComuna);
 
-        jMenuItem6.setText("Buscar Comuna...");
-        menuComuna.add(jMenuItem6);
+        itemBuscarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarComuna.setText("Buscar Comuna...");
+        menuComuna.add(itemBuscarComuna);
 
-        jMenuItem7.setText("Modificar Comuna...");
-        menuComuna.add(jMenuItem7);
+        itemModiificarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModiificarComuna.setText("Modificar Comuna...");
+        menuComuna.add(itemModiificarComuna);
 
-        jMenuItem8.setText("Eliminar Comuna...");
-        menuComuna.add(jMenuItem8);
+        itemEliminarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarComuna.setText("Eliminar Comuna...");
+        menuComuna.add(itemEliminarComuna);
 
-        jMenu3.setText("Reportes");
+        submenuComuna.setText("Reportes");
 
-        jMenuItem23.setText("Listar Todo...");
-        jMenu3.add(jMenuItem23);
+        itemListarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarComuna.setText("Listar Todo...");
+        submenuComuna.add(itemListarComuna);
 
-        menuComuna.add(jMenu3);
+        menuComuna.add(submenuComuna);
 
         BarraMenu.add(menuComuna);
 
         menuLocalVotacion.setText("Local Votación");
 
-        jMenuItem9.setText("Agregar Local Votación...");
-        menuLocalVotacion.add(jMenuItem9);
+        itemAgregarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarLocalVotacion.setText("Agregar Local Votación...");
+        menuLocalVotacion.add(itemAgregarLocalVotacion);
 
-        jMenuItem10.setText("Buscar Local Votación...");
-        menuLocalVotacion.add(jMenuItem10);
+        itemBuscarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarLocalVotacion.setText("Buscar Local Votación...");
+        menuLocalVotacion.add(itemBuscarLocalVotacion);
 
-        jMenuItem11.setText("Modificar Local Votación...");
-        menuLocalVotacion.add(jMenuItem11);
+        itemModificarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarLocalVotacion.setText("Modificar Local Votación...");
+        menuLocalVotacion.add(itemModificarLocalVotacion);
 
-        jMenuItem12.setText("Eliminar Local Votación...");
-        menuLocalVotacion.add(jMenuItem12);
+        itemEliminarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarLocalVotacion.setText("Eliminar Local Votación...");
+        menuLocalVotacion.add(itemEliminarLocalVotacion);
 
-        jMenu4.setText("Reportes");
+        submenuLocalVotacion.setText("Reportes");
 
-        jMenuItem24.setText("Listar Todo..");
-        jMenu4.add(jMenuItem24);
+        itemLIstarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemLIstarLocalVotacion.setText("Listar Todo..");
+        submenuLocalVotacion.add(itemLIstarLocalVotacion);
 
-        menuLocalVotacion.add(jMenu4);
+        menuLocalVotacion.add(submenuLocalVotacion);
 
         BarraMenu.add(menuLocalVotacion);
 
         menuCiudadano.setText("Ciudadano");
 
-        jMenuItem13.setText("Agregar Ciudadano...");
-        menuCiudadano.add(jMenuItem13);
+        itemAgregarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarCiudadano.setText("Agregar Ciudadano...");
+        menuCiudadano.add(itemAgregarCiudadano);
 
-        jMenuItem14.setText("Buscar CIudadano...");
-        menuCiudadano.add(jMenuItem14);
+        itemBuscarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarCiudadano.setText("Buscar CIudadano...");
+        menuCiudadano.add(itemBuscarCiudadano);
 
-        jMenuItem15.setText("Modificar Ciudadano...");
-        menuCiudadano.add(jMenuItem15);
+        itemModificarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarCiudadano.setText("Modificar Ciudadano...");
+        menuCiudadano.add(itemModificarCiudadano);
 
-        jMenuItem16.setText("Eliminar Ciudadano...");
-        menuCiudadano.add(jMenuItem16);
+        itemEliminarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarCiudadano.setText("Eliminar Ciudadano...");
+        menuCiudadano.add(itemEliminarCiudadano);
 
-        jMenu5.setText("Reportes");
+        submenuCiudadano.setText("Reportes");
 
-        jMenuItem25.setText("Listar Todo...");
-        jMenu5.add(jMenuItem25);
+        itemListarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarCiudadano.setText("Listar Todo...");
+        submenuCiudadano.add(itemListarCiudadano);
 
-        menuCiudadano.add(jMenu5);
+        menuCiudadano.add(submenuCiudadano);
 
         BarraMenu.add(menuCiudadano);
 
         menuApoderadoMesa.setText("Apoderado de Mesa");
 
-        jMenuItem17.setText("Agregar Apoderado...");
-        menuApoderadoMesa.add(jMenuItem17);
+        itemAgregarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarApoderado.setText("Agregar Apoderado...");
+        menuApoderadoMesa.add(itemAgregarApoderado);
 
-        jMenuItem18.setText("Buscar Apoderado...");
-        menuApoderadoMesa.add(jMenuItem18);
+        itemBuscarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarApoderado.setText("Buscar Apoderado...");
+        menuApoderadoMesa.add(itemBuscarApoderado);
 
-        jMenuItem19.setText("Modificar Apoderado...");
-        menuApoderadoMesa.add(jMenuItem19);
+        itemModificarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarApoderado.setText("Modificar Apoderado...");
+        menuApoderadoMesa.add(itemModificarApoderado);
 
-        jMenuItem20.setText("Eliminar Apoderado...");
-        menuApoderadoMesa.add(jMenuItem20);
+        itemEliminarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarApoderado.setText("Eliminar Apoderado...");
+        menuApoderadoMesa.add(itemEliminarApoderado);
 
-        jMenu1.setText("Reportes");
+        submenuApoderado.setText("Reportes");
 
-        jMenuItem21.setText("Listar Todo...");
-        jMenu1.add(jMenuItem21);
+        itemListarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarApoderado.setText("Listar Todo...");
+        submenuApoderado.add(itemListarApoderado);
 
-        menuApoderadoMesa.add(jMenu1);
+        menuApoderadoMesa.add(submenuApoderado);
 
         BarraMenu.add(menuApoderadoMesa);
 
         menuCandidato.setText("Candidato");
 
-        jMenuItem26.setText("Agregar Candidato...");
-        menuCandidato.add(jMenuItem26);
+        itemAgregarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarCandidato.setText("Agregar Candidato...");
+        menuCandidato.add(itemAgregarCandidato);
 
-        jMenuItem27.setText("Buscar Candidato...");
-        menuCandidato.add(jMenuItem27);
+        itemBuscarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarCandidato.setText("Buscar Candidato...");
+        menuCandidato.add(itemBuscarCandidato);
 
-        jMenuItem28.setText("Modificar Candidato...");
-        menuCandidato.add(jMenuItem28);
+        itemModificarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarCandidato.setText("Modificar Candidato...");
+        menuCandidato.add(itemModificarCandidato);
 
-        jMenuItem29.setText("Elimiinar Candidato...");
-        menuCandidato.add(jMenuItem29);
+        itemEliminarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarCandidato.setText("Elimiinar Candidato...");
+        menuCandidato.add(itemEliminarCandidato);
 
-        jMenu6.setText("Reportes");
+        submenuCandidato.setText("Reportes");
 
-        jMenuItem30.setText("Listar Todo...");
-        jMenu6.add(jMenuItem30);
+        itemListarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarCandidato.setText("Listar Todo...");
+        submenuCandidato.add(itemListarCandidato);
 
-        menuCandidato.add(jMenu6);
+        menuCandidato.add(submenuCandidato);
 
         BarraMenu.add(menuCandidato);
 
         menuVocalMesa.setText("Vocal de Mesa");
 
-        jMenuItem31.setText("Agregar Vocal Mesa...");
-        menuVocalMesa.add(jMenuItem31);
+        itemAgregarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarVocal.setText("Agregar Vocal Mesa...");
+        menuVocalMesa.add(itemAgregarVocal);
 
-        jMenuItem32.setText("Buscar Vocal Mesa...");
-        menuVocalMesa.add(jMenuItem32);
+        itemBuscarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarVocal.setText("Buscar Vocal Mesa...");
+        menuVocalMesa.add(itemBuscarVocal);
 
-        jMenuItem33.setText("Modificar Vocal Mesa...");
-        menuVocalMesa.add(jMenuItem33);
+        itemModificarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarVocal.setText("Modificar Vocal Mesa...");
+        menuVocalMesa.add(itemModificarVocal);
 
-        jMenuItem34.setText("Eliminar Vocal Mesa...");
-        menuVocalMesa.add(jMenuItem34);
+        itemEliminarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarVocal.setText("Eliminar Vocal Mesa...");
+        menuVocalMesa.add(itemEliminarVocal);
 
-        jMenu7.setText("Reportes");
+        submenuVocal.setText("Reportes");
 
-        jMenuItem35.setText("Listar Todo...");
-        jMenu7.add(jMenuItem35);
+        itemListarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarVocal.setText("Listar Todo...");
+        submenuVocal.add(itemListarVocal);
 
-        menuVocalMesa.add(jMenu7);
+        menuVocalMesa.add(submenuVocal);
 
         BarraMenu.add(menuVocalMesa);
 
-        menuMesa.setText("Mesa");
+        menuMesa.setText("Mesa de Votación");
 
-        jMenuItem36.setText("Agregar Mesa...");
-        menuMesa.add(jMenuItem36);
+        itemAgregarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarMesa.setText("Agregar Mesa...");
+        menuMesa.add(itemAgregarMesa);
 
-        jMenuItem37.setText("Buscar Mesa...");
-        menuMesa.add(jMenuItem37);
+        itemBuscarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarMesa.setText("Buscar Mesa...");
+        menuMesa.add(itemBuscarMesa);
 
-        jMenuItem38.setText("Modificar Mesa...");
-        menuMesa.add(jMenuItem38);
+        itemModificarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarMesa.setText("Modificar Mesa...");
+        menuMesa.add(itemModificarMesa);
 
-        jMenuItem39.setText("Eliminar Mesa...");
-        menuMesa.add(jMenuItem39);
+        itemEliminarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarMesa.setText("Eliminar Mesa...");
+        menuMesa.add(itemEliminarMesa);
 
-        jMenu8.setText("Reportes");
+        submenuMesa.setText("Reportes");
 
-        jMenuItem40.setText("Listar Todo...");
-        jMenu8.add(jMenuItem40);
+        itemListarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarMesa.setText("Listar Todo...");
+        submenuMesa.add(itemListarMesa);
 
-        menuMesa.add(jMenu8);
+        menuMesa.add(submenuMesa);
 
         BarraMenu.add(menuMesa);
 
         menuVoto.setText("Voto");
 
-        jMenuItem41.setText("Agregar Voto...");
-        menuVoto.add(jMenuItem41);
+        itemAgregarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        itemAgregarVoto.setText("Agregar Voto...");
+        menuVoto.add(itemAgregarVoto);
 
-        jMenuItem42.setText("Buscar Voto...");
-        menuVoto.add(jMenuItem42);
+        itemBuscarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        itemBuscarVoto.setText("Buscar Voto...");
+        menuVoto.add(itemBuscarVoto);
 
-        jMenuItem43.setText("Modificar Voto...");
-        menuVoto.add(jMenuItem43);
+        itemModificarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        itemModificarVoto.setText("Modificar Voto...");
+        menuVoto.add(itemModificarVoto);
 
-        jMenuItem44.setText("Eliminar Voto...");
-        menuVoto.add(jMenuItem44);
+        itemEliminarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        itemEliminarVoto.setText("Eliminar Voto...");
+        menuVoto.add(itemEliminarVoto);
 
-        jMenu9.setText("Reportes");
+        submenuVoto.setText("Reportes");
 
-        jMenuItem45.setText("Listar Todo...");
-        jMenu9.add(jMenuItem45);
+        itemListarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
+        itemListarVoto.setText("Listar Todo...");
+        submenuVoto.add(itemListarVoto);
 
-        menuVoto.add(jMenu9);
+        menuVoto.add(submenuVoto);
 
         BarraMenu.add(menuVoto);
 
@@ -306,15 +360,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 191, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itemAgregarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarPartidoActionPerformed
+        // TODO add your handling code here:
+        VentanaPartido v2 = new VentanaPartido(this, true);
+        v2.setLocationRelativeTo(this);
+        v2.setVisible(true);
+    }//GEN-LAST:event_itemAgregarPartidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,60 +416,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
-    private javax.swing.JMenuItem jMenuItem25;
-    private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
-    private javax.swing.JMenuItem jMenuItem28;
-    private javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem30;
-    private javax.swing.JMenuItem jMenuItem31;
-    private javax.swing.JMenuItem jMenuItem32;
-    private javax.swing.JMenuItem jMenuItem33;
-    private javax.swing.JMenuItem jMenuItem34;
-    private javax.swing.JMenuItem jMenuItem35;
-    private javax.swing.JMenuItem jMenuItem36;
-    private javax.swing.JMenuItem jMenuItem37;
-    private javax.swing.JMenuItem jMenuItem38;
-    private javax.swing.JMenuItem jMenuItem39;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem40;
-    private javax.swing.JMenuItem jMenuItem41;
-    private javax.swing.JMenuItem jMenuItem42;
-    private javax.swing.JMenuItem jMenuItem43;
-    private javax.swing.JMenuItem jMenuItem44;
-    private javax.swing.JMenuItem jMenuItem45;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem itemAgregarApoderado;
+    private javax.swing.JMenuItem itemAgregarCandidato;
+    private javax.swing.JMenuItem itemAgregarCiudadano;
+    private javax.swing.JMenuItem itemAgregarComuna;
+    private javax.swing.JMenuItem itemAgregarLocalVotacion;
+    private javax.swing.JMenuItem itemAgregarMesa;
+    private javax.swing.JMenuItem itemAgregarPartido;
+    private javax.swing.JMenuItem itemAgregarVocal;
+    private javax.swing.JMenuItem itemAgregarVoto;
+    private javax.swing.JMenuItem itemBuscarApoderado;
+    private javax.swing.JMenuItem itemBuscarCandidato;
+    private javax.swing.JMenuItem itemBuscarCiudadano;
+    private javax.swing.JMenuItem itemBuscarComuna;
+    private javax.swing.JMenuItem itemBuscarLocalVotacion;
+    private javax.swing.JMenuItem itemBuscarMesa;
+    private javax.swing.JMenuItem itemBuscarPartido;
+    private javax.swing.JMenuItem itemBuscarVocal;
+    private javax.swing.JMenuItem itemBuscarVoto;
+    private javax.swing.JMenuItem itemEliminarApoderado;
+    private javax.swing.JMenuItem itemEliminarCandidato;
+    private javax.swing.JMenuItem itemEliminarCiudadano;
+    private javax.swing.JMenuItem itemEliminarComuna;
+    private javax.swing.JMenuItem itemEliminarLocalVotacion;
+    private javax.swing.JMenuItem itemEliminarMesa;
+    private javax.swing.JMenuItem itemEliminarPartido;
+    private javax.swing.JMenuItem itemEliminarVocal;
+    private javax.swing.JMenuItem itemEliminarVoto;
+    private javax.swing.JMenuItem itemLIstarLocalVotacion;
+    private javax.swing.JMenuItem itemListarApoderado;
+    private javax.swing.JMenuItem itemListarCandidato;
+    private javax.swing.JMenuItem itemListarCiudadano;
+    private javax.swing.JMenuItem itemListarComuna;
+    private javax.swing.JMenuItem itemListarMesa;
+    private javax.swing.JMenuItem itemListarPartido;
+    private javax.swing.JMenuItem itemListarVocal;
+    private javax.swing.JMenuItem itemListarVoto;
+    private javax.swing.JMenuItem itemModificarApoderado;
+    private javax.swing.JMenuItem itemModificarCandidato;
+    private javax.swing.JMenuItem itemModificarCiudadano;
+    private javax.swing.JMenuItem itemModificarLocalVotacion;
+    private javax.swing.JMenuItem itemModificarMesa;
+    private javax.swing.JMenuItem itemModificarPartido;
+    private javax.swing.JMenuItem itemModificarVocal;
+    private javax.swing.JMenuItem itemModificarVoto;
+    private javax.swing.JMenuItem itemModiificarComuna;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu menuApoderadoMesa;
     private javax.swing.JMenu menuCandidato;
     private javax.swing.JMenu menuCiudadano;
@@ -416,5 +471,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuPartido;
     private javax.swing.JMenu menuVocalMesa;
     private javax.swing.JMenu menuVoto;
+    private javax.swing.JMenu submenuApoderado;
+    private javax.swing.JMenu submenuCandidato;
+    private javax.swing.JMenu submenuCiudadano;
+    private javax.swing.JMenu submenuComuna;
+    private javax.swing.JMenu submenuLocalVotacion;
+    private javax.swing.JMenu submenuMesa;
+    private javax.swing.JMenu submenuPartido;
+    private javax.swing.JMenu submenuVocal;
+    private javax.swing.JMenu submenuVoto;
     // End of variables declaration//GEN-END:variables
 }
