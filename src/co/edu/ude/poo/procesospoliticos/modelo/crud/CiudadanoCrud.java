@@ -12,7 +12,7 @@ public class CiudadanoCrud {
         if(ciudadanos.containsKey(ciudadano.getDNICiudadano())){
             throw new Exception("El ciudadano ya existe en la lista");
         }
-        ciudadanos.put(ciudadano.getDNICiudadano(), new Ciudadano(ciudadano.getDNICiudadano(), ciudadano.getEdadCiudadano(), ciudadano.getNombreCompletoCiudadano(), ciudadano.getGeneroCiudadano()));
+        ciudadanos.put(ciudadano.getDNICiudadano(), ciudadano);
     }
     
     public Ciudadano buscarCiudadano(Integer DNI) throws Exception{
@@ -22,9 +22,12 @@ public class CiudadanoCrud {
         throw new Exception("El ciudadano no existe");
     }
     
-    public void actualizarCiudadano(Ciudadano ciudadano, Ciudadano nuevoCiudadano) throws Exception{
-        if(ciudadanos.containsKey(ciudadano.getDNICiudadano())){
-            ciudadanos.put(ciudadano.getDNICiudadano(), nuevoCiudadano);
+    public void actualizarCiudadano(Integer DNI, String nombreCompleto, Integer edad, String genero) throws Exception{
+        if(ciudadanos.containsKey(DNI)){
+            Ciudadano ciudadano = ciudadanos.get(DNI);
+            ciudadano.setNombreCompletoCiudadano(nombreCompleto);
+            ciudadano.setEdadCiudadano(edad);
+            ciudadano.setGeneroCiudadano(genero);
             return;
         }
         throw new Exception("El ciudadano no existe");
@@ -38,8 +41,10 @@ public class CiudadanoCrud {
         throw new Exception("El ciudadano no existe");
     }
     
-    public HashMap<Integer, Ciudadano> listarCiudadanos(){
-        return ciudadanos;
+    public void mostrarCiudadanos(){
+        for (Ciudadano ciudadano : ciudadanos.values()) {
+            System.out.println(ciudadano);
+        }
     }
     
     public int contarCiudadanos(){

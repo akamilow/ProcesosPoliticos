@@ -50,10 +50,9 @@ public class Ciudadano {
 
     @Override
     public String toString() {
-        return  "\tDatos del Ciudadano:" + "\n" +
-                "\tIdentificación: " + DNI + "\n" +
-                "\tEdad: " + edad + "\n" +
-                "\tNombre: " + nombreCompleto + "\n" +
-                "\tGénero: " + genero;
+        return  "Identificación: " + DNI + "\n" +
+                "Edad: " + edad + "\n" +
+                "Nombre: " + nombreCompleto + "\n" +
+                "Género: " + genero;
     }
 }

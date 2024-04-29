@@ -40,7 +40,6 @@ public class Principal {
             System.out.println(e.getMessage());
         }
 
-
         Comuna comuna1 = new Comuna("Cali");
         Comuna comuna2 = new Comuna("Bogota");
 
@@ -67,23 +66,9 @@ public class Principal {
             System.out.println(e.getMessage());
         }
 
-        //actualizar local de votacion
-        try {
-            localVotacion.actualizarLocalVotacion(1, "Calle 3 # 3-3");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        // buscar local de votacion
-        try {
-            System.out.println(localVotacion.buscarLocalVotacion(1));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
         Ciudadano ciudadano1 = new Ciudadano(1001, 25, "Juan Perez", "Masculino");
         Ciudadano ciudadano2 = new Ciudadano(1002, 30, "Maria Gonzales", "Femenino");
-        Ciudadano ciudadano3 = new Ciudadano(1004, 20, "Camilo Castellar", "Masculino");
+        Ciudadano ciudadano3 = new Ciudadano(1003, 20, "Camilo Castellar", "Masculino");
 
         // CRUD Ciudadano
         CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
