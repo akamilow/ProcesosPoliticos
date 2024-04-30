@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 /**
@@ -93,7 +89,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         itemListarVoto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("APLICACIÓN PARA GESTIONAR PROCESOS POLITICOS");
+        setTitle("PROCESOS POLITICOS APP");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"))); // NOI18N
 

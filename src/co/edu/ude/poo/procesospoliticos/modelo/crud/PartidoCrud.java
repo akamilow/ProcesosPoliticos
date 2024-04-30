@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class PartidoCrud {
 
-    private HashMap<Integer, Partido> partidos = new HashMap<>();
+    public HashMap<Integer, Partido> partidos = new HashMap<>();
 
     public void agregarPartido(Integer id, Partido nombrePartido) throws Exception{
         if(partidos.containsKey(id) || partidos.containsValue(nombrePartido)) {

@@ -498,7 +498,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="APLICACI&#xd3;N PARA GESTIONAR PROCESOS POLITICOS"/>
+    <Property name="title" type="java.lang.String" value="PROCESOS POLITICOS APP"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="BarraMenu"/>
