@@ -1,7 +1,6 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 /**
- *
  * @author camilo castellar
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -89,7 +88,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         itemListarVoto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PROCESOS POLITICOS APP");
+        setTitle("Procesos Politícos");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"))); // NOI18N
 
@@ -106,14 +105,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemBuscarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarPartido.setText("Buscar Partido...");
+        itemBuscarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarPartidoActionPerformed(evt);
+            }
+        });
         menuPartido.add(itemBuscarPartido);
 
         itemModificarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarPartido.setText("Modificar Partido...");
+        itemModificarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarPartidoActionPerformed(evt);
+            }
+        });
         menuPartido.add(itemModificarPartido);
 
         itemEliminarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarPartido.setText("Eliminar Partido...");
+        itemEliminarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarPartidoActionPerformed(evt);
+            }
+        });
         menuPartido.add(itemEliminarPartido);
 
         submenuPartido.setText("Reportes");
@@ -370,10 +384,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemAgregarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarPartidoActionPerformed
         // TODO add your handling code here:
-        VentanaPartido v2 = new VentanaPartido(this, true);
-        v2.setLocationRelativeTo(this);
-        v2.setVisible(true);
+        VentanaPartido ventana = new VentanaPartido(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
     }//GEN-LAST:event_itemAgregarPartidoActionPerformed
+
+    private void itemBuscarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarPartidoActionPerformed
+        VentanaPartido ventana = new VentanaPartido(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarPartidoActionPerformed
+
+    private void itemModificarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarPartidoActionPerformed
+        itemBuscarPartidoActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarPartidoActionPerformed
+
+    private void itemEliminarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarPartidoActionPerformed
+        itemBuscarPartidoActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarPartidoActionPerformed
 
     /**
      * @param args the command line arguments

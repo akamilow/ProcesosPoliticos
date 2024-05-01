@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ComunaCrud {
         
-    private HashMap<Integer, Comuna> comunas = new HashMap<>();
+    public HashMap<Integer, Comuna> comunas = new HashMap<>();
 
     public void agregarComuna(Integer id, Comuna nombreComuna) throws Exception{
         if(comunas.containsKey(id) || comunas.containsValue(nombreComuna)) {

@@ -1,7 +1,8 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
 
 import java.awt.Toolkit;
 
@@ -10,16 +11,25 @@ import javax.swing.JOptionPane;
 /**
  * @author camilo castellar
  */
-public class VentanaPartido extends javax.swing.JDialog {
+public class VentanaComuna extends javax.swing.JDialog {
     
     // instacia de clase CRUD Partido
-    PartidoCrud partidoCrud = new PartidoCrud();
+    ComunaCrud comunaCrud = new ComunaCrud();
     
-    public VentanaPartido(java.awt.Frame parent, boolean modal) {
+    public VentanaComuna(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
+    
+    
+    // Metodo para habilitar botones
+    public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
+        btnAgregarComuna.setEnabled(agregar);
+        btnBuscarComuna.setEnabled(buscar);
+        btnModificarComuna.setEnabled(modificar);
+        btnEliminarComuna.setEnabled(eliminar);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,40 +41,40 @@ public class VentanaPartido extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtIDPartido = new javax.swing.JTextField();
+        txtIDComuna = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNombrePartido = new javax.swing.JTextField();
+        txtNombreComuna = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnAgregarPartido = new javax.swing.JButton();
-        btnBuscarPartido = new javax.swing.JButton();
-        btnModificarPartido = new javax.swing.JButton();
-        btnEliminarPartido = new javax.swing.JButton();
+        btnAgregarComuna = new javax.swing.JButton();
+        btnBuscarComuna = new javax.swing.JButton();
+        btnModificarComuna = new javax.swing.JButton();
+        btnEliminarComuna = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Procesos Politicos - Gestion de Partidos");
+        setTitle("Procesos Politícos - Gestión de Comunas");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos del Partido:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de comuna:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("ID:");
 
-        txtIDPartido.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        txtIDPartido.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtIDComuna.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtIDComuna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIDPartidoKeyTyped(evt);
+                txtIDComunaKeyTyped(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Nombre del partido:");
+        jLabel3.setText("Nombre de comuna:");
 
-        txtNombrePartido.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        txtNombrePartido.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreComuna.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtNombreComuna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombrePartidoKeyTyped(evt);
+                txtNombreComunaKeyTyped(evt);
             }
         });
 
@@ -75,18 +85,16 @@ public class VentanaPartido extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombrePartido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIDPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtIDPartido, txtNombrePartido});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtIDComuna, txtNombreComuna});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,54 +102,54 @@ public class VentanaPartido extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIDPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIDComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombrePartido, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtIDPartido, txtNombrePartido});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtIDComuna, txtNombreComuna});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FORMULARIO PARA GESTIONAR PARTIDOS");
+        jLabel1.setText("FORMULARIO PARA GESTIONAR COMUNAS");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/img_ventana_partidos.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/app-map-icon.png"))); // NOI18N
 
-        btnAgregarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
-        btnAgregarPartido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnAgregarPartido.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        btnAgregarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnAgregarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarPartidoActionPerformed(evt);
+                btnAgregarComunaActionPerformed(evt);
             }
         });
 
-        btnBuscarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
-        btnBuscarPartido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnBuscarPartido.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        btnBuscarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnBuscarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPartidoActionPerformed(evt);
+                btnBuscarComunaActionPerformed(evt);
             }
         });
 
-        btnModificarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
-        btnModificarPartido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnModificarPartido.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        btnModificarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnModificarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarPartidoActionPerformed(evt);
+                btnModificarComunaActionPerformed(evt);
             }
         });
 
-        btnEliminarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
-        btnEliminarPartido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnEliminarPartido.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        btnEliminarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnEliminarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarPartidoActionPerformed(evt);
+                btnEliminarComunaActionPerformed(evt);
             }
         });
 
@@ -154,16 +162,15 @@ public class VentanaPartido extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEliminarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnModificarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAgregarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAgregarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
@@ -179,66 +186,66 @@ public class VentanaPartido extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPartidoActionPerformed
+    private void btnAgregarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComunaActionPerformed
         // Datos de formulario, crear un partido
-        String id = txtIDPartido.getText();
+        String id = txtIDComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
         if (id == null || id.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el id del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtIDPartido.setText("");
-            txtIDPartido.requestFocus();
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }  
 
-        String nombrePartido = txtNombrePartido.getText();
+        String nombreComuna = txtNombreComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
-        if (nombrePartido == null || nombrePartido.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtNombrePartido.setText("");
-            txtNombrePartido.requestFocus();
+        if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombreComuna.setText("");
+            txtNombreComuna.requestFocus();
             return;
         }
 
         // Crear objetos
-        Partido p = new Partido(nombrePartido);
+        Comuna c = new Comuna(nombreComuna);
         
         try {
-            partidoCrud.agregarPartido(Integer.parseInt(id), p);
+            comunaCrud.agregarComuna(Integer.parseInt(id), c);
             
             // Mensaje de confirmacion
-            int totalPartidosAlmacenados = partidoCrud.numeroPartidos();
-            String msg = "El partido: " + nombrePartido + " se guardo con éxito";
-            msg += "\n" + " TOTAL PARTIDOS: " + totalPartidosAlmacenados;
+            int totalComunasAlmacenados = comunaCrud.numeroComunas();
+            String msg = "La comuna: " + nombreComuna + " se guardo con éxito";
+            msg += "\n" + " TOTAL COMUNAS: " + totalComunasAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
-            txtIDPartido.setText("");          
-            txtNombrePartido.setText("");
+            txtIDComuna.setText("");          
+            txtNombreComuna.setText("");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btnAgregarPartidoActionPerformed
+    }//GEN-LAST:event_btnAgregarComunaActionPerformed
 
-    private void txtIDPartidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDPartidoKeyTyped
+    private void txtIDComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDComunaKeyTyped
         // validar que el ID sea Integer
         char tecla = evt.getKeyChar();
         if(!Character.isDigit(tecla)) { 
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_txtIDPartidoKeyTyped
+    }//GEN-LAST:event_txtIDComunaKeyTyped
 
-    private void txtNombrePartidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePartidoKeyTyped
+    private void txtNombreComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreComunaKeyTyped
         // validar que el nombre del partido sea String
         char tecla = evt.getKeyChar();
         if(!Character.isLetter(tecla) && !Character.isSpaceChar(tecla)) { 
@@ -246,99 +253,102 @@ public class VentanaPartido extends javax.swing.JDialog {
             evt.consume();
         }
 
-    }//GEN-LAST:event_txtNombrePartidoKeyTyped
+    }//GEN-LAST:event_txtNombreComunaKeyTyped
 
-    private void btnBuscarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPartidoActionPerformed
-        String id = txtIDPartido.getText();
+    private void btnBuscarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarComunaActionPerformed
+        String id = txtIDComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
         if (id == null || id.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el id del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtIDPartido.setText("");
-            txtIDPartido.requestFocus();
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }
 
         // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
-            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         //recupera el objeto para mostrarlo en los campos del formulario
-        Partido p = partidoCrud.partidos.get(Integer.parseInt(id));
-        txtNombrePartido.setText(p.getNombrePartido());
-    }//GEN-LAST:event_btnBuscarPartidoActionPerformed
+        Comuna c = comunaCrud.comunas.get(Integer.parseInt(id));
+        txtNombreComuna.setText(c.getComuna());
 
-    private void btnModificarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPartidoActionPerformed
+        // habilitar botones, y deshabilitar el boton agregar
+        habilitarBotones(false, true, true, true);
+    }//GEN-LAST:event_btnBuscarComunaActionPerformed
+
+    private void btnModificarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComunaActionPerformed
         // metodo para modifica un elemento del hasmap, se ubica al elemento con el id y se modifica el nombre
-        String id = txtIDPartido.getText();
+        String id = txtIDComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
         if (id == null || id.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el id del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtIDPartido.setText("");
-            txtIDPartido.requestFocus();
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }
 
         // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
-            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String nombrePartido = txtNombrePartido.getText();
+        String nombreComuna = txtNombreComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
-        if (nombrePartido == null || nombrePartido.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtNombrePartido.setText("");
-            txtNombrePartido.requestFocus();
+        if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombreComuna.setText("");
+            txtNombreComuna.requestFocus();
             return;
         }
 
         try {
-            partidoCrud.actualizarPartido(Integer.parseInt(id), nombrePartido);
-            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
-            txtIDPartido.setText("");
-            txtNombrePartido.setText("");
+            comunaCrud.actualizarComuna(Integer.parseInt(id), nombreComuna);
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+            txtIDComuna.setText("");
+            txtNombreComuna.setText("");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btnModificarPartidoActionPerformed
+    }//GEN-LAST:event_btnModificarComunaActionPerformed
 
-    private void btnEliminarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPartidoActionPerformed
+    private void btnEliminarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComunaActionPerformed
         // metodo para eliminar un elemento del hasmap, se ubica al elemento con el id y se elimina
-        String id = txtIDPartido.getText();
+        String id = txtIDComuna.getText();
 
         // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
         if (id == null || id.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el id del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtIDPartido.setText("");
-            txtIDPartido.requestFocus();
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }
 
         // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
-            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el partido con ID: " + id + "?", "CONFIRMACION", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar la comuna con ID: " + id + "?", "CONFIRMACION", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                partidoCrud.eliminarPartido(Integer.parseInt(id));
-                JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
-                txtIDPartido.setText("");
-                txtNombrePartido.setText("");
+                comunaCrud.eliminarComuna(Integer.parseInt(id));
+                JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+                txtIDComuna.setText("");
+                txtNombreComuna.setText("");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-    }//GEN-LAST:event_btnEliminarPartidoActionPerformed
+    }//GEN-LAST:event_btnEliminarComunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,20 +367,21 @@ public class VentanaPartido extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPartido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaComuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPartido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaComuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPartido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaComuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPartido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaComuna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VentanaPartido dialog = new VentanaPartido(new javax.swing.JFrame(), true);
+                VentanaComuna dialog = new VentanaComuna(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -383,16 +394,16 @@ public class VentanaPartido extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarPartido;
-    private javax.swing.JButton btnBuscarPartido;
-    private javax.swing.JButton btnEliminarPartido;
-    private javax.swing.JButton btnModificarPartido;
+    private javax.swing.JButton btnAgregarComuna;
+    private javax.swing.JButton btnBuscarComuna;
+    private javax.swing.JButton btnEliminarComuna;
+    private javax.swing.JButton btnModificarComuna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtIDPartido;
-    private javax.swing.JTextField txtNombrePartido;
+    private javax.swing.JTextField txtIDComuna;
+    private javax.swing.JTextField txtNombreComuna;
     // End of variables declaration//GEN-END:variables
 }

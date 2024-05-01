@@ -19,7 +19,16 @@ public class VentanaPartido extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    
+    
+    // Metodo para habilitar botones
+    public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
+        btnAgregarPartido.setEnabled(agregar);
+        btnBuscarPartido.setEnabled(buscar);
+        btnModificarPartido.setEnabled(modificar);
+        btnEliminarPartido.setEnabled(eliminar);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +51,7 @@ public class VentanaPartido extends javax.swing.JDialog {
         btnEliminarPartido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Procesos Politicos - Gestion de Partidos");
+        setTitle("Procesos Politícos - Gestión de Partidos");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos del Partido:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
@@ -268,6 +277,9 @@ public class VentanaPartido extends javax.swing.JDialog {
         //recupera el objeto para mostrarlo en los campos del formulario
         Partido p = partidoCrud.partidos.get(Integer.parseInt(id));
         txtNombrePartido.setText(p.getNombrePartido());
+
+        // habilitar botones, y deshabilitar el boton agregar
+        habilitarBotones(false, true, true, true);
     }//GEN-LAST:event_btnBuscarPartidoActionPerformed
 
     private void btnModificarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPartidoActionPerformed
