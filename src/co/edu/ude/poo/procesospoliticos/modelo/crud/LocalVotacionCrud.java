@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class LocalVotacionCrud {
             
-    private HashMap<Integer, LocalVotacion> localVotaciones = new HashMap<>();
+    public HashMap<Integer, LocalVotacion> localVotaciones = new HashMap<>();
 
     public void agregarLocalVotacion(Integer id, LocalVotacion localVotacion) throws Exception{
         if(localVotaciones.containsKey(id) || localVotaciones.containsValue(localVotacion)) {

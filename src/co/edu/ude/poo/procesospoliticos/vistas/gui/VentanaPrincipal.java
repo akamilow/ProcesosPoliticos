@@ -144,18 +144,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarComuna.setText("Agregar Comuna...");
+        itemAgregarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarComunaActionPerformed(evt);
+            }
+        });
         menuComuna.add(itemAgregarComuna);
 
         itemBuscarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarComuna.setText("Buscar Comuna...");
+        itemBuscarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarComunaActionPerformed(evt);
+            }
+        });
         menuComuna.add(itemBuscarComuna);
 
         itemModiificarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModiificarComuna.setText("Modificar Comuna...");
+        itemModiificarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModiificarComunaActionPerformed(evt);
+            }
+        });
         menuComuna.add(itemModiificarComuna);
 
         itemEliminarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarComuna.setText("Eliminar Comuna...");
+        itemEliminarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarComunaActionPerformed(evt);
+            }
+        });
         menuComuna.add(itemEliminarComuna);
 
         submenuComuna.setText("Reportes");
@@ -172,18 +192,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarLocalVotacion.setText("Agregar Local Votación...");
+        itemAgregarLocalVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarLocalVotacionActionPerformed(evt);
+            }
+        });
         menuLocalVotacion.add(itemAgregarLocalVotacion);
 
         itemBuscarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarLocalVotacion.setText("Buscar Local Votación...");
+        itemBuscarLocalVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarLocalVotacionActionPerformed(evt);
+            }
+        });
         menuLocalVotacion.add(itemBuscarLocalVotacion);
 
         itemModificarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarLocalVotacion.setText("Modificar Local Votación...");
+        itemModificarLocalVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarLocalVotacionActionPerformed(evt);
+            }
+        });
         menuLocalVotacion.add(itemModificarLocalVotacion);
 
         itemEliminarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarLocalVotacion.setText("Eliminar Local Votación...");
+        itemEliminarLocalVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarLocalVotacionActionPerformed(evt);
+            }
+        });
         menuLocalVotacion.add(itemEliminarLocalVotacion);
 
         submenuLocalVotacion.setText("Reportes");
@@ -404,6 +444,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void itemEliminarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarPartidoActionPerformed
         itemBuscarPartidoActionPerformed(evt);
     }//GEN-LAST:event_itemEliminarPartidoActionPerformed
+
+    private void itemAgregarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarComunaActionPerformed
+        VentanaComuna ventana = new VentanaComuna(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarComunaActionPerformed
+    
+    private void itemBuscarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarComunaActionPerformed
+        VentanaComuna ventana = new VentanaComuna(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarComunaActionPerformed
+
+    private void itemModiificarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModiificarComunaActionPerformed
+        itemBuscarComunaActionPerformed(evt);
+    }//GEN-LAST:event_itemModiificarComunaActionPerformed
+
+    private void itemEliminarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarComunaActionPerformed
+        itemBuscarComunaActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarComunaActionPerformed
+
+    private void itemAgregarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarLocalVotacionActionPerformed
+        VentanaLocalVotacion ventana = new VentanaLocalVotacion(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarLocalVotacionActionPerformed
+
+    private void itemBuscarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarLocalVotacionActionPerformed
+        VentanaLocalVotacion ventana = new VentanaLocalVotacion(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarLocalVotacionActionPerformed
+
+    private void itemModificarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarLocalVotacionActionPerformed
+        itemBuscarLocalVotacionActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarLocalVotacionActionPerformed
+
+    private void itemEliminarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarLocalVotacionActionPerformed
+        itemBuscarLocalVotacionActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarLocalVotacionActionPerformed
 
     /**
      * @param args the command line arguments

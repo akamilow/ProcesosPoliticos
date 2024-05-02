@@ -1,7 +1,6 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
 
 import java.awt.Toolkit;
@@ -13,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class VentanaComuna extends javax.swing.JDialog {
     
-    // instacia de clase CRUD Partido
+    // instacia de clase CRUD Comuna
     ComunaCrud comunaCrud = new ComunaCrud();
     
     public VentanaComuna(java.awt.Frame parent, boolean modal) {
@@ -197,10 +196,10 @@ public class VentanaComuna extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComunaActionPerformed
-        // Datos de formulario, crear un partido
+        // Datos de formulario, crear una Comuna
         String id = txtIDComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
+        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id de la Comuna"
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDComuna.setText("");

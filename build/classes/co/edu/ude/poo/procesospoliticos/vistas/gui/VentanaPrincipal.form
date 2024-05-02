@@ -82,6 +82,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Comuna..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarComunaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarComuna">
               <Properties>
@@ -90,6 +93,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Comuna..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarComunaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModiificarComuna">
               <Properties>
@@ -98,6 +104,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Comuna..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModiificarComunaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarComuna">
               <Properties>
@@ -106,6 +115,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Comuna..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarComunaActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuComuna">
               <Properties>
@@ -136,6 +148,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Local Votaci&#xf3;n..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarLocalVotacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarLocalVotacion">
               <Properties>
@@ -144,6 +159,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Local Votaci&#xf3;n..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarLocalVotacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarLocalVotacion">
               <Properties>
@@ -152,6 +170,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Local Votaci&#xf3;n..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarLocalVotacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarLocalVotacion">
               <Properties>
@@ -160,6 +181,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Local Votaci&#xf3;n..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarLocalVotacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuLocalVotacion">
               <Properties>
