@@ -20,7 +20,6 @@ public class VentanaComuna extends javax.swing.JDialog {
         initComponents();
     }
     
-    
     // Metodo para habilitar botones
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
         btnAgregarComuna.setEnabled(agregar);
@@ -196,10 +195,9 @@ public class VentanaComuna extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComunaActionPerformed
-        // Datos de formulario, crear una Comuna
+        // Datos de formulario
         String id = txtIDComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id de la Comuna"
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDComuna.setText("");
@@ -209,7 +207,6 @@ public class VentanaComuna extends javax.swing.JDialog {
 
         String nombreComuna = txtNombreComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
         if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtNombreComuna.setText("");
@@ -217,7 +214,7 @@ public class VentanaComuna extends javax.swing.JDialog {
             return;
         }
 
-        // Crear objetos
+        // Crear objeto
         Comuna c = new Comuna(nombreComuna);
         
         try {
@@ -257,7 +254,7 @@ public class VentanaComuna extends javax.swing.JDialog {
     private void btnBuscarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarComunaActionPerformed
         String id = txtIDComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
+        // Validar que no este vacio id
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDComuna.setText("");
@@ -280,10 +277,8 @@ public class VentanaComuna extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarComunaActionPerformed
 
     private void btnModificarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComunaActionPerformed
-        // metodo para modifica un elemento del hasmap, se ubica al elemento con el id y se modifica el nombre
         String id = txtIDComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDComuna.setText("");
@@ -299,7 +294,7 @@ public class VentanaComuna extends javax.swing.JDialog {
 
         String nombreComuna = txtNombreComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
+        // Validar que no este vacio, si esta vacio lanzar un mensaje
         if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtNombreComuna.setText("");
@@ -318,10 +313,9 @@ public class VentanaComuna extends javax.swing.JDialog {
     }//GEN-LAST:event_btnModificarComunaActionPerformed
 
     private void btnEliminarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComunaActionPerformed
-        // metodo para eliminar un elemento del hasmap, se ubica al elemento con el id y se elimina
         String id = txtIDComuna.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
+        // Validar que no este vacio
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDComuna.setText("");
@@ -335,6 +329,7 @@ public class VentanaComuna extends javax.swing.JDialog {
             return;
         }
 
+        // Mensaje de confirmacion
         int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar la comuna con ID: " + id + "?", "CONFIRMACION", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
         
         if (opcion == JOptionPane.YES_OPTION) {

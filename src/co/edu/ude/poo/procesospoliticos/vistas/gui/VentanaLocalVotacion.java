@@ -1,7 +1,6 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalVotacionCrud;
 
@@ -22,7 +21,6 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         initComponents();
     }
 
-    // Metodo para habilitar botones
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
         btnAgregarLocalVotacion.setEnabled(agregar);
         btnBuscarLocalVotacion.setEnabled(buscar);
@@ -202,10 +200,10 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLocalVotacionActionPerformed
-        // Datos de formulario, agregar un local de votacion a hashmap
+        // Datos de formulario
         String id = txtIDLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del local
+        // Validar que no este vacio
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id del local", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDLocalVotacion.setText("");
@@ -215,7 +213,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
 
         String localVotacion = txtLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
+        // Validar que no este vacio 
         if (localVotacion == null || localVotacion.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la ubicación del local", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtLocalVotacion.setText("");
@@ -273,7 +271,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
     private void btnBuscarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLocalVotacionActionPerformed
         String id = txtIDLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del partido"
+        // Validar que no este vacio
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id del local", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDLocalVotacion.setText("");
@@ -298,10 +296,9 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarLocalVotacionActionPerformed
 
     private void btnModificarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLocalVotacionActionPerformed
-        // metodo para modifica un elemento del hasmap, se ubica al elemento con el id y se modifica el nombre
         String id = txtIDLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del local de votación"
+        // Validar que no este vacio
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id del local", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDLocalVotacion.setText("");
@@ -329,7 +326,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
 
         String localVotacion = txtLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del local"
+        // Validar que no este vacio
         if (localVotacion == null || localVotacion.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la ubicación", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDLocalVotacion.setText("");
@@ -349,10 +346,9 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
     }//GEN-LAST:event_btnModificarLocalVotacionActionPerformed
 
     private void btnEliminarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComunaActionPerformed
-        // metodo para eliminar un elemento del hasmap, se ubica al elemento con el id y se elimina
         String id = txtIDLocalVotacion.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el id del local de votación"
+        // Validar que no este vacio
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el id del local de votación", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtIDLocalVotacion.setText("");

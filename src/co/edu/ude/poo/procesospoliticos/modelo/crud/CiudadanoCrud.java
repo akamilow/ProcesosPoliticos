@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class CiudadanoCrud {
                
-    private HashMap<Integer, Ciudadano> ciudadanos = new HashMap<>();
+    public HashMap<Integer, Ciudadano> ciudadanos = new HashMap<>();
     
-    public void agregarCiudadano(Ciudadano ciudadano) throws Exception{
-        if(ciudadanos.containsKey(ciudadano.getDNICiudadano())){
-            throw new Exception("El ciudadano ya existe en la lista");
+    public void agregarCiudadano(Integer id, Ciudadano ciudadano) throws Exception{
+        if(ciudadanos.containsKey(id) || ciudadanos.containsValue(ciudadano)) {
+            throw new Exception("El ciudadano ya existe");
         }
-        ciudadanos.put(ciudadano.getDNICiudadano(), ciudadano);
+        ciudadanos.put(id, ciudadano);
     }
     
     public Ciudadano buscarCiudadano(Integer DNI) throws Exception{

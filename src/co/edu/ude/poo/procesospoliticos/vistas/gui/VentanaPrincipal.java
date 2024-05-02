@@ -240,18 +240,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarCiudadano.setText("Agregar Ciudadano...");
+        itemAgregarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarCiudadanoActionPerformed(evt);
+            }
+        });
         menuCiudadano.add(itemAgregarCiudadano);
 
         itemBuscarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarCiudadano.setText("Buscar CIudadano...");
+        itemBuscarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarCiudadanoActionPerformed(evt);
+            }
+        });
         menuCiudadano.add(itemBuscarCiudadano);
 
         itemModificarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarCiudadano.setText("Modificar Ciudadano...");
+        itemModificarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarCiudadanoActionPerformed(evt);
+            }
+        });
         menuCiudadano.add(itemModificarCiudadano);
 
         itemEliminarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarCiudadano.setText("Eliminar Ciudadano...");
+        itemEliminarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarCiudadanoActionPerformed(evt);
+            }
+        });
         menuCiudadano.add(itemEliminarCiudadano);
 
         submenuCiudadano.setText("Reportes");
@@ -488,6 +508,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void itemEliminarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarLocalVotacionActionPerformed
         itemBuscarLocalVotacionActionPerformed(evt);
     }//GEN-LAST:event_itemEliminarLocalVotacionActionPerformed
+
+    private void itemAgregarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarCiudadanoActionPerformed
+        VentanaCiudadano ventana = new VentanaCiudadano(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarCiudadanoActionPerformed
+
+    private void itemBuscarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarCiudadanoActionPerformed
+        VentanaCiudadano ventana = new VentanaCiudadano(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarCiudadanoActionPerformed
+
+    private void itemModificarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarCiudadanoActionPerformed
+        itemBuscarCiudadanoActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarCiudadanoActionPerformed
+
+    private void itemEliminarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarCiudadanoActionPerformed
+        itemBuscarCiudadanoActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarCiudadanoActionPerformed
 
     /**
      * @param args the command line arguments
