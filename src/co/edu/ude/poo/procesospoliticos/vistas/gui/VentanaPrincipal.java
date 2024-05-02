@@ -22,7 +22,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         BarraMenu = new javax.swing.JMenuBar();
         menuPartido = new javax.swing.JMenu();
         itemAgregarPartido = new javax.swing.JMenuItem();
@@ -432,14 +431,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -447,7 +443,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemAgregarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarPartidoActionPerformed
-        // TODO add your handling code here:
         VentanaPartido ventana = new VentanaPartido(this, true);
         ventana.setLocationRelativeTo(this);
         ventana.habilitarBotones(true, true, false, false);
@@ -618,7 +613,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemModificarVoto;
     private javax.swing.JMenuItem itemModiificarComuna;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu menuApoderadoMesa;
     private javax.swing.JMenu menuCandidato;
     private javax.swing.JMenu menuCiudadano;
