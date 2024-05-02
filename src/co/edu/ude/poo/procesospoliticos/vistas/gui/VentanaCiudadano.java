@@ -1,7 +1,7 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
 
 import java.awt.Toolkit;
 
@@ -12,19 +12,20 @@ import javax.swing.JOptionPane;
  */
 public class VentanaCiudadano extends javax.swing.JDialog {
     
-    // Instancia de la clase CiudadanoCrud
-    CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
+    // instacia de clase CRUD Comuna
+    ComunaCrud comunaCrud = new ComunaCrud();
     
     public VentanaCiudadano(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
+    // Metodo para habilitar botones
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
-        btnAgregarCiudadano.setEnabled(agregar);
-        btnBuscarCiudadano.setEnabled(buscar);
-        btnModificarCiudadano.setEnabled(modificar);
-        btnEliminarCiudadano.setEnabled(eliminar);
+        btnAgregarComuna.setEnabled(agregar);
+        btnBuscarComuna.setEnabled(buscar);
+        btnModificarComuna.setEnabled(modificar);
+        btnEliminarComuna.setEnabled(eliminar);
     }
     
     /**
@@ -36,66 +37,44 @@ public class VentanaCiudadano extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        grupoGeneroCiudadano = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtDNICiudadano = new javax.swing.JTextField();
+        txtIDComuna = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNombreCiudadano = new javax.swing.JTextField();
-        txtEdadCiudadano = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        radioHombre = new javax.swing.JRadioButton();
-        radioMujer = new javax.swing.JRadioButton();
+        txtNombreComuna = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnAgregarCiudadano = new javax.swing.JButton();
-        btnBuscarCiudadano = new javax.swing.JButton();
-        btnModificarCiudadano = new javax.swing.JButton();
-        btnEliminarCiudadano = new javax.swing.JButton();
+        btnAgregarComuna = new javax.swing.JButton();
+        btnBuscarComuna = new javax.swing.JButton();
+        btnModificarComuna = new javax.swing.JButton();
+        btnEliminarComuna = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Procesos Politícos - Gestión de Ciudadanos");
+        setTitle("Procesos Politícos - Gestión de Comunas");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos del ciudadano:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Datos de comuna:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Cédula:");
+        jLabel2.setText("ID:");
 
-        txtDNICiudadano.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        txtDNICiudadano.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtIDComuna.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtIDComuna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDNICiudadanoKeyTyped(evt);
+                txtIDComunaKeyTyped(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Nombre completo:");
+        jLabel3.setText("Nombre de comuna:");
 
-        txtNombreCiudadano.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
-        txtEdadCiudadano.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        txtEdadCiudadano.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreComuna.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtNombreComuna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtEdadCiudadanoKeyTyped(evt);
+                txtNombreComunaKeyTyped(evt);
             }
         });
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Edad:");
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Genero:");
-
-        grupoGeneroCiudadano.add(radioHombre);
-        radioHombre.setText("HOMBRE");
-
-        grupoGeneroCiudadano.add(radioMujer);
-        radioMujer.setText("MUJER");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,25 +83,16 @@ public class VentanaCiudadano extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtNombreCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDNICiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtEdadCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(radioHombre, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radioMujer, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDNICiudadano, txtEdadCiudadano, txtNombreCiudadano});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtIDComuna, txtNombreComuna});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,63 +100,54 @@ public class VentanaCiudadano extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDNICiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIDComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombreCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEdadCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioHombre)
-                    .addComponent(radioMujer))
+                    .addComponent(txtNombreComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDNICiudadano, txtEdadCiudadano, txtNombreCiudadano});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtIDComuna, txtNombreComuna});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FORMULARIO PARA GESTIONAR CIUDADANOS");
+        jLabel1.setText("FORMULARIO PARA GESTIONAR COMUNAS");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/Actions-user-group-new-icon.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/app-map-icon.png"))); // NOI18N
 
-        btnAgregarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
-        btnAgregarCiudadano.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnAgregarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
+        btnAgregarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnAgregarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCiudadanoActionPerformed(evt);
+                btnAgregarComunaActionPerformed(evt);
             }
         });
 
-        btnBuscarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
-        btnBuscarCiudadano.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnBuscarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
+        btnBuscarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnBuscarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarCiudadanoActionPerformed(evt);
+                btnBuscarComunaActionPerformed(evt);
             }
         });
 
-        btnModificarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
-        btnModificarCiudadano.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnModificarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
+        btnModificarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnModificarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarCiudadanoActionPerformed(evt);
+                btnModificarComunaActionPerformed(evt);
             }
         });
 
-        btnEliminarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
-        btnEliminarCiudadano.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnEliminarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
+        btnEliminarComuna.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btnEliminarComuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCiudadanoActionPerformed(evt);
+                btnEliminarComunaActionPerformed(evt);
             }
         });
 
@@ -199,13 +160,13 @@ public class VentanaCiudadano extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEliminarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnModificarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAgregarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAgregarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,212 +184,165 @@ public class VentanaCiudadano extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCiudadanoActionPerformed
-        // obtener los datos del formulario
-        String dni = txtDNICiudadano.getText();
+    private void btnAgregarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComunaActionPerformed
+        // Datos de formulario
+        String id = txtIDComuna.getText();
 
-        // Validar que dni no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane
-        if (dni == null || dni.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la cédula del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtDNICiudadano.setText("");
-            txtDNICiudadano.requestFocus();
+        if (id == null || id.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }  
 
-        String nombreCiudadano = txtNombreCiudadano.getText();
+        String nombreComuna = txtNombreComuna.getText();
 
-        if (nombreCiudadano == null || nombreCiudadano.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtNombreCiudadano.setText("");
-            txtNombreCiudadano.requestFocus();
-            return;
-        }
-
-        String edad = txtEdadCiudadano.getText();
-
-        if (edad == null || edad.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la edad del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtEdadCiudadano.setText("");
-            txtEdadCiudadano.requestFocus();
-            return;
-        }
-
-        String genero = "";
-        if (radioHombre.isSelected()) {
-            genero = "HOMBRE";
-        } else if (radioMujer.isSelected()) {
-            genero = "MUJER";
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione el genero del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombreComuna.setText("");
+            txtNombreComuna.requestFocus();
             return;
         }
 
         // Crear objeto
-        Ciudadano c = new Ciudadano(Integer.parseInt(dni), Integer.parseInt(edad), nombreCiudadano, genero);
+        Comuna c = new Comuna(nombreComuna);
         
         try {
-            ciudadanoCrud.agregarCiudadano(Integer.parseInt(dni), c);
+            comunaCrud.agregarComuna(Integer.parseInt(id), c);
             
             // Mensaje de confirmacion
-            int totalCiudadanosAlmacenados = ciudadanoCrud.contarCiudadanos();
-            String msg = "El ciudadano: " + nombreCiudadano + " se guardo con éxito";
-            msg += "\n" + " TOTAL: " + totalCiudadanosAlmacenados;
+            int totalComunasAlmacenados = comunaCrud.numeroComunas();
+            String msg = "La comuna: " + nombreComuna + " se guardo con éxito";
+            msg += "\n" + " TOTAL COMUNAS: " + totalComunasAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
-            txtDNICiudadano.setText("");          
-            txtNombreCiudadano.setText("");
-            txtEdadCiudadano.setText("");
-            grupoGeneroCiudadano.clearSelection();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnAgregarCiudadanoActionPerformed
-
-    private void txtDNICiudadanoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNICiudadanoKeyTyped
-        // validar que el dni sea Integer
-        char tecla = evt.getKeyChar();
-        if(!Character.isDigit(tecla)) { 
-            Toolkit.getDefaultToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDNICiudadanoKeyTyped
-
-    private void txtEdadCiudadanoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadCiudadanoKeyTyped
-        // validar que la edad sea Integer
-        char tecla = evt.getKeyChar();
-        if(!Character.isDigit(tecla)) { 
-            Toolkit.getDefaultToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtEdadCiudadanoKeyTyped
-
-    private void btnBuscarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCiudadanoActionPerformed
-        String dni = txtDNICiudadano.getText();
-
-        if (dni == null || dni.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la cédula del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtDNICiudadano.setText("");
-            txtDNICiudadano.requestFocus();
-            return;
-        }
-
-        // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
-            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // recuperar el objeto para mostrarlo sus atributos en los campos del formulario
-        Ciudadano c = ciudadanoCrud.ciudadanos.get(Integer.parseInt(dni));
-        txtNombreCiudadano.setText(c.getNombreCompletoCiudadano());
-        txtEdadCiudadano.setText(c.getEdadCiudadano().toString());
-        if (c.getGeneroCiudadano().equals("HOMBRE")) {
-            radioHombre.setSelected(true);
-        } else {
-            radioMujer.setSelected(true);
-        }
-
-        // habilitar botones, y deshabilitar el boton agregar
-        habilitarBotones(false, true, true, true);
-    }//GEN-LAST:event_btnBuscarCiudadanoActionPerformed
-
-    private void btnModificarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCiudadanoActionPerformed
-        String dni = txtDNICiudadano.getText();
-
-        if (dni == null || dni.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el DNI del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtDNICiudadano.setText("");
-            txtDNICiudadano.requestFocus();
-            return;
-        }
-
-        // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
-            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String nombreCiudadano = txtNombreCiudadano.getText();
-
-        if (nombreCiudadano == null || nombreCiudadano.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtNombreCiudadano.setText("");
-            txtNombreCiudadano.requestFocus();
-            return;
-        }
-
-        String edad = txtEdadCiudadano.getText();
-
-        if (edad == null || edad.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la edad del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtEdadCiudadano.setText("");
-            txtEdadCiudadano.requestFocus();
-            return;
-        }
-
-        String genero = "";
-        if (radioHombre.isSelected()) {
-            genero = "HOMBRE";
-        } else if (radioMujer.isSelected()) {
-            genero = "MUJER";
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione el genero del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        try {
-            ciudadanoCrud.actualizarCiudadano(Integer.parseInt(dni), nombreCiudadano, Integer.parseInt(edad), genero);
-            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
-            txtDNICiudadano.setText("");
-            txtNombreCiudadano.setText("");
-            txtEdadCiudadano.setText("");
-            grupoGeneroCiudadano.clearSelection();
+            txtIDComuna.setText("");          
+            txtNombreComuna.setText("");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btnModificarCiudadanoActionPerformed
+    }//GEN-LAST:event_btnAgregarComunaActionPerformed
 
-    private void btnEliminarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCiudadanoActionPerformed
-        String dni = txtDNICiudadano.getText();
+    private void txtIDComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDComunaKeyTyped
+        // validar que el ID sea Integer
+        char tecla = evt.getKeyChar();
+        if(!Character.isDigit(tecla)) { 
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIDComunaKeyTyped
 
-        if (dni == null || dni.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el DNI del ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtDNICiudadano.setText("");
-            txtDNICiudadano.requestFocus();
+    private void txtNombreComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreComunaKeyTyped
+        // validar que el nombre del partido sea String
+        char tecla = evt.getKeyChar();
+        if(!Character.isLetter(tecla) && !Character.isSpaceChar(tecla)) { 
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNombreComunaKeyTyped
+
+    private void btnBuscarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarComunaActionPerformed
+        String id = txtIDComuna.getText();
+
+        // Validar que no este vacio id
+        if (id == null || id.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
             return;
         }
 
         // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
-            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Mensaje de confirmacion para eliminar el ciudadano
-        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar la comuna con ID: " + dni + "?", "CONFIRMACION", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
+        //recupera el objeto para mostrarlo en los campos del formulario
+        Comuna c = comunaCrud.comunas.get(Integer.parseInt(id));
+        txtNombreComuna.setText(c.getComuna());
+
+        // habilitar botones, y deshabilitar el boton agregar
+        habilitarBotones(false, true, true, true);
+    }//GEN-LAST:event_btnBuscarComunaActionPerformed
+
+    private void btnModificarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComunaActionPerformed
+        String id = txtIDComuna.getText();
+
+        if (id == null || id.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
+            return;
+        }
+
+        // validar que el contenga la llave a buscar
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nombreComuna = txtNombreComuna.getText();
+
+        // Validar que no este vacio, si esta vacio lanzar un mensaje
+        if (nombreComuna == null || nombreComuna.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el nombre de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtNombreComuna.setText("");
+            txtNombreComuna.requestFocus();
+            return;
+        }
+
+        try {
+            comunaCrud.actualizarComuna(Integer.parseInt(id), nombreComuna);
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+            txtIDComuna.setText("");
+            txtNombreComuna.setText("");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnModificarComunaActionPerformed
+
+    private void btnEliminarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComunaActionPerformed
+        String id = txtIDComuna.getText();
+
+        // Validar que no este vacio
+        if (id == null || id.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el id de la comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtIDComuna.setText("");
+            txtIDComuna.requestFocus();
+            return;
+        }
+
+        // validar que el contenga la llave a buscar
+        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+            JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Mensaje de confirmacion
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar la comuna con ID: " + id + "?", "CONFIRMACION", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); 
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                ciudadanoCrud.eliminarCiudadano(Integer.parseInt(dni));
-                JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
-                txtDNICiudadano.setText("");
-                txtNombreCiudadano.setText("");
-                txtEdadCiudadano.setText("");
-                grupoGeneroCiudadano.clearSelection();
+                comunaCrud.eliminarComuna(Integer.parseInt(id));
+                JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+                txtIDComuna.setText("");
+                txtNombreComuna.setText("");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-    }//GEN-LAST:event_btnEliminarCiudadanoActionPerformed
+    }//GEN-LAST:event_btnEliminarComunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,22 +390,16 @@ public class VentanaCiudadano extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarCiudadano;
-    private javax.swing.JButton btnBuscarCiudadano;
-    private javax.swing.JButton btnEliminarCiudadano;
-    private javax.swing.JButton btnModificarCiudadano;
-    private javax.swing.ButtonGroup grupoGeneroCiudadano;
+    private javax.swing.JButton btnAgregarComuna;
+    private javax.swing.JButton btnBuscarComuna;
+    private javax.swing.JButton btnEliminarComuna;
+    private javax.swing.JButton btnModificarComuna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton radioHombre;
-    private javax.swing.JRadioButton radioMujer;
-    private javax.swing.JTextField txtDNICiudadano;
-    private javax.swing.JTextField txtEdadCiudadano;
-    private javax.swing.JTextField txtNombreCiudadano;
+    private javax.swing.JTextField txtIDComuna;
+    private javax.swing.JTextField txtNombreComuna;
     // End of variables declaration//GEN-END:variables
 }
