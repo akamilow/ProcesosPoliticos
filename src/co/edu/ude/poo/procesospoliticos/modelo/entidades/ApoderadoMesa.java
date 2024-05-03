@@ -19,24 +19,12 @@ public class ApoderadoMesa extends Ciudadano {
         return RUT;
     }
 
-    public void setCiudadano(Ciudadano ciudadano) {
-        this.DNI = ciudadano.DNI;
-        this.edad = ciudadano.edad;
-        this.nombreCompleto = ciudadano.nombreCompleto;
-        this.genero = ciudadano.genero;
-    }
-
-    public Ciudadano getCiudadano() {
-        return new Ciudadano(DNI, edad, nombreCompleto, genero);
-    }
-
     @Override
     public String toString() {
-        return  "\n" +"\tDatos del apoderado de mesa:" + "\n" +
-                "\tIdentificación: " + DNI + "\n" +
-                "\tEdad: " + edad + "\n" +
-                "\tNombre: " + nombreCompleto + "\n" +
-                "\tGénero: " + genero + "\n" +
-                "\tRUT: " + RUT + "\n";
+        return  "Identificación: " + DNI + "\n" +
+                "Edad: " + edad + "\n" +
+                "Nombre: " + nombreCompleto + "\n" +
+                "Género: " + genero + "\n" +
+                "RUT: " + RUT + "\n";
     }
 }

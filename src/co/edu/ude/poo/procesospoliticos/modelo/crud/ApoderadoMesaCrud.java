@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class ApoderadoMesaCrud {
     
-private HashMap<Integer, ApoderadoMesa> apoderados = new HashMap<>();
+public HashMap<Integer, ApoderadoMesa> apoderados = new HashMap<>();
 
-    public void agregarApoderadoMesa(ApoderadoMesa apoderadoMesa) throws Exception {
-        if (apoderados.containsKey(apoderadoMesa.getCiudadano().getDNICiudadano())) {
-            throw new Exception("El apoderado ya existe en la lista");
+    public void agregarApoderadoMesa(Integer id, ApoderadoMesa apoderadoMesa) throws Exception {
+        if (apoderados.containsKey(id)) {
+            throw new Exception("El apoderado ya existe");
         }
-        apoderados.put(apoderadoMesa.getCiudadano().getDNICiudadano(), new ApoderadoMesa(apoderadoMesa.getCiudadano(), apoderadoMesa.getRUTApoderado()));
+        apoderados.put(id, apoderadoMesa);
     }
 
     public ApoderadoMesa buscarApoderadoMesa(Integer DNI) throws Exception {
@@ -22,11 +22,11 @@ private HashMap<Integer, ApoderadoMesa> apoderados = new HashMap<>();
         return apoderados.get(DNI);
     }
 
-    public void actualizarApoderadoMesa(ApoderadoMesa apoderadoMesa, ApoderadoMesa nuevoApoderadoMesa) throws Exception {
-        if (!apoderados.containsKey(apoderadoMesa.getCiudadano().getDNICiudadano())) {
+    public void actualizarApoderadoMesa(Integer id, Integer RUT) throws Exception {
+        if (!apoderados.containsKey(id)) {
             throw new Exception("El apoderado no existe");
         }
-        apoderados.put(apoderadoMesa.getCiudadano().getDNICiudadano(), nuevoApoderadoMesa);
+        apoderados.get(id).setRUTApoderado(RUT);
     }
 
     public void eliminarApoderadoMesa(Integer DNI) throws Exception {

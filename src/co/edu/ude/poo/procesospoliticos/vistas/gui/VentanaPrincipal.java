@@ -288,18 +288,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarApoderado.setText("Agregar Apoderado...");
+        itemAgregarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarApoderadoActionPerformed(evt);
+            }
+        });
         menuApoderadoMesa.add(itemAgregarApoderado);
 
         itemBuscarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarApoderado.setText("Buscar Apoderado...");
+        itemBuscarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarApoderadoActionPerformed(evt);
+            }
+        });
         menuApoderadoMesa.add(itemBuscarApoderado);
 
         itemModificarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarApoderado.setText("Modificar Apoderado...");
+        itemModificarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarApoderadoActionPerformed(evt);
+            }
+        });
         menuApoderadoMesa.add(itemModificarApoderado);
 
         itemEliminarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarApoderado.setText("Eliminar Apoderado...");
+        itemEliminarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarApoderadoActionPerformed(evt);
+            }
+        });
         menuApoderadoMesa.add(itemEliminarApoderado);
 
         submenuApoderado.setText("Reportes");
@@ -529,6 +549,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void itemEliminarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarCiudadanoActionPerformed
         itemBuscarCiudadanoActionPerformed(evt);
     }//GEN-LAST:event_itemEliminarCiudadanoActionPerformed
+
+    private void itemAgregarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarApoderadoActionPerformed
+        VentanaApoderadoMesa ventana = new VentanaApoderadoMesa(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarApoderadoActionPerformed
+
+    private void itemBuscarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarApoderadoActionPerformed
+        VentanaApoderadoMesa ventana = new VentanaApoderadoMesa(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarApoderadoActionPerformed
+
+    private void itemModificarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarApoderadoActionPerformed
+        itemBuscarApoderadoActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarApoderadoActionPerformed
+
+    private void itemEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarApoderadoActionPerformed
+        itemBuscarApoderadoActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarApoderadoActionPerformed
 
     /**
      * @param args the command line arguments

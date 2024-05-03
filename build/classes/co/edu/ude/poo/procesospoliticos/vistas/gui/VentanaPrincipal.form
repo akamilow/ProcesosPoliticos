@@ -280,6 +280,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Apoderado..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarApoderadoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarApoderado">
               <Properties>
@@ -288,6 +291,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Apoderado..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarApoderadoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarApoderado">
               <Properties>
@@ -296,6 +302,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Apoderado..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarApoderadoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarApoderado">
               <Properties>
@@ -304,6 +313,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Apoderado..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarApoderadoActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuApoderado">
               <Properties>
