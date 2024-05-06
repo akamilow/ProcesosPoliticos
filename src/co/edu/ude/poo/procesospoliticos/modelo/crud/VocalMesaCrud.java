@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class VocalMesaCrud {
 
-    private HashMap<Integer, VocalMesa> vocales = new HashMap<>();
+    public HashMap<Integer, VocalMesa> vocales = new HashMap<>();
 
-    public void agregarVocalMesa(VocalMesa vocalMesa) throws Exception {
-        if (vocales.containsKey(vocalMesa.getCiudadano().getDNICiudadano())) {
-            throw new Exception("El vocal ya existe en la lista");
+    public void agregarVocalMesa(Integer id, VocalMesa vocalMesa) throws Exception {
+        if (vocales.containsKey(id)) {
+            throw new Exception("El vocal ya existe");
         }
-        vocales.put(vocalMesa.getCiudadano().getDNICiudadano(), new VocalMesa(vocalMesa.getCiudadano(), vocalMesa.getIdVocal(), vocalMesa.getRolVocal()));
+        vocales.put(id, vocalMesa);
     }
     
     public VocalMesa buscarVocalMesa(Integer DNI) throws Exception {
@@ -22,11 +22,11 @@ public class VocalMesaCrud {
         return vocales.get(DNI);
     }
 
-    public void actualizarVocalMesa(VocalMesa vocalMesa, VocalMesa nuevoVocalMesa) throws Exception {
-        if (!vocales.containsKey(vocalMesa.getCiudadano().getDNICiudadano())) {
+    public void actualizarVocalMesa(Integer id, String rol) throws Exception {
+        if (!vocales.containsKey(id)) {
             throw new Exception("El vocal no existe");
         }
-        vocales.put(vocalMesa.getCiudadano().getDNICiudadano(), nuevoVocalMesa);
+        vocales.get(id).setRolVocal(rol);
     }
 
     public void eliminarVocalMesa(Integer DNI) throws Exception {
