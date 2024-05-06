@@ -478,6 +478,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarMesaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarMesa">
               <Properties>
@@ -486,6 +489,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarMesaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarMesa">
               <Properties>
@@ -494,6 +500,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarMesaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarMesa">
               <Properties>
@@ -502,6 +511,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarMesaActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuMesa">
               <Properties>

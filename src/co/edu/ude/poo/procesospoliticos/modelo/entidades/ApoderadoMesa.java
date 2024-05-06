@@ -19,6 +19,11 @@ public class ApoderadoMesa extends Ciudadano {
         return RUT;
     }
 
+    // get ciudadano
+    public Ciudadano getCiudadano() {
+        return new Ciudadano(DNI, edad, nombreCompleto, genero);
+    }
+
     @Override
     public String toString() {
         return  "Identificación: " + DNI + "\n" +

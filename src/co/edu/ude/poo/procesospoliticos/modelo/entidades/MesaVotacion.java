@@ -1,34 +1,28 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
-import java.util.ArrayList;
-
 public class MesaVotacion {
     // Asociancion con LocalVotacion, VocalMesa, ApoderadoMesa, Voto
     protected LocalVotacion localVotacion;
     protected VocalMesa vocalMesa;
-    protected ArrayList<ApoderadoMesa> apoderadoMesa;
+    protected ApoderadoMesa apoderadoMesaUno;
+    protected ApoderadoMesa apoderadoMesaDos;
     //hasmap votosEmitidosMesa
-
-    protected   ArrayList<Voto> votosEmitidosMesa = new ArrayList<Voto>();
-
     // Atributos
     protected Integer numeroMesa;
     protected String generoMesa;
-    protected Integer cantidadVotantes;
-    protected Boolean estadoMesa;
+    protected String estadoMesa;
 
     public MesaVotacion() {
     }
 
-
-    public MesaVotacion(Integer numeroMesa, String generoMesa, Integer cantidadVotantesMesa, Boolean estadoMesa, LocalVotacion localVotacion, VocalMesa vocalMesa, ArrayList<ApoderadoMesa> apoderadoMesa) {
+    public MesaVotacion(Integer numeroMesa, String generoMesa, String estadoMesa, LocalVotacion localVotacion, VocalMesa vocalMesa, ApoderadoMesa apoderadoMesaUno, ApoderadoMesa apoderadoMesaDos) {
         this.numeroMesa = numeroMesa;
         this.generoMesa = generoMesa;
-        this.cantidadVotantes = cantidadVotantesMesa;
         this.estadoMesa = estadoMesa;
         this.localVotacion = localVotacion;
         this.vocalMesa = vocalMesa;
-        this.apoderadoMesa = apoderadoMesa;
+        this.apoderadoMesaUno = apoderadoMesaUno;
+        this.apoderadoMesaDos = apoderadoMesaDos;
     }
 
     public void setNumeroMesa(Integer numeroMesa) {
@@ -47,19 +41,11 @@ public class MesaVotacion {
         return generoMesa;
     }
 
-    public void setCantidadVotantesMesa(Integer cantidadVotantesMesa) {
-        this.cantidadVotantes = cantidadVotantesMesa;
-    }
-
-    public Integer getCantidadVotantesMesa() {
-        return cantidadVotantes;
-    }
-
-    public void setEstadoMesa(Boolean estadoMesa) {
+    public void setEstadoMesa(String estadoMesa) {
         this.estadoMesa = estadoMesa;
     }
 
-    public Boolean getEstadoMesa() {
+    public String getEstadoMesa() {
         return estadoMesa;
     }
 
@@ -79,58 +65,33 @@ public class MesaVotacion {
         return vocalMesa;
     }
 
-    public void setApoderadoMesa(ArrayList<ApoderadoMesa> apoderadoMesa) {
-        this.apoderadoMesa = apoderadoMesa;
+    public void setApoderadoMesaUno(ApoderadoMesa apoderadoMesaUno) {
+        this.apoderadoMesaUno = apoderadoMesaUno;
     }
 
-    public ArrayList<ApoderadoMesa> getApoderadoMesa() {
-        return apoderadoMesa;
+    public ApoderadoMesa getApoderadoMesaUno() {
+        return apoderadoMesaUno;
     }
 
-    public void setVotosEmitidosMesa(ArrayList<Voto> votosEmitidosMesa) {
-        this.votosEmitidosMesa = votosEmitidosMesa;
+    public void setApoderadoMesaDos(ApoderadoMesa apoderadoMesaDos) {
+        this.apoderadoMesaDos = apoderadoMesaDos;
     }
 
-    public ArrayList<Voto> getVotosEmitidosMesa() {
-        return votosEmitidosMesa;
-    }
-
-    public void addVocalMesa(VocalMesa vocalMesa) {
-        this.vocalMesa = vocalMesa;
-    }
-
-    public void removeVocalMesa(VocalMesa vocalMesa) {
-        this.vocalMesa = null;
-    }
-
-    public void addApoderadoMesa(ApoderadoMesa apoderadoMesa) {
-        this.apoderadoMesa.add(apoderadoMesa);
-    }
-
-    public void removeApoderadoMesa(ApoderadoMesa apoderadoMesa) {
-        this.apoderadoMesa.remove(apoderadoMesa);
-    }
-
-    public void addVoto(Voto voto) {
-        this.votosEmitidosMesa.add(voto);
-    }
-
-    public void removeVoto(Voto voto) {
-        this.votosEmitidosMesa.remove(voto);
+    public ApoderadoMesa getApoderadoMesaDos() {
+        return apoderadoMesaDos;
     }
 
     @Override
     public String toString() {
-        return  "\tDatos de la mesa de votacion:" + "\n" +
-                "\tID de mesa: " + numeroMesa + "\n" +
-                "\tGénero de mesa: " + generoMesa + "\n" +
-                "\tCantidad de votantes: " + cantidadVotantes + "\n" +
-                "\tEstado de la mesa: " + estadoMesa + "\n" +
+        return  "Numero de mesa: " + numeroMesa + "\n" +
+                "Género de mesa: " + generoMesa + "\n" +
+                "Estado de la mesa: " + estadoMesa + "\n" +
                 "\n" +
                 localVotacion.toString() + "\n" +
                 "\n" +
                 vocalMesa.toString() + "\n" +
                 "\n" +
-                "\tApoderados de mesa: " + apoderadoMesa.toString();
+                "Apoderado 1: " + apoderadoMesaUno.toString() + "\n" +
+                "Apoderado 2: " + apoderadoMesaDos.toString();
         }
 }

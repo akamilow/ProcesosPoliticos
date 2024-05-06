@@ -19,6 +19,11 @@ public class VocalMesa extends Ciudadano {
         return rol;
     }
 
+    // get ciudadano
+    public Ciudadano getCiudadano() {
+        return new Ciudadano(DNI, edad, nombreCompleto, genero);
+    }
+
     @Override 
     public String toString() {
         return  "Identificación: " + DNI + "\n" +
