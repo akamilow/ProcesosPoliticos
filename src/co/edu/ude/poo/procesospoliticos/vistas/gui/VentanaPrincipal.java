@@ -336,18 +336,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarCandidato.setText("Agregar Candidato...");
+        itemAgregarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarCandidatoActionPerformed(evt);
+            }
+        });
         menuCandidato.add(itemAgregarCandidato);
 
         itemBuscarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarCandidato.setText("Buscar Candidato...");
+        itemBuscarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarCandidatoActionPerformed(evt);
+            }
+        });
         menuCandidato.add(itemBuscarCandidato);
 
         itemModificarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarCandidato.setText("Modificar Candidato...");
+        itemModificarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarCandidatoActionPerformed(evt);
+            }
+        });
         menuCandidato.add(itemModificarCandidato);
 
         itemEliminarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarCandidato.setText("Elimiinar Candidato...");
+        itemEliminarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarCandidatoActionPerformed(evt);
+            }
+        });
         menuCandidato.add(itemEliminarCandidato);
 
         submenuCandidato.setText("Reportes");
@@ -364,18 +384,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarVocal.setText("Agregar Vocal Mesa...");
+        itemAgregarVocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarVocalActionPerformed(evt);
+            }
+        });
         menuVocalMesa.add(itemAgregarVocal);
 
         itemBuscarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarVocal.setText("Buscar Vocal Mesa...");
+        itemBuscarVocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarVocalActionPerformed(evt);
+            }
+        });
         menuVocalMesa.add(itemBuscarVocal);
 
         itemModificarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarVocal.setText("Modificar Vocal Mesa...");
+        itemModificarVocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarVocalActionPerformed(evt);
+            }
+        });
         menuVocalMesa.add(itemModificarVocal);
 
         itemEliminarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarVocal.setText("Eliminar Vocal Mesa...");
+        itemEliminarVocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarVocalActionPerformed(evt);
+            }
+        });
         menuVocalMesa.add(itemEliminarVocal);
 
         submenuVocal.setText("Reportes");
@@ -571,6 +611,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void itemEliminarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarApoderadoActionPerformed
         itemBuscarApoderadoActionPerformed(evt);
     }//GEN-LAST:event_itemEliminarApoderadoActionPerformed
+
+    private void itemAgregarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarCandidatoActionPerformed
+        VentanaCandidato ventana = new VentanaCandidato(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarCandidatoActionPerformed
+
+    private void itemBuscarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarCandidatoActionPerformed
+        VentanaCandidato ventana = new VentanaCandidato(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarCandidatoActionPerformed
+
+    private void itemModificarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarCandidatoActionPerformed
+        itemBuscarCandidatoActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarCandidatoActionPerformed
+
+    private void itemEliminarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarCandidatoActionPerformed
+        itemBuscarCandidatoActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarCandidatoActionPerformed
+
+    private void itemAgregarVocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarVocalActionPerformed
+        VentanaVocalMesa ventana = new VentanaVocalMesa(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarVocalActionPerformed
+
+    private void itemBuscarVocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarVocalActionPerformed
+        VentanaVocalMesa ventana = new VentanaVocalMesa(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarVocalActionPerformed
+
+    private void itemModificarVocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarVocalActionPerformed
+        itemBuscarVocalActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarVocalActionPerformed
+
+    private void itemEliminarVocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarVocalActionPerformed
+        itemBuscarVocalActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarVocalActionPerformed
 
     /**
      * @param args the command line arguments

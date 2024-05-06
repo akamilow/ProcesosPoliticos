@@ -346,6 +346,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Candidato..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarCandidatoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarCandidato">
               <Properties>
@@ -354,6 +357,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Candidato..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarCandidatoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarCandidato">
               <Properties>
@@ -362,6 +368,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Candidato..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarCandidatoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarCandidato">
               <Properties>
@@ -370,6 +379,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Elimiinar Candidato..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarCandidatoActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuCandidato">
               <Properties>
@@ -400,6 +412,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Vocal Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarVocalActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarVocal">
               <Properties>
@@ -408,6 +423,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Vocal Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarVocalActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarVocal">
               <Properties>
@@ -416,6 +434,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Vocal Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarVocalActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarVocal">
               <Properties>
@@ -424,6 +445,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Vocal Mesa..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarVocalActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuVocal">
               <Properties>

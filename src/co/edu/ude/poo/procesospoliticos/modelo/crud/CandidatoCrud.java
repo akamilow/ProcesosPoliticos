@@ -1,18 +1,20 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
 
 import java.util.HashMap;
 
 public class CandidatoCrud {
 
-    private HashMap<Integer, Candidato> candidatos = new HashMap<>();
+    public HashMap<Integer, Candidato> candidatos = new HashMap<>();
 
-    public void agregarCandidato(Candidato candidato) throws Exception {
-        if (candidatos.containsKey(candidato.getDNICiudadano())) {
-            throw new Exception("El candidato ya existe en la lista");
+    public void agregarCandidato(Integer id, Candidato candidato) throws Exception {
+        if (candidatos.containsKey(id)) {
+            throw new Exception("El candidato ya existe");
         }
-        candidatos.put(candidato.getDNICiudadano(), new Candidato(candidato, candidato.getPartidoElectoral(), candidato.getComuna(), candidato.getCategoria()));
+        candidatos.put(id, candidato);
     }
 
     public Candidato buscarCandidato(Integer DNI) throws Exception {
@@ -22,11 +24,14 @@ public class CandidatoCrud {
         return candidatos.get(DNI);
     }
 
-    public void actualizarCandidato(Candidato candidato, Candidato nuevoCandidato) throws Exception {
-        if (!candidatos.containsKey(candidato.getDNICiudadano())) {
+    public void actualizarCandidato(Integer id, Partido nombrePartido, Comuna comuna, String categoria) throws Exception {
+        if (!candidatos.containsKey(id)) {
             throw new Exception("El candidato no existe");
         }
-        candidatos.put(candidato.getDNICiudadano(), nuevoCandidato);
+        Candidato candidato = candidatos.get(id);
+        candidato.setPartidoElectoral(nombrePartido);
+        candidato.setComuna(comuna);
+        candidato.setCategoria(categoria);
     }
 
     public void eliminarCandidato(Integer DNI) throws Exception {

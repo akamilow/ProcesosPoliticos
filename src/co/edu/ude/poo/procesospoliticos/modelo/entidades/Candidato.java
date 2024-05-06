@@ -39,16 +39,13 @@ public class Candidato extends Ciudadano {
         return comuna;
     }
 
-    
-
     @Override
     public String toString() {
-        return  "\tDatos del Candidato:" + "\n" +
-                "\tIdentificación: " + DNI + "\n" +
-                "\tEdad: " + edad + "\n" +
-                "\tNombre: " + nombreCompleto + "\n" +
-                "\tGénero: " + genero + "\n" +
-                "\tCategoría: " + categoria + "\n" +
+        return  "Identificación: " + DNI + "\n" +
+                "Edad: " + edad + "\n" +
+                "Nombre: " + nombreCompleto + "\n" +
+                "Género: " + genero + "\n" +
+                "Categoría: " + categoria + "\n" +
                 partidoElectoral.toString() + "\n" +
                 comuna.toString();
     }
