@@ -1,5 +1,7 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
+import javax.swing.ImageIcon;
+
 /**
  * @author camilo castellar
  */
@@ -10,6 +12,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        // Cargar una imagen para usar como icono la imagen se llama icono-ventana.pg
+        ImageIcon icono = new ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/icono-ventana.png"));
+
+        // Establecer la imagen como icono de la ventana
+        this.setIconImage(icono.getImage());
     }
 
     /**

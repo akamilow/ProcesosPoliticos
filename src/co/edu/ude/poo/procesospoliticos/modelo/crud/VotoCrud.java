@@ -1,5 +1,8 @@
 package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesaVotacion;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Voto;
 
 import java.util.HashMap;
@@ -7,34 +10,37 @@ import java.util.HashMap;
 
 public class VotoCrud {
 
-    private HashMap<Integer, Voto> votos = new HashMap<>();
+    public HashMap<Integer, Voto> votos = new HashMap<>();
 
-    public void agregarVoto(Voto voto) throws Exception {
-        if (votos.containsKey(voto.getCiudadano().getDNICiudadano())) {
+    public void agregarVoto(Integer id, Voto voto) throws Exception {
+        if (votos.containsKey(id)) {
             throw new Exception("El voto ya existe");
         }
-        votos.put(voto.getCiudadano().getDNICiudadano(), voto);
+        votos.put(id, voto);
     }
 
-    public Voto buscarVoto(Integer DNI) throws Exception {
-        if (!votos.containsKey(DNI)) {
+    public Voto buscarVoto(Integer id) throws Exception {
+        if (!votos.containsKey(id)) {
             throw new Exception("El voto no existe");
         }
-        return votos.get(DNI);
+        return votos.get(id);
     }
 
-    public void actualizarVoto(Voto voto, Voto nuevoVoto) throws Exception {
-        if (!votos.containsKey(voto.getCiudadano().getDNICiudadano())) {
+    public void actualizarVoto(Integer id, MesaVotacion mesaVotacion, Ciudadano ciudadano, Candidato candidato) throws Exception {
+        if (!votos.containsKey(id)) {
             throw new Exception("El voto no existe");
         }
-        votos.replace(voto.getCiudadano().getDNICiudadano(), nuevoVoto);
+        Voto voto = votos.get(id);
+        voto.setMesaVotacion(mesaVotacion);
+        voto.setCiudadano(ciudadano);
+        voto.setCandidato(candidato);
     }
 
-    public void eliminarVoto(Integer DNI) throws Exception {
-        if (!votos.containsKey(DNI)) {
+    public void eliminarVoto(Integer id) throws Exception {
+        if (!votos.containsKey(id)) {
             throw new Exception("El voto no existe");
         }
-        votos.remove(DNI);
+        votos.remove(id);
     }
 
     public HashMap<Integer, Voto> listarVotos() {

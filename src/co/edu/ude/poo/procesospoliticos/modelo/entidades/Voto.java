@@ -1,42 +1,47 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
-import java.util.Date;
-
 public class Voto {
+    protected MesaVotacion mesaVotacion;
     protected Candidato candidato;
     protected Ciudadano ciudadano;
-    protected Date fechaEmision;
 
     public Voto() {
     }
 
-    public Voto(Ciudadano ciudadano, Candidato candidato, Date fechaEmision) {
+    public Voto(MesaVotacion mesaVotacion, Ciudadano ciudadano, Candidato candidato) {
+        this.mesaVotacion = mesaVotacion;
         this.ciudadano = ciudadano;
         this.candidato = candidato;
-        this.fechaEmision = fechaEmision;
     }
 
-    public void setFechaEmision(Date fechaEmision) {
-        this.fechaEmision = fechaEmision;
+    public MesaVotacion getMesaVotacion() {
+        return mesaVotacion;
     }
 
-    public Date getFechaEmision() {
-        return fechaEmision;
+    public void setMesaVotacion(MesaVotacion mesaVotacion) {
+        this.mesaVotacion = mesaVotacion;
     }
 
     public Candidato getCandidato() {
         return candidato;
     }
 
+    public void setCandidato(Candidato candidato) {
+        this.candidato = candidato;
+    }
+
     public Ciudadano getCiudadano() {
         return ciudadano;
     }
 
+    public void setCiudadano(Ciudadano ciudadano) {
+        this.ciudadano = ciudadano;
+    }
+
     @Override
     public String toString() {
-        return "\tDatos del voto:" + "\n" + "\n" +
-                candidato.toString() + "\n" + "\n" +
+        return  candidato.toString() + "\n" + "\n" +
                 ciudadano.toString() + "\n" + "\n" +
-                "\tFecha de emisión: " + fechaEmision;
+                mesaVotacion.toString();
     }
 }

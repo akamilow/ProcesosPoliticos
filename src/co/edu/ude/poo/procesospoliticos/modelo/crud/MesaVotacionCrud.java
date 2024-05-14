@@ -5,7 +5,6 @@ import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesaVotacion;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalMesa;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MesaVotacionCrud {
