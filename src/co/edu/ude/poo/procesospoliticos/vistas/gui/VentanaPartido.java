@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author camilo castellar
  */
 public class VentanaPartido extends javax.swing.JDialog {
-    
+
     // instacia de clase CRUD Partido
     PartidoCrud partidoCrud = new PartidoCrud();
     
@@ -19,7 +19,6 @@ public class VentanaPartido extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
     
     // Metodo para habilitar botones
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
@@ -225,7 +224,6 @@ public class VentanaPartido extends javax.swing.JDialog {
         
         try {
             partidoCrud.agregarPartido(Integer.parseInt(id), p);
-            
             // Mensaje de confirmacion
             int totalPartidosAlmacenados = partidoCrud.numeroPartidos();
             String msg = "El partido: " + nombrePartido + " se guardo con éxito";

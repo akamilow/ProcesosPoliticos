@@ -141,6 +141,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarPartido.setText("Listar Todo...");
+        itemListarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarPartidoActionPerformed(evt);
+            }
+        });
         submenuPartido.add(itemListarPartido);
 
         menuPartido.add(submenuPartido);
@@ -487,18 +492,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemAgregarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/add-icon.png"))); // NOI18N
         itemAgregarVoto.setText("Agregar Voto...");
+        itemAgregarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarVotoActionPerformed(evt);
+            }
+        });
         menuVoto.add(itemAgregarVoto);
 
         itemBuscarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/search-icon.png"))); // NOI18N
         itemBuscarVoto.setText("Buscar Voto...");
+        itemBuscarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarVotoActionPerformed(evt);
+            }
+        });
         menuVoto.add(itemBuscarVoto);
 
         itemModificarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/edit-icon.png"))); // NOI18N
         itemModificarVoto.setText("Modificar Voto...");
+        itemModificarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemModificarVotoActionPerformed(evt);
+            }
+        });
         menuVoto.add(itemModificarVoto);
 
         itemEliminarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/delete-icon.png"))); // NOI18N
         itemEliminarVoto.setText("Eliminar Voto...");
+        itemEliminarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarVotoActionPerformed(evt);
+            }
+        });
         menuVoto.add(itemEliminarVoto);
 
         submenuVoto.setText("Reportes");
@@ -704,6 +729,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void itemEliminarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarMesaActionPerformed
         itemBuscarMesaActionPerformed(evt);
     }//GEN-LAST:event_itemEliminarMesaActionPerformed
+
+    private void itemAgregarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarVotoActionPerformed
+        VentanaVoto ventana = new VentanaVoto(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemAgregarVotoActionPerformed
+
+    private void itemBuscarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarVotoActionPerformed
+        VentanaVoto ventana = new VentanaVoto(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(false, true, true, true);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemBuscarVotoActionPerformed
+
+    private void itemModificarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarVotoActionPerformed
+        itemBuscarVotoActionPerformed(evt);
+    }//GEN-LAST:event_itemModificarVotoActionPerformed
+
+    private void itemEliminarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarVotoActionPerformed
+        itemBuscarVotoActionPerformed(evt);
+    }//GEN-LAST:event_itemEliminarVotoActionPerformed
+
+    private void itemListarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarPartidoActionPerformed
+        VentanaListarPartidos ventana = new VentanaListarPartidos(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarPartidoActionPerformed
 
     /**
      * @param args the command line arguments

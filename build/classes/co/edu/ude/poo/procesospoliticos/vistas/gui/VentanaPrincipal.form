@@ -65,6 +65,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Listar Todo..."/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemListarPartidoActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -544,6 +547,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Voto..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAgregarVotoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemBuscarVoto">
               <Properties>
@@ -552,6 +558,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Voto..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBuscarVotoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemModificarVoto">
               <Properties>
@@ -560,6 +569,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Modificar Voto..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemModificarVotoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemEliminarVoto">
               <Properties>
@@ -568,6 +580,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Voto..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemEliminarVotoActionPerformed"/>
+              </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="submenuVoto">
               <Properties>

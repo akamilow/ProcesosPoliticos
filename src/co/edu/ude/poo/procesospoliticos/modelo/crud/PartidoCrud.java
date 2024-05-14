@@ -38,10 +38,8 @@ public class PartidoCrud {
         throw new Exception("El partido no existe");
     }
 
-    public void mostrarPartidos(){
-        for (Partido partido : partidos.values()) {
-            System.out.println(partido);
-        }
+    public HashMap<Integer, Partido> listarPartidos(){
+        return partidos;
     }
 
     public int numeroPartidos(){
