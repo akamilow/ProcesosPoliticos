@@ -194,6 +194,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarComuna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarComuna.setText("Listar Todo...");
+        itemListarComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarComunaActionPerformed(evt);
+            }
+        });
         submenuComuna.add(itemListarComuna);
 
         menuComuna.add(submenuComuna);
@@ -757,6 +762,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_itemListarPartidoActionPerformed
+
+    private void itemListarComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarComunaActionPerformed
+        VentanaListarComunas ventana = new VentanaListarComunas(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarComunaActionPerformed
 
     /**
      * @param args the command line arguments
