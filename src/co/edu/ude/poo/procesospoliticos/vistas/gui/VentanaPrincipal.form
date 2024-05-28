@@ -4,6 +4,28 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="BarraMenu">
       <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sistema"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemGestiionUsuarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n Usuarios"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemListarUsuarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Listar Usuarios"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemInicioSesion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inicio Sesi&#xf3;n"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="menuPartido">
           <Properties>
             <Property name="text" type="java.lang.String" value="Partido"/>
@@ -658,7 +680,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="206" max="32767" attributes="0"/>
+              <EmptySpace pref="208" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="271" max="-2" attributes="0"/>
           </Group>
       </Group>

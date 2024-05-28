@@ -1,17 +1,22 @@
-package co.edu.ude.poo.procesospoliticos.vistas.gui;
+ package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
+import co.edu.ude.poo.procesospoliticos.util.config.DBConection;
 import javax.swing.ImageIcon;
-
+import java.sql.*;
 /**
  * @author camilo castellar
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        con = DBConection.ConnectionDB();
         // Cargar una imagen para usar como icono la imagen se llama icono-ventana.pg
         ImageIcon icono = new ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/icono-ventana.png"));
 
@@ -30,6 +35,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         BarraMenu = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        itemGestiionUsuarios = new javax.swing.JMenuItem();
+        itemListarUsuarios = new javax.swing.JMenuItem();
+        itemInicioSesion = new javax.swing.JMenuItem();
         menuPartido = new javax.swing.JMenu();
         itemAgregarPartido = new javax.swing.JMenuItem();
         itemBuscarPartido = new javax.swing.JMenuItem();
@@ -98,6 +107,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setTitle("Procesos Politícos");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"))); // NOI18N
+
+        jMenu1.setText("Sistema");
+
+        itemGestiionUsuarios.setText("Gestión Usuarios");
+        jMenu1.add(itemGestiionUsuarios);
+
+        itemListarUsuarios.setText("Listar Usuarios");
+        jMenu1.add(itemListarUsuarios);
+
+        itemInicioSesion.setText("Inicio Sesión");
+        jMenu1.add(itemInicioSesion);
+
+        BarraMenu.add(jMenu1);
 
         menuPartido.setText("Partido");
 
@@ -587,7 +609,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -910,6 +932,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemEliminarPartido;
     private javax.swing.JMenuItem itemEliminarVocal;
     private javax.swing.JMenuItem itemEliminarVoto;
+    private javax.swing.JMenuItem itemGestiionUsuarios;
+    private javax.swing.JMenuItem itemInicioSesion;
     private javax.swing.JMenuItem itemLIstarLocalVotacion;
     private javax.swing.JMenuItem itemListarApoderado;
     private javax.swing.JMenuItem itemListarCandidato;
@@ -917,6 +941,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemListarComuna;
     private javax.swing.JMenuItem itemListarMesa;
     private javax.swing.JMenuItem itemListarPartido;
+    private javax.swing.JMenuItem itemListarUsuarios;
     private javax.swing.JMenuItem itemListarVocal;
     private javax.swing.JMenuItem itemListarVoto;
     private javax.swing.JMenuItem itemModificarApoderado;
@@ -929,6 +954,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemModificarVoto;
     private javax.swing.JMenuItem itemModiificarComuna;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu menuApoderadoMesa;
     private javax.swing.JMenu menuCandidato;
     private javax.swing.JMenu menuCiudadano;
