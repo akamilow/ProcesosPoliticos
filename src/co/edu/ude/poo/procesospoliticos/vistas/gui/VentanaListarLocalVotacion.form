@@ -30,7 +30,7 @@
           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel4" max="32767" attributes="0"/>
+              <Component id="jLabel4" min="-2" pref="128" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -57,7 +57,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Lista de las Comunas:">
+            <TitledBorder title="Lista de las ubicaciones de mesas:">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true"/>
               </Border>
@@ -93,12 +93,12 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tablaComunas">
+            <Component class="javax.swing.JTable" name="tablaLocalVotacion">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="4">
                     <Column editable="true" title="ID" type="java.lang.Integer"/>
-                    <Column editable="true" title="Nombre de comunas" type="java.lang.String"/>
+                    <Column editable="true" title="Ubicaciones" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -130,14 +130,14 @@
           <Font name="Dialog" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="LISTAR COMUNAS REGISTRADAS"/>
+        <Property name="text" type="java.lang.String" value="LISTAR LOCALES DE VOTACI&#xd3;N REGISTRADOS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/app-map-icon.png"/>
+          <Image iconType="3" name="/co/edu/ude/poo/procesospoliticos/vistas/iconos/Location-icon.png"/>
         </Property>
       </Properties>
     </Component>

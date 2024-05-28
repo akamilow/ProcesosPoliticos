@@ -247,6 +247,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemLIstarLocalVotacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemLIstarLocalVotacion.setText("Listar Todo..");
+        itemLIstarLocalVotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemLIstarLocalVotacionActionPerformed(evt);
+            }
+        });
         submenuLocalVotacion.add(itemLIstarLocalVotacion);
 
         menuLocalVotacion.add(submenuLocalVotacion);
@@ -768,6 +773,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_itemListarComunaActionPerformed
+
+    private void itemLIstarLocalVotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLIstarLocalVotacionActionPerformed
+        VentanaListarLocalVotacion ventana = new VentanaListarLocalVotacion(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemLIstarLocalVotacionActionPerformed
 
     /**
      * @param args the command line arguments
