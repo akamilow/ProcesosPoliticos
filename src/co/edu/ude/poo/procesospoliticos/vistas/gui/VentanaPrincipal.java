@@ -300,6 +300,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarCiudadano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarCiudadano.setText("Listar Todo...");
+        itemListarCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarCiudadanoActionPerformed(evt);
+            }
+        });
         submenuCiudadano.add(itemListarCiudadano);
 
         menuCiudadano.add(submenuCiudadano);
@@ -348,6 +353,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarApoderado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarApoderado.setText("Listar Todo...");
+        itemListarApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarApoderadoActionPerformed(evt);
+            }
+        });
         submenuApoderado.add(itemListarApoderado);
 
         menuApoderadoMesa.add(submenuApoderado);
@@ -396,6 +406,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarCandidato.setText("Listar Todo...");
+        itemListarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarCandidatoActionPerformed(evt);
+            }
+        });
         submenuCandidato.add(itemListarCandidato);
 
         menuCandidato.add(submenuCandidato);
@@ -444,6 +459,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarVocal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarVocal.setText("Listar Todo...");
+        itemListarVocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarVocalActionPerformed(evt);
+            }
+        });
         submenuVocal.add(itemListarVocal);
 
         menuVocalMesa.add(submenuVocal);
@@ -492,6 +512,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarMesa.setText("Listar Todo...");
+        itemListarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarMesaActionPerformed(evt);
+            }
+        });
         submenuMesa.add(itemListarMesa);
 
         menuMesa.add(submenuMesa);
@@ -540,6 +565,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         itemListarVoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarVoto.setText("Listar Todo...");
+        itemListarVoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarVotoActionPerformed(evt);
+            }
+        });
         submenuVoto.add(itemListarVoto);
 
         menuVoto.add(submenuVoto);
@@ -779,6 +809,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_itemLIstarLocalVotacionActionPerformed
+
+    private void itemListarCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarCiudadanoActionPerformed
+        VentanaListarCiudadanos ventana = new VentanaListarCiudadanos(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarCiudadanoActionPerformed
+
+    private void itemListarApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarApoderadoActionPerformed
+        VentanaListarApoderados ventana = new VentanaListarApoderados(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarApoderadoActionPerformed
+
+    private void itemListarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarCandidatoActionPerformed
+        VentanaListarCandidato ventana = new VentanaListarCandidato(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarCandidatoActionPerformed
+
+    private void itemListarVocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarVocalActionPerformed
+        VentanaListarVocalMesa ventana = new VentanaListarVocalMesa(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarVocalActionPerformed
+
+    private void itemListarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarMesaActionPerformed
+        VentanaListarMesas ventana = new VentanaListarMesas(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarMesaActionPerformed
+
+    private void itemListarVotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarVotoActionPerformed
+        VentanaListarVotos ventana = new VentanaListarVotos(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarVotoActionPerformed
 
     /**
      * @param args the command line arguments
