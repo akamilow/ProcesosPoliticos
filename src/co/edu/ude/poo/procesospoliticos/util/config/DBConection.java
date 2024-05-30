@@ -12,21 +12,17 @@ import java.sql.DriverManager;
  * @author camil
  */
 public class DBConection {
-    Connection con = null;
+    static Connection con = null;
     public static Connection ConnectionDB(){
         // se requiere conectar a SQLite
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection("jdbc:sqlite:DB_ProcesosPoliticos.db");
+            con = DriverManager.getConnection("jdbc:sqlite:DB_ProcesosPoliticos.db");
             System.out.println("Conexión exitosa");
             return con;
         }catch(Exception e){
             System.out.println("Conexión fallida: " + e);
             return null;
         }
-    }
-    
-    public static void main(String[] args){
-        ConnectionDB();
     }
 }

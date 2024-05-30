@@ -1,22 +1,17 @@
- package co.edu.ude.poo.procesospoliticos.vistas.gui;
+package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.util.config.DBConection;
 import javax.swing.ImageIcon;
-import java.sql.*;
+
 /**
  * @author camilo castellar
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        con = DBConection.ConnectionDB();
         // Cargar una imagen para usar como icono la imagen se llama icono-ventana.pg
         ImageIcon icono = new ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/icono-ventana.png"));
 

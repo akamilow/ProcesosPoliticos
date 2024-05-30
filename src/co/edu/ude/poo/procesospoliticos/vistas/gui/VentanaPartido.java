@@ -1,9 +1,11 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -11,23 +13,23 @@ import javax.swing.JOptionPane;
  * @author camilo castellar
  */
 public class VentanaPartido extends javax.swing.JDialog {
-
-    // instacia de clase CRUD Partido
-    PartidoCrud partidoCrud = new PartidoCrud();
     
+    // conexion a la base de datos
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    // instanciar la clase PartidoEntityJpaController
+    PartidoModelJpaController partidoCrud = new PartidoModelJpaController(con);
+
     public VentanaPartido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
-    // Metodo para habilitar botones
+
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
         btnAgregarPartido.setEnabled(agregar);
         btnBuscarPartido.setEnabled(buscar);
         btnModificarPartido.setEnabled(modificar);
         btnEliminarPartido.setEnabled(eliminar);
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,7 +213,6 @@ public class VentanaPartido extends javax.swing.JDialog {
 
         String nombrePartido = txtNombrePartido.getText();
 
-        // Validar que no este vacio o empty con trim, si esta vacio lanzar un mensaje JOptionPane: "Digite el nombre del partido"
         if (nombrePartido == null || nombrePartido.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite el nombre del partido", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtNombrePartido.setText("");
@@ -220,12 +221,14 @@ public class VentanaPartido extends javax.swing.JDialog {
         }
 
         // Crear objetos
-        Partido p = new Partido(nombrePartido);
+        PartidoModel p = new PartidoModel();
+        p.setId(Integer.parseInt(id));
+        p.setNombre(nombrePartido);
         
         try {
-            partidoCrud.agregarPartido(Integer.parseInt(id), p);
+            partidoCrud.create(p);
             // Mensaje de confirmacion
-            int totalPartidosAlmacenados = partidoCrud.numeroPartidos();
+            int totalPartidosAlmacenados = partidoCrud.getPartidoModelCount();
             String msg = "El partido: " + nombrePartido + " se guardo con éxito";
             msg += "\n" + " TOTAL PARTIDOS: " + totalPartidosAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
@@ -266,15 +269,16 @@ public class VentanaPartido extends javax.swing.JDialog {
             return;
         }
 
-        // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
+        // validar en la base de datos que exista el partido a buscar
+        if(partidoCrud.findPartidoModel(Integer.parseInt(id)) == null){
             JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
 
         //recupera el objeto para mostrarlo en los campos del formulario
-        Partido p = partidoCrud.partidos.get(Integer.parseInt(id));
-        txtNombrePartido.setText(p.getNombrePartido());
+        PartidoModel p = partidoCrud.findPartidoModel(Integer.parseInt(id));
+        txtNombrePartido.setText(p.getNombre());
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -292,8 +296,8 @@ public class VentanaPartido extends javax.swing.JDialog {
             return;
         }
 
-        // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
+        // validar que el contenga la llave a buscar en la base de datos
+        if(partidoCrud.findPartidoModel(Integer.parseInt(id)) == null){
             JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -308,9 +312,14 @@ public class VentanaPartido extends javax.swing.JDialog {
             return;
         }
 
+        // crear un objeto partido para obtener la actualizacion
+        PartidoModel p = partidoCrud.findPartidoModel(Integer.parseInt(id));
+        p.setNombre(nombrePartido);
+
+
         try {
-            partidoCrud.actualizarPartido(Integer.parseInt(id), nombrePartido);
-            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+            partidoCrud.edit(p);
+            JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se modifico con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtIDPartido.setText("");
             txtNombrePartido.setText("");
         } catch (Exception e) {
@@ -331,7 +340,7 @@ public class VentanaPartido extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!partidoCrud.partidos.containsKey(Integer.parseInt(id))) {
+        if(partidoCrud.findPartidoModel(Integer.parseInt(id)) == null){
             JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -340,8 +349,8 @@ public class VentanaPartido extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                partidoCrud.eliminarPartido(Integer.parseInt(id));
-                JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
+                partidoCrud.destroy(Integer.parseInt(id));
+                JOptionPane.showMessageDialog(this, "El partido con ID: " + id + " se eliminó con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtIDPartido.setText("");
                 txtNombrePartido.setText("");
             } catch (Exception e) {
