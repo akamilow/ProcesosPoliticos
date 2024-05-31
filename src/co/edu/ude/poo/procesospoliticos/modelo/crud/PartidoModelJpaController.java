@@ -6,15 +6,17 @@ package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.crud.exceptions.NonexistentEntityException;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.exceptions.PreexistingEntityException;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -32,11 +34,29 @@ public class PartidoModelJpaController implements Serializable {
     }
 
     public void create(PartidoModel partidoModel) throws PreexistingEntityException, Exception {
+        if (partidoModel.getCandidatoModelList() == null) {
+            partidoModel.setCandidatoModelList(new ArrayList<CandidatoModel>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<CandidatoModel> attachedCandidatoModelList = new ArrayList<CandidatoModel>();
+            for (CandidatoModel candidatoModelListCandidatoModelToAttach : partidoModel.getCandidatoModelList()) {
+                candidatoModelListCandidatoModelToAttach = em.getReference(candidatoModelListCandidatoModelToAttach.getClass(), candidatoModelListCandidatoModelToAttach.getDni());
+                attachedCandidatoModelList.add(candidatoModelListCandidatoModelToAttach);
+            }
+            partidoModel.setCandidatoModelList(attachedCandidatoModelList);
             em.persist(partidoModel);
+            for (CandidatoModel candidatoModelListCandidatoModel : partidoModel.getCandidatoModelList()) {
+                PartidoModel oldPartidoOfCandidatoModelListCandidatoModel = candidatoModelListCandidatoModel.getPartido();
+                candidatoModelListCandidatoModel.setPartido(partidoModel);
+                candidatoModelListCandidatoModel = em.merge(candidatoModelListCandidatoModel);
+                if (oldPartidoOfCandidatoModelListCandidatoModel != null) {
+                    oldPartidoOfCandidatoModelListCandidatoModel.getCandidatoModelList().remove(candidatoModelListCandidatoModel);
+                    oldPartidoOfCandidatoModelListCandidatoModel = em.merge(oldPartidoOfCandidatoModelListCandidatoModel);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findPartidoModel(partidoModel.getId()) != null) {
@@ -55,7 +75,34 @@ public class PartidoModelJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            PartidoModel persistentPartidoModel = em.find(PartidoModel.class, partidoModel.getId());
+            List<CandidatoModel> candidatoModelListOld = persistentPartidoModel.getCandidatoModelList();
+            List<CandidatoModel> candidatoModelListNew = partidoModel.getCandidatoModelList();
+            List<CandidatoModel> attachedCandidatoModelListNew = new ArrayList<CandidatoModel>();
+            for (CandidatoModel candidatoModelListNewCandidatoModelToAttach : candidatoModelListNew) {
+                candidatoModelListNewCandidatoModelToAttach = em.getReference(candidatoModelListNewCandidatoModelToAttach.getClass(), candidatoModelListNewCandidatoModelToAttach.getDni());
+                attachedCandidatoModelListNew.add(candidatoModelListNewCandidatoModelToAttach);
+            }
+            candidatoModelListNew = attachedCandidatoModelListNew;
+            partidoModel.setCandidatoModelList(candidatoModelListNew);
             partidoModel = em.merge(partidoModel);
+            for (CandidatoModel candidatoModelListOldCandidatoModel : candidatoModelListOld) {
+                if (!candidatoModelListNew.contains(candidatoModelListOldCandidatoModel)) {
+                    candidatoModelListOldCandidatoModel.setPartido(null);
+                    candidatoModelListOldCandidatoModel = em.merge(candidatoModelListOldCandidatoModel);
+                }
+            }
+            for (CandidatoModel candidatoModelListNewCandidatoModel : candidatoModelListNew) {
+                if (!candidatoModelListOld.contains(candidatoModelListNewCandidatoModel)) {
+                    PartidoModel oldPartidoOfCandidatoModelListNewCandidatoModel = candidatoModelListNewCandidatoModel.getPartido();
+                    candidatoModelListNewCandidatoModel.setPartido(partidoModel);
+                    candidatoModelListNewCandidatoModel = em.merge(candidatoModelListNewCandidatoModel);
+                    if (oldPartidoOfCandidatoModelListNewCandidatoModel != null && !oldPartidoOfCandidatoModelListNewCandidatoModel.equals(partidoModel)) {
+                        oldPartidoOfCandidatoModelListNewCandidatoModel.getCandidatoModelList().remove(candidatoModelListNewCandidatoModel);
+                        oldPartidoOfCandidatoModelListNewCandidatoModel = em.merge(oldPartidoOfCandidatoModelListNewCandidatoModel);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -84,6 +131,11 @@ public class PartidoModelJpaController implements Serializable {
                 partidoModel.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The partidoModel with id " + id + " no longer exists.", enfe);
+            }
+            List<CandidatoModel> candidatoModelList = partidoModel.getCandidatoModelList();
+            for (CandidatoModel candidatoModelListCandidatoModel : candidatoModelList) {
+                candidatoModelListCandidatoModel.setPartido(null);
+                candidatoModelListCandidatoModel = em.merge(candidatoModelListCandidatoModel);
             }
             em.remove(partidoModel);
             em.getTransaction().commit();

@@ -30,14 +30,15 @@ import javax.persistence.Table;
     @NamedQuery(name = "MesavotacionModel.findByApoderadoDos", query = "SELECT m FROM MesavotacionModel m WHERE m.apoderadoDos = :apoderadoDos")})
 public class MesavotacionModel implements Serializable {
 
+    @Column(name = "estado")
+    private String estado;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "numero")
     private Integer numero;
     @Column(name = "genero")
     private String genero;
-    @Column(name = "estado")
-    private Integer estado;
     @Column(name = "vocalmesa")
     private Integer vocalmesa;
     @Column(name = "apoderadoUno")
@@ -71,13 +72,6 @@ public class MesavotacionModel implements Serializable {
         this.genero = genero;
     }
 
-    public Integer getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Integer estado) {
-        this.estado = estado;
-    }
 
     public Integer getVocalmesa() {
         return vocalmesa;
@@ -134,6 +128,14 @@ public class MesavotacionModel implements Serializable {
     @Override
     public String toString() {
         return "co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel[ numero=" + numero + " ]";
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
 }

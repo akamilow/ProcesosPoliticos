@@ -1,9 +1,12 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -12,8 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class VentanaComuna extends javax.swing.JDialog {
     
-    // instacia de clase CRUD Comuna
-    ComunaCrud comunaCrud = new ComunaCrud();
+    // conexion a la base de datos
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    // instanciar la clase PartidoEntityJpaController
+    ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
     
     public VentanaComuna(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -215,13 +220,16 @@ public class VentanaComuna extends javax.swing.JDialog {
         }
 
         // Crear objeto
-        Comuna c = new Comuna(nombreComuna);
+        ComunaModel c = new ComunaModel();
+        c.setId(id);
+        c.setNombre(nombreComuna);
         
         try {
-            comunaCrud.agregarComuna(Integer.parseInt(id), c);
+            // Guardar objeto
+            comunaCrud.create(c);
             
             // Mensaje de confirmacion
-            int totalComunasAlmacenados = comunaCrud.numeroComunas();
+            int totalComunasAlmacenados = comunaCrud.getComunaModelCount();
             String msg = "La comuna: " + nombreComuna + " se guardo con éxito";
             msg += "\n" + " TOTAL COMUNAS: " + totalComunasAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
@@ -262,15 +270,15 @@ public class VentanaComuna extends javax.swing.JDialog {
             return;
         }
 
-        // validar que el contenga la llave a buscar
-        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+        // validar que el contenga la llave a buscar la base de datos
+        if (comunaCrud.findComunaModel(id) == null) {
             JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         //recupera el objeto para mostrarlo en los campos del formulario
-        Comuna c = comunaCrud.comunas.get(Integer.parseInt(id));
-        txtNombreComuna.setText(c.getComuna());
+        ComunaModel c = comunaCrud.findComunaModel(id);
+        txtNombreComuna.setText(c.getNombre());
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -287,7 +295,7 @@ public class VentanaComuna extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+        if(comunaCrud.findComunaModel(id) == null) {
             JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -302,8 +310,11 @@ public class VentanaComuna extends javax.swing.JDialog {
             return;
         }
 
+        ComunaModel c = comunaCrud.findComunaModel(id);
+        c.setNombre(nombreComuna);
+
         try {
-            comunaCrud.actualizarComuna(Integer.parseInt(id), nombreComuna);
+            comunaCrud.edit(c);
             JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtIDComuna.setText("");
             txtNombreComuna.setText("");
@@ -324,7 +335,7 @@ public class VentanaComuna extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!comunaCrud.comunas.containsKey(Integer.parseInt(id))) {
+        if (comunaCrud.findComunaModel(id) == null) {
             JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -334,7 +345,7 @@ public class VentanaComuna extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                comunaCrud.eliminarComuna(Integer.parseInt(id));
+                comunaCrud.destroy(id);
                 JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtIDComuna.setText("");
                 txtNombreComuna.setText("");

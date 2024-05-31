@@ -129,8 +129,8 @@ public class VentanaListarPartidos extends javax.swing.JDialog {
 
     public void cargarPartidos() {
         // Cargar los partidos registrados en la tabla
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
-        PartidoModelJpaController controlador = new PartidoModelJpaController(emf);
+        EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        PartidoModelJpaController controlador = new PartidoModelJpaController(con);
         List<PartidoModel> partidos = controlador.findPartidoModelEntities();
         /*if (partidos != null && !partidos.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No hay partidos registrados", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -145,7 +145,7 @@ public class VentanaListarPartidos extends javax.swing.JDialog {
         }
         Vector<String> columnas = new Vector<>();
         columnas.add("ID");
-        columnas.add("Nombreddd de partido");
+        columnas.add("Nombre del partido");
         
         // vector registros
         Vector<Vector> registros = new Vector<>();
@@ -160,8 +160,6 @@ public class VentanaListarPartidos extends javax.swing.JDialog {
             registros.add(registro);
         }
         tablaPartidos.setModel(modelo);
-
-
     }
 
     /**

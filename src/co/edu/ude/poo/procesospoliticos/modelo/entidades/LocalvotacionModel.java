@@ -28,6 +28,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "LocalvotacionModel.findByUbicacion", query = "SELECT l FROM LocalvotacionModel l WHERE l.ubicacion = :ubicacion")})
 public class LocalvotacionModel implements Serializable {
 
+    @OneToMany(mappedBy = "ubicacion")
+    private List<MesavotacionModel> mesavotacionModelList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "id")
@@ -37,8 +40,6 @@ public class LocalvotacionModel implements Serializable {
     @JoinColumn(name = "comuna", referencedColumnName = "id")
     @ManyToOne
     private ComunaModel comuna;
-    @OneToMany(mappedBy = "ubicacion")
-    private List<MesavotacionModel> mesavotacionModelList;
 
     public LocalvotacionModel() {
     }
@@ -71,14 +72,6 @@ public class LocalvotacionModel implements Serializable {
         this.comuna = comuna;
     }
 
-    public List<MesavotacionModel> getMesavotacionModelList() {
-        return mesavotacionModelList;
-    }
-
-    public void setMesavotacionModelList(List<MesavotacionModel> mesavotacionModelList) {
-        this.mesavotacionModelList = mesavotacionModelList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -102,6 +95,14 @@ public class LocalvotacionModel implements Serializable {
     @Override
     public String toString() {
         return "co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel[ id=" + id + " ]";
+    }
+
+    public List<MesavotacionModel> getMesavotacionModelList() {
+        return mesavotacionModelList;
+    }
+
+    public void setMesavotacionModelList(List<MesavotacionModel> mesavotacionModelList) {
+        this.mesavotacionModelList = mesavotacionModelList;
     }
     
 }

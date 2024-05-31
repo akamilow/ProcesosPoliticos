@@ -1,10 +1,13 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalVotacionCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalvotacionModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -12,13 +15,14 @@ import javax.swing.JOptionPane;
  * @author camilo castellar
  */
 public class VentanaLocalVotacion extends javax.swing.JDialog {
-    
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
     // instacia de clase CRUD Local de votacion
-    LocalVotacionCrud localVotacionCrud = new LocalVotacionCrud();
+    LocalvotacionModelJpaController localvotacionCrud = new LocalvotacionModelJpaController(con);
     
     public VentanaLocalVotacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarComunas();
     }
 
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
@@ -26,6 +30,22 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         btnBuscarLocalVotacion.setEnabled(buscar);
         btnModificarLocalVotacion.setEnabled(modificar);
         btnEliminarLocalVotacion.setEnabled(eliminar);
+    }
+
+    public void cargarComunas() {
+        // conexion a la base de datos
+        //EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        // instanciar la clase PartidoEntityJpaController
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel comunaModel = new ComunaModel();
+
+        cmbComunaLocal.removeAllItems();
+        cmbComunaLocal.addItem("Seleccione una comuna");
+        for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
+            cmbComunaLocal.addItem(c.getNombre());
+        }
+
+        cmbComunaLocal.setSelectedIndex(0);
     }
     
     /**
@@ -228,26 +248,34 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
             return;
         }
 
-        // Agregar comunas en el desplegable cmbComunaLocal, los items son los nombres de las comunas del hashmap
-        /*ComunaCrud comunaCrud = new ComunaCrud();
-        cmbComunaLocal.removeAllItems();
-        cmbComunaLocal.addItem("Seleccione una comuna");
-        for (Comuna c : comunaCrud.comunas.values()) {
-            cmbComunaLocal.addItem(c.getComuna());
-        }*/
-
         String nombreComuna = cmbComunaLocal.getSelectedItem().toString();
-        
-        Comuna comuna = new Comuna(nombreComuna);
 
-        // Crear objeto
-        LocalVotacion l = new LocalVotacion(comuna, localVotacion);
+        // obtener el id con el nombre de la comuna seleccionada para luego asignarla al objeto LocalVotacion
+        // EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel comunaModel = new ComunaModel();
+
+        String idComuna = "";
+
+        for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
+            if (c.getNombre().equals(nombreComuna)) {
+                idComuna = c.getId();
+            }
+        }
+        
+        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
+
+
+        // Crear objeto LocalVotacion
+        LocalvotacionModel l = new LocalvotacionModel();
+        l.setUbicacion(localVotacion);
+        l.setComuna(comuna);
         
         try {
-            localVotacionCrud.agregarLocalVotacion(Integer.parseInt(id), l);
+            localvotacionCrud.create(l);
             
             // Mensaje de confirmacion
-            int totalLocalesAlmacenados = localVotacionCrud.numeroLocalVotaciones();
+            int totalLocalesAlmacenados = localvotacionCrud.getLocalvotacionModelCount();
             String msg = "La ubicación del local de votación, se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalLocalesAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
@@ -280,16 +308,16 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!localVotacionCrud.localVotaciones.containsKey(Integer.parseInt(id))) {
+        if (localvotacionCrud.findLocalvotacionModel(Integer.parseInt(id)) == null) {
             JOptionPane.showMessageDialog(this, "El local con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         //recupera el objeto para mostrarlo en los campos del formulario
-        LocalVotacion l = localVotacionCrud.localVotaciones.get(Integer.parseInt(id));
-        cmbComunaLocal.setSelectedItem(l.getComuna());
-        txtLocalVotacion.setText(l.getLocalVotacion());
-
+        LocalvotacionModel l = localvotacionCrud.findLocalvotacionModel(Integer.parseInt(id));
+        txtLocalVotacion.setText(l.getUbicacion());
+        cmbComunaLocal.setSelectedItem(l.getComuna().getNombre());
+        
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -307,25 +335,19 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!localVotacionCrud.localVotaciones.containsKey(Integer.parseInt(id))) {
+        if (localvotacionCrud.findLocalvotacionModel(Integer.parseInt(id)) == null) {
             JOptionPane.showMessageDialog(this, "El local con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        //String nombreComuna = cmbComunaLocal.getSelectedItem().toString();
-        //recupera el objeto para mostrarlo en los campos del formulario
-        LocalVotacion l = localVotacionCrud.localVotaciones.get(Integer.parseInt(id));
-        cmbComunaLocal.setSelectedItem(l.getComuna());
-
+        
         // Validar que el combobox tenga una comuna seleccionada
         if (cmbComunaLocal.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Seleccione una comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
             cmbComunaLocal.requestFocus();
             return;
         }
-
+        
         String localVotacion = txtLocalVotacion.getText();
-
         // Validar que no este vacio
         if (localVotacion == null || localVotacion.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la ubicación", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -334,8 +356,30 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
             return;
         }
 
+        String nombreComuna = cmbComunaLocal.getSelectedItem().toString();
+
+        // obtener el id con el nombre de la comuna seleccionada para luego asignarla al objeto LocalVotacion
+        // EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel comunaModel = new ComunaModel();
+
+        String idComuna = "";
+
+        for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
+            if (c.getNombre().equals(nombreComuna)) {
+                idComuna = c.getId();
+            }
+        }
+        
+        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
+
+        // Crear objeto LocalVotacion
+        LocalvotacionModel l = new LocalvotacionModel();
+        l.setUbicacion(localVotacion);
+        l.setComuna(comuna);
+
         try {
-            localVotacionCrud.actualizarLocalVotacion(Integer.parseInt(id), localVotacion);
+            localvotacionCrud.edit(l);
             JOptionPane.showMessageDialog(this, "La comuna con ID: " + id + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtIDLocalVotacion.setText("");
             cmbComunaLocal.setSelectedIndex(0);
@@ -357,8 +401,8 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!localVotacionCrud.localVotaciones.containsKey(Integer.parseInt(id))) {
-            JOptionPane.showMessageDialog(this, "El local con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (localvotacionCrud.findLocalvotacionModel(Integer.parseInt(id)) == null) {
+            JOptionPane.showMessageDialog(this, "El local de votación con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -366,7 +410,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                localVotacionCrud.eliminarLocalVotacion(Integer.parseInt(id));
+                localvotacionCrud.destroy(Integer.parseInt(id));
                 JOptionPane.showMessageDialog(this, "El local de votación con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtIDLocalVotacion.setText("");
                 cmbComunaLocal.setSelectedIndex(0);
