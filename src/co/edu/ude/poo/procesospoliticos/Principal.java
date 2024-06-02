@@ -9,7 +9,7 @@ public class Principal {
         
         VentanaPrincipal v1 = new VentanaPrincipal();
         v1.setLocationRelativeTo(null);
-        //v1.setExtendedState(VentanaPrincipal.MAXIMIZED_BOTH);
+        v1.setExtendedState(VentanaPrincipal.MAXIMIZED_BOTH);
         v1.setVisible(true);
     }
 }

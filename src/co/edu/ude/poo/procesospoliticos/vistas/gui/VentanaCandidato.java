@@ -1,15 +1,17 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Partido;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -18,8 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class VentanaCandidato extends javax.swing.JDialog {
 
-    // instacia de clase CRUD vacal de mesa
-    CandidatoCrud candidatoCrud = new CandidatoCrud();
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+
+    CandidatoModelJpaController candidatoCrud = new CandidatoModelJpaController(con);
     
     public VentanaCandidato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -276,33 +279,59 @@ public class VentanaCandidato extends javax.swing.JDialog {
         }
 
         // bucar ciudadano por DNI
-        //CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
-
-        Ciudadano ciudadano = new Ciudadano(100, 20, "Camilo Castellar", "HOMBRE");
-        
-        /*
-        // validar que el ciudadano exista antes de que se cree un apoderado de mesa
-        try {
-            c = ciudadanoCrud.buscarCiudadano(Integer.parseInt(dni));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        // Validar que el dni del ciudadano exista
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        */
+        
+        // buscar partido por nombre
+        // Validar que el partido exista
+        PartidoModelJpaController partidoCrud = new PartidoModelJpaController(con);
+        // buscar partido por nombre usando un for
+        Integer idPartido = null;
+        PartidoModel p = new PartidoModel();
+        for (PartidoModel partido : partidoCrud.findPartidoModelEntities()) {
+            if (partido.getNombre().equals(partidoCandidato)) {
+                idPartido = partido.getId();
+            }
+        }
+        if (p == null) {
+            JOptionPane.showMessageDialog(this, "El partido con nombre: " + partidoCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        PartidoModel partido = partidoCrud.findPartidoModel(idPartido);
 
-        Partido partido = new Partido("Partido Prueba U");
+        // buscar comuna por nombre
+        // Validar que la comuna exista
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel cm = new ComunaModel();
+        String idComuna = null;
+        for (ComunaModel comuna : comunaCrud.findComunaModelEntities()) {
+            if (comuna.getNombre().equals(comunaCandidato)) {
+                idComuna = comuna.getId();
+            }
+        }
+        if (cm == null) {
+            JOptionPane.showMessageDialog(this, "La comuna con nombre: " + comunaCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
         
-        Comuna comuna = new Comuna("Cartagena");
-        
-        // Crear objeto apoderado de mesa
-        Candidato candidato = new Candidato(ciudadano, partido, comuna, categoriaCandidato);
+        // Crear un objeto candidato
+        CandidatoModel candidato = new CandidatoModel();
+        candidato.setCiudadanoModel(c);
+        candidato.setPartido(partido);
+        candidato.setComuna(comuna);
 
         try {
-            candidatoCrud.agregarCandidato(Integer.parseInt(dni), candidato);
+            candidatoCrud.create(candidato);
             
             // Mensaje de confirmacion
-            int totalCandidatosAlmacenados = candidatoCrud.contarCandidatos();
-            String msg = "El candidato: " + ciudadano.getNombreCompletoCiudadano() + " se guardo con éxito";
+            int totalCandidatosAlmacenados = candidatoCrud.getCandidatoModelCount();
+            String msg = "El candidato: " + candidato.getCiudadanoModel().getNombre() + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalCandidatosAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
             txtDNICandidato.setText("");          
@@ -335,16 +364,16 @@ public class VentanaCandidato extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!candidatoCrud.candidatos.containsKey(Integer.parseInt(dni))) {
+        if (candidatoCrud.findCandidatoModel(null) == null) {
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // se recupera el objeto para mostrarlo en los campos del formulario
-        Candidato c = candidatoCrud.candidatos.get(Integer.parseInt(dni));
-        txtPartidoCandidato.setText(c.getPartidoElectoral().getNombrePartido());
-        txtComunaCandidato.setText(c.getComuna().getComuna());
-        txtCategoriaCandidato.setText(c.getCategoria());
+        CandidatoModel candidato = candidatoCrud.findCandidatoModel(Integer.parseInt(dni));
+        txtPartidoCandidato.setText(candidato.getPartido().getNombre());
+        txtComunaCandidato.setText(candidato.getComuna().getNombre());
+        txtCategoriaCandidato.setText(candidato.getCategoria());
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -362,7 +391,7 @@ public class VentanaCandidato extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!candidatoCrud.candidatos.containsKey(Integer.parseInt(dni))) {
+        if (candidatoCrud.findCandidatoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -395,8 +424,56 @@ public class VentanaCandidato extends javax.swing.JDialog {
             return;
         }
 
+        // bucar ciudadano por DNI
+        // Validar que el dni del ciudadano exista
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // buscar partido por nombre
+        // Validar que el partido exista
+        PartidoModelJpaController partidoCrud = new PartidoModelJpaController(con);
+        // buscar partido por nombre usando un for
+        Integer idPartido = null;
+        PartidoModel p = new PartidoModel();
+        for (PartidoModel partido : partidoCrud.findPartidoModelEntities()) {
+            if (partido.getNombre().equals(partidoCandidato)) {
+                idPartido = partido.getId();
+            }
+        }
+        if (p == null) {
+            JOptionPane.showMessageDialog(this, "El partido con nombre: " + partidoCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        PartidoModel partido = partidoCrud.findPartidoModel(idPartido);
+
+        // buscar comuna por nombre
+        // Validar que la comuna exista
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel cm = new ComunaModel();
+        String idComuna = null;
+        for (ComunaModel comuna : comunaCrud.findComunaModelEntities()) {
+            if (comuna.getNombre().equals(comunaCandidato)) {
+                idComuna = comuna.getId();
+            }
+        }
+        if (cm == null) {
+            JOptionPane.showMessageDialog(this, "La comuna con nombre: " + comunaCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
+        
+        // Crear un objeto candidato
+        CandidatoModel candidato = new CandidatoModel();
+        candidato.setCiudadanoModel(c);
+        candidato.setPartido(partido);
+        candidato.setComuna(comuna);
+
         try {
-            candidatoCrud.actualizarCandidato(Integer.parseInt(dni), new Partido(partidoCandidato), new Comuna(comunaCandidato), categoriaCandidato);
+            candidatoCrud.edit(candidato);
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtDNICandidato.setText("");
             txtPartidoCandidato.setText("");
@@ -419,7 +496,7 @@ public class VentanaCandidato extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!candidatoCrud.candidatos.containsKey(Integer.parseInt(dni))) {
+        if (candidatoCrud.findCandidatoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -428,7 +505,7 @@ public class VentanaCandidato extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                candidatoCrud.eliminarCandidato(Integer.parseInt(dni));
+                candidatoCrud.destroy(Integer.parseInt(dni));
                 JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtDNICandidato.setText("");
                 txtPartidoCandidato.setText("");

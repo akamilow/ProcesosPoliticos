@@ -1,12 +1,15 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoMesa;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoMesaCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
+
 
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -15,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaApoderadoMesa extends javax.swing.JDialog {
 
-    // instacia de clase CRUD ApoderadoMesaCrud
-    ApoderadoMesaCrud apoderadoCrud = new ApoderadoMesaCrud();
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    ApoderadoModelJpaController apoderadoCrud = new ApoderadoModelJpaController(con);
     
     public VentanaApoderadoMesa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -223,30 +226,25 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         }
 
         
-        // bucar ciudadano por DNI
-        //CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
-
-        Ciudadano c = new Ciudadano(100, 20, "Camilo Castellar", "HOMBRE");
-        
-        /*
-        // validar que el ciudadano exista antes de que se cree un apoderado de mesa
-        try {
-            c = ciudadanoCrud.buscarCiudadano(Integer.parseInt(dni));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        // Validar que el dni del ciudadano exista
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        */
 
         // Crear objeto apoderado de mesa
-        ApoderadoMesa p = new ApoderadoMesa(c, Integer.parseInt(rutApoderado));
+        ApoderadoModel a = new ApoderadoModel();
+        a.setDni(Integer.parseInt(dni));
+        a.setRut(Integer.parseInt(rutApoderado));
 
         try {
-            apoderadoCrud.agregarApoderadoMesa(c.getDNICiudadano(), p);
+            apoderadoCrud.create(a);
             
             // Mensaje de confirmacion
-            int totalApoderadosAlmacenados = apoderadoCrud.contarApoderados();
-            String msg = "El apoderado de mesa: " + c.getNombreCompletoCiudadano() + " se guardo con éxito";
+            int totalApoderadosAlmacenados = apoderadoCrud.getApoderadoModelCount();
+            String msg = "El apoderado de mesa: " + c.getNombre() + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalApoderadosAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
             txtDNIApoderado.setText("");          
@@ -286,14 +284,14 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!apoderadoCrud.apoderados.containsKey(Integer.parseInt(dni))) {
+        if (apoderadoCrud.findApoderadoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // se recupera el objeto para mostrarlo en los campos del formulario
-        ApoderadoMesa p = apoderadoCrud.apoderados.get(Integer.parseInt(dni));
-        txtRUTApoderado.setText(String.valueOf(p.getRUTApoderado()));
+        ApoderadoModel a = apoderadoCrud.findApoderadoModel(Integer.parseInt(dni));
+        txtRUTApoderado.setText(String.valueOf(a.getRut()));
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -311,8 +309,8 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!apoderadoCrud.apoderados.containsKey(Integer.parseInt(dni))) {
-            JOptionPane.showMessageDialog(this, "El apoderado: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (apoderadoCrud.findApoderadoModel(Integer.parseInt(dni)) == null) {
+            JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -326,8 +324,12 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
             return;
         }
 
+        // obten el objeto apoderado de la base de datos
+        ApoderadoModel a = apoderadoCrud.findApoderadoModel(Integer.parseInt(dni));
+        a.setRut(Integer.parseInt(rutApoderado));
+
         try {
-            apoderadoCrud.actualizarApoderadoMesa(Integer.parseInt(dni), Integer.parseInt(rutApoderado));
+            apoderadoCrud.edit(a);
             JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtDNIApoderado.setText("");
             txtRUTApoderado.setText("");
@@ -348,7 +350,7 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!apoderadoCrud.apoderados.containsKey(Integer.parseInt(dni))) {
+        if (apoderadoCrud.findApoderadoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -357,7 +359,7 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                apoderadoCrud.eliminarApoderadoMesa(Integer.parseInt(dni));
+                apoderadoCrud.destroy(Integer.parseInt(dni));
                 JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtDNIApoderado.setText("");
                 txtRUTApoderado.setText("");

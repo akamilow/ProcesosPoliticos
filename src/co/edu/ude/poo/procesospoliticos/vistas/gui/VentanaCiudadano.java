@@ -1,9 +1,11 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -12,14 +14,15 @@ import javax.swing.JOptionPane;
  */
 public class VentanaCiudadano extends javax.swing.JDialog {
     
-    // Instancia de la clase CiudadanoCrud
-    CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
+    // conexion a la base de datos
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    // instanciar la clase PartidoEntityJpaController
+    CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
 
     public VentanaCiudadano(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
     
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
         btnAgregarCiudadano.setEnabled(agregar);
@@ -274,14 +277,17 @@ public class VentanaCiudadano extends javax.swing.JDialog {
             return;
         }
 
-        // Crear objeto
-        Ciudadano c = new Ciudadano(Integer.parseInt(dni), Integer.parseInt(edad), nombreCiudadano, genero);
+        CiudadanoModel c = new CiudadanoModel();
+        c.setDni(Integer.parseInt(dni));
+        c.setNombre(nombreCiudadano);
+        c.setEdad(Integer.parseInt(edad));
+        c.setGenero(genero);
         
         try {
-            ciudadanoCrud.agregarCiudadano(Integer.parseInt(dni), c);
+            ciudadanoCrud.create(c);
             
             // Mensaje de confirmacion
-            int totalCiudadanosAlmacenados = ciudadanoCrud.contarCiudadanos();
+            int totalCiudadanosAlmacenados = ciudadanoCrud.getCiudadanoModelCount();
             String msg = "El ciudadano: " + nombreCiudadano + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalCiudadanosAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
@@ -323,16 +329,16 @@ public class VentanaCiudadano extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
+        if (ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // recuperar el objeto para mostrarlo sus atributos en los campos del formulario
-        Ciudadano c = ciudadanoCrud.ciudadanos.get(Integer.parseInt(dni));
-        txtNombreCiudadano.setText(c.getNombreCompletoCiudadano());
-        txtEdadCiudadano.setText(c.getEdadCiudadano().toString());
-        if (c.getGeneroCiudadano().equals("HOMBRE")) {
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        txtEdadCiudadano.setText(String.valueOf(c.getEdad()));
+        txtNombreCiudadano.setText(c.getNombre());
+        if (c.getGenero().equals("HOMBRE")) {
             radioHombre.setSelected(true);
         } else {
             radioMujer.setSelected(true);
@@ -353,7 +359,7 @@ public class VentanaCiudadano extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
+        if (ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -386,8 +392,15 @@ public class VentanaCiudadano extends javax.swing.JDialog {
             return;
         }
 
+        // obten el objeto ciudadano con el id
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        c.setNombre(nombreCiudadano);
+        c.setEdad(Integer.parseInt(edad));
+        c.setGenero(genero);
+
+
         try {
-            ciudadanoCrud.actualizarCiudadano(Integer.parseInt(dni), nombreCiudadano, Integer.parseInt(edad), genero);
+            ciudadanoCrud.edit(c);
             JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtDNICiudadano.setText("");
             txtNombreCiudadano.setText("");
@@ -409,7 +422,7 @@ public class VentanaCiudadano extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!ciudadanoCrud.ciudadanos.containsKey(Integer.parseInt(dni))) {
+        if (ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -419,7 +432,7 @@ public class VentanaCiudadano extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                ciudadanoCrud.eliminarCiudadano(Integer.parseInt(dni));
+                ciudadanoCrud.destroy(Integer.parseInt(dni));
                 JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtDNICiudadano.setText("");
                 txtNombreCiudadano.setText("");

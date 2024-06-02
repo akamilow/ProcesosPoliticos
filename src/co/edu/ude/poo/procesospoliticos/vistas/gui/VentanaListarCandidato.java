@@ -1,5 +1,27 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel;
+
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoModelJpaController;
+
 /**
  * @author camilo castellar
  */
@@ -108,25 +130,47 @@ public class VentanaListarCandidato extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-        int totalPartidos = ventanaPrincipal.partidosCopia.size();
-        System.out.println("Total partidos: " + totalPartidos);
-        String [] columnas = {"ID", "Nombre de partido"};
-        tablaPartidos.setModel(new javax.swing.table.DefaultTableModel(new Object[totalPartidos][2], columnas));
-        String[][] filas = new String[totalPartidos][columnas.length];
-        if(totalPartidos > 0){
-            for(int i = 0; i < totalPartidos; i++){
-                // usa los metodos getkey y getvalue de la clase HashMap
-                filas[i][0] = ventanaPrincipal.partidosCopia.keySet().toArray()[i].toString();
-                filas[i][1] = ventanaPrincipal.partidosCopia.get(Integer.parseInt(filas[i][0])).getNombrePartido();
-            }
-        } else {
-            filas = new String[1][2];
-            filas[0][0] = "No hay partidos registrados";
-            filas[0][1] = "No hay partidos registrados";
-        }
-        tablaPartidos.setModel(new javax.swing.table.DefaultTableModel(filas, columnas));*/
+        cargarPartidos();
     }//GEN-LAST:event_formWindowOpened
+
+    public void cargarPartidos() {
+    // Cargar los partidos registrados en la tabla
+        EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        CandidatoModelJpaController controlador = new CandidatoModelJpaController(con);
+        List<CandidatoModel> candidatos = controlador.findCandidatoModelEntities();
+        /*if (partidos != null && !partidos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay partidos registrados", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            return;
+        }*/
+        //valida que la lista de partidos no sea nula, si es nula muestra un mensaje de error
+        if (candidatos == null) {
+            JOptionPane.showMessageDialog(this, "No hay candidatos registrados", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            return;
+        }
+        Vector<String> columnas = new Vector<>();
+        columnas.add("DNI");
+        columnas.add("Partido");
+        columnas.add("Comuna");
+        columnas.add("Categoria");
+        
+        // vector registros
+        Vector<Vector> registros = new Vector<>();
+
+        DefaultTableModel modelo = new DefaultTableModel(registros, columnas);
+
+        for(int i = 0; i < candidatos.size(); i++) {
+            CandidatoModel a = candidatos.get(i);
+            Vector<String> registro = new Vector<>();
+            registro.add(String.valueOf(a.getDni()));
+            registro.add(a.getPartido().getNombre());
+            registro.add(a.getComuna().getNombre());
+            registro.add(String.valueOf(a.getCategoria()));
+            registros.add(registro);
+        }
+        tablaCandidatos.setModel(modelo);
+    }
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,16 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalmesaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalmesaModelJpaController;
+
+import java.util.List;
+import java.util.Vector;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  * @author camilo castellar
  */
@@ -108,25 +119,43 @@ public class VentanaListarVocalMesa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-        int totalPartidos = ventanaPrincipal.partidosCopia.size();
-        System.out.println("Total partidos: " + totalPartidos);
-        String [] columnas = {"ID", "Nombre de partido"};
-        tablaPartidos.setModel(new javax.swing.table.DefaultTableModel(new Object[totalPartidos][2], columnas));
-        String[][] filas = new String[totalPartidos][columnas.length];
-        if(totalPartidos > 0){
-            for(int i = 0; i < totalPartidos; i++){
-                // usa los metodos getkey y getvalue de la clase HashMap
-                filas[i][0] = ventanaPrincipal.partidosCopia.keySet().toArray()[i].toString();
-                filas[i][1] = ventanaPrincipal.partidosCopia.get(Integer.parseInt(filas[i][0])).getNombrePartido();
-            }
-        } else {
-            filas = new String[1][2];
-            filas[0][0] = "No hay partidos registrados";
-            filas[0][1] = "No hay partidos registrados";
-        }
-        tablaPartidos.setModel(new javax.swing.table.DefaultTableModel(filas, columnas));*/
+        cargarPartidos();
     }//GEN-LAST:event_formWindowOpened
+
+    public void cargarPartidos() {
+    // Cargar los partidos registrados en la tabla
+        EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+        VocalmesaModelJpaController controlador = new VocalmesaModelJpaController(con);
+        List<VocalmesaModel> vocales = controlador.findVocalmesaModelEntities();
+        /*if (partidos != null && !partidos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay partidos registrados", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            return;
+        }*/
+        //valida que la lista de partidos no sea nula, si es nula muestra un mensaje de error
+        if (vocales == null) {
+            JOptionPane.showMessageDialog(this, "No hay vocales registrados", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            return;
+        }
+        Vector<String> columnas = new Vector<>();
+        columnas.add("DNI");
+        columnas.add("Rol");
+        
+        // vector registros
+        Vector<Vector> registros = new Vector<>();
+
+        DefaultTableModel modelo = new DefaultTableModel(registros, columnas);
+
+        for(int i = 0; i < vocales.size(); i++) {
+            VocalmesaModel a = vocales.get(i);
+            Vector<String> registro = new Vector<>();
+            registro.add(String.valueOf(a.getDni()));
+            registro.add(a.getRol());
+            registros.add(registro);
+        }
+        tablaVocalesMesa.setModel(modelo);
+    }
 
     /**
      * @param args the command line arguments

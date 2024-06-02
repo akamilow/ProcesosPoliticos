@@ -1,12 +1,14 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalMesa;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalMesaCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoCrud;
-
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalmesaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalmesaModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 
 import javax.swing.JOptionPane;
 
@@ -15,8 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaVocalMesa extends javax.swing.JDialog {
 
-    // instacia de clase CRUD vacal de mesa
-    VocalMesaCrud vocalCrud = new VocalMesaCrud();
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    VocalmesaModelJpaController vocalCrud = new VocalmesaModelJpaController(con);
     
     public VentanaVocalMesa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -217,30 +219,25 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
         }
 
         
-        // bucar ciudadano por DNI
-        //CiudadanoCrud ciudadanoCrud = new CiudadanoCrud();
-
-        Ciudadano c = new Ciudadano(100, 20, "Camilo Castellar", "HOMBRE");
-        
-        /*
-        // validar que el ciudadano exista antes de que se cree un apoderado de mesa
-        try {
-            c = ciudadanoCrud.buscarCiudadano(Integer.parseInt(dni));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "El apoderado con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        // Validar que el dni del ciudadano exista
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        */
 
-        // Crear objeto apoderado de mesa
-        VocalMesa v = new VocalMesa(c, rolVocal);
+        // Crear un objeto de tipo VocalMesa
+        VocalmesaModel v = new VocalmesaModel();
+        v.setDni(Integer.parseInt(dni));
+        v.setRol(rolVocal);
 
         try {
-            vocalCrud.agregarVocalMesa(c.getDNICiudadano(), v);
+            vocalCrud.create(v);
             
             // Mensaje de confirmacion
-            int totalVocalAlmacenados = vocalCrud.contarVocales();
-            String msg = "El apoderado de mesa: " + c.getNombreCompletoCiudadano() + " se guardo con éxito";
+            int totalVocalAlmacenados = vocalCrud.getVocalmesaModelCount();
+            String msg = "El apoderado de mesa: " + v.getCiudadanoModel().getNombre() + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalVocalAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
             txtDNIVocal.setText("");          
@@ -271,14 +268,13 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!vocalCrud.vocales.containsKey(Integer.parseInt(dni))) {
+        if (vocalCrud.findVocalmesaModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El vocal con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // se recupera el objeto para mostrarlo en los campos del formulario
-        VocalMesa v = vocalCrud.vocales.get(Integer.parseInt(dni));
-        txtRolVocal.setText(String.valueOf(v.getRolVocal()));
+        VocalmesaModel v = vocalCrud.findVocalmesaModel(Integer.parseInt(dni));
+        txtRolVocal.setText(v.getRol());
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -296,7 +292,7 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!vocalCrud.vocales.containsKey(Integer.parseInt(dni))) {
+        if (vocalCrud.findVocalmesaModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El vocal con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -311,8 +307,11 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
             return;
         }
 
+        VocalmesaModel v = vocalCrud.findVocalmesaModel(Integer.parseInt(dni));
+        v.setRol(rolVocal);
+
         try {
-            vocalCrud.actualizarVocalMesa(Integer.parseInt(dni), rolVocal);
+            vocalCrud.edit(v);
             JOptionPane.showMessageDialog(this, "El vocal con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtDNIVocal.setText("");
             txtRolVocal.setText("");
@@ -333,7 +332,7 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!vocalCrud.vocales.containsKey(Integer.parseInt(dni))) {
+        if (vocalCrud.findVocalmesaModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El vocal con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -342,7 +341,7 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                vocalCrud.eliminarVocalMesa(Integer.parseInt(dni));
+                vocalCrud.destroy(Integer.parseInt(dni));
                 JOptionPane.showMessageDialog(this, "El vocal con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtDNIVocal.setText("");
                 txtRolVocal.setText("");

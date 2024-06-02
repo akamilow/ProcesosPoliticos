@@ -1,6 +1,5 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.ComunaModelJpaController;
 
