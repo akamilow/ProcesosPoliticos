@@ -5,7 +5,6 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,9 +25,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "LocalvotacionModel.findById", query = "SELECT l FROM LocalvotacionModel l WHERE l.id = :id"),
     @NamedQuery(name = "LocalvotacionModel.findByUbicacion", query = "SELECT l FROM LocalvotacionModel l WHERE l.ubicacion = :ubicacion")})
 public class LocalvotacionModel implements Serializable {
-
-    @OneToMany(mappedBy = "ubicacion")
-    private List<MesavotacionModel> mesavotacionModelList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -95,14 +90,6 @@ public class LocalvotacionModel implements Serializable {
     @Override
     public String toString() {
         return "co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel[ id=" + id + " ]";
-    }
-
-    public List<MesavotacionModel> getMesavotacionModelList() {
-        return mesavotacionModelList;
-    }
-
-    public void setMesavotacionModelList(List<MesavotacionModel> mesavotacionModelList) {
-        this.mesavotacionModelList = mesavotacionModelList;
     }
     
 }

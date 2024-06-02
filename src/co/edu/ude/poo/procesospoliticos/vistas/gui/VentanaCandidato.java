@@ -12,7 +12,6 @@ import co.edu.ude.poo.procesospoliticos.modelo.crud.PartidoModelJpaController;
 import java.awt.Toolkit;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -21,12 +20,13 @@ import javax.swing.JOptionPane;
 public class VentanaCandidato extends javax.swing.JDialog {
 
     EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
-
     CandidatoModelJpaController candidatoCrud = new CandidatoModelJpaController(con);
     
     public VentanaCandidato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarComunas();
+        cargarPartidos();
     }
     
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
@@ -34,6 +34,34 @@ public class VentanaCandidato extends javax.swing.JDialog {
         btnBuscarCandidato.setEnabled(buscar);
         btnModificarCandidato.setEnabled(modificar);
         btnEliminarCandidato.setEnabled(eliminar);
+    }
+
+    public void cargarComunas() {
+        
+        ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
+        ComunaModel comunaModel = new ComunaModel();
+
+        cmbComunaLocal.removeAllItems();
+        cmbComunaLocal.addItem("Seleccione una comuna");
+        for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
+            cmbComunaLocal.addItem(c.getNombre());
+        }
+
+        cmbComunaLocal.setSelectedIndex(0);
+    }
+
+    public void cargarPartidos() {
+        
+        PartidoModelJpaController partidoCrud = new PartidoModelJpaController(con);
+        PartidoModel partidoModel = new PartidoModel();
+
+        cmbPartidos.removeAllItems();
+        cmbPartidos.addItem("Seleccione un partido");
+        for (PartidoModel p : partidoCrud.findPartidoModelEntities()) {
+            cmbPartidos.addItem(p.getNombre());
+        }
+
+        cmbPartidos.setSelectedIndex(0);
     }
     
     /**
@@ -49,11 +77,11 @@ public class VentanaCandidato extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtDNICandidato = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtPartidoCandidato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtComunaCandidato = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCategoriaCandidato = new javax.swing.JTextField();
+        cmbPartidos = new javax.swing.JComboBox<>();
+        cmbComunaLocal = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAgregarCandidato = new javax.swing.JButton();
@@ -81,19 +109,19 @@ public class VentanaCandidato extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Partido:");
 
-        txtPartidoCandidato.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Comuna:");
-
-        txtComunaCandidato.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Categoria:");
 
         txtCategoriaCandidato.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        cmbPartidos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbComunaLocal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,14 +135,14 @@ public class VentanaCandidato extends javax.swing.JDialog {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPartidoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDNICandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDNICandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbPartidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtComunaCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbComunaLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -123,8 +151,6 @@ public class VentanaCandidato extends javax.swing.JDialog {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDNICandidato, txtPartidoCandidato});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,11 +162,11 @@ public class VentanaCandidato extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPartidoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbPartidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtComunaCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbComunaLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,8 +175,6 @@ public class VentanaCandidato extends javax.swing.JDialog {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDNICandidato, txtPartidoCandidato});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -246,31 +270,28 @@ public class VentanaCandidato extends javax.swing.JDialog {
             return;
         }
 
-        String partidoCandidato = txtPartidoCandidato.getText();
-        
-        // Validar que no este vacio el rol
-        if (partidoCandidato == null || partidoCandidato.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el rol del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtPartidoCandidato.setText("");
-            txtPartidoCandidato.requestFocus();
+        // Validar que el combobox de partido no este vacio y luego obten el item elegido
+        if(cmbPartidos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un partido", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cmbPartidos.requestFocus();
             return;
         }
-        
-        String comunaCandidato = txtComunaCandidato.getText();
+
+        String partidoCandidato = cmbPartidos.getSelectedItem().toString();
+
 
         // Validar que no este vacio la comuna
-
-        if (comunaCandidato == null || comunaCandidato.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la comuna del candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtComunaCandidato.setText("");
-            txtComunaCandidato.requestFocus();
+        if (cmbComunaLocal.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cmbComunaLocal.requestFocus();
             return;
         }
 
+        String comunaCandidato = cmbComunaLocal.getSelectedItem().toString();
+
+        
         String categoriaCandidato = txtCategoriaCandidato.getText();
-
         // Validar que no este vacio la categoria
-
         if (categoriaCandidato == null || categoriaCandidato.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la categoria del candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtCategoriaCandidato.setText("");
@@ -311,33 +332,33 @@ public class VentanaCandidato extends javax.swing.JDialog {
         String idComuna = null;
         for (ComunaModel comuna : comunaCrud.findComunaModelEntities()) {
             if (comuna.getNombre().equals(comunaCandidato)) {
-                idComuna = comuna.getId();
+                idComuna = comuna.getId().toString();
             }
         }
         if (cm == null) {
             JOptionPane.showMessageDialog(this, "La comuna con nombre: " + comunaCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
+        ComunaModel comuna = comunaCrud.findComunaModel(Integer.parseInt(idComuna));
         
         // Crear un objeto candidato
         CandidatoModel candidato = new CandidatoModel();
         candidato.setCiudadanoModel(c);
         candidato.setPartido(partido);
         candidato.setComuna(comuna);
+        candidato.setCategoria(categoriaCandidato);
 
         try {
             candidatoCrud.create(candidato);
-            
             // Mensaje de confirmacion
             int totalCandidatosAlmacenados = candidatoCrud.getCandidatoModelCount();
             String msg = "El candidato: " + candidato.getCiudadanoModel().getNombre() + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalCandidatosAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
             txtDNICandidato.setText("");          
-            txtPartidoCandidato.setText("");
-            txtComunaCandidato.setText("");
             txtCategoriaCandidato.setText("");
+            cmbPartidos.setSelectedIndex(0);
+            cmbComunaLocal.setSelectedIndex(0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -364,15 +385,15 @@ public class VentanaCandidato extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (candidatoCrud.findCandidatoModel(null) == null) {
+        if (candidatoCrud.findCandidatoModel(Integer.parseInt(dni)) == null) {
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // se recupera el objeto para mostrarlo en los campos del formulario
         CandidatoModel candidato = candidatoCrud.findCandidatoModel(Integer.parseInt(dni));
-        txtPartidoCandidato.setText(candidato.getPartido().getNombre());
-        txtComunaCandidato.setText(candidato.getComuna().getNombre());
+        cmbPartidos.setSelectedItem(candidato.getPartido().getNombre());
+        cmbComunaLocal.setSelectedItem(candidato.getComuna().getNombre());
         txtCategoriaCandidato.setText(candidato.getCategoria());
 
         // habilitar botones, y deshabilitar el boton agregar
@@ -396,27 +417,28 @@ public class VentanaCandidato extends javax.swing.JDialog {
             return;
         }
 
-        String partidoCandidato = txtPartidoCandidato.getText();
-
-        // Validar que no este vacio el partido
-        if (partidoCandidato == null || partidoCandidato.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el partido del candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtPartidoCandidato.setText("");
-            txtPartidoCandidato.requestFocus();
+        // Validar que el combobox de partido no este vacio y luego obten el item elegido
+        if(cmbPartidos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un partido", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cmbPartidos.requestFocus();
             return;
         }
 
-        String comunaCandidato = txtComunaCandidato.getText();
+        String partidoCandidato = cmbPartidos.getSelectedItem().toString();
 
-        if (comunaCandidato == null || comunaCandidato.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la comuna del candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtComunaCandidato.setText("");
-            txtComunaCandidato.requestFocus();
+
+        // Validar que no este vacio la comuna
+        if (cmbComunaLocal.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una comuna", "ERROR", JOptionPane.ERROR_MESSAGE);
+            cmbComunaLocal.requestFocus();
             return;
         }
 
+        String comunaCandidato = cmbComunaLocal.getSelectedItem().toString();
+
+        
         String categoriaCandidato = txtCategoriaCandidato.getText();
-
+        // Validar que no este vacio la categoria
         if (categoriaCandidato == null || categoriaCandidato.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la categoria del candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtCategoriaCandidato.setText("");
@@ -457,28 +479,29 @@ public class VentanaCandidato extends javax.swing.JDialog {
         String idComuna = null;
         for (ComunaModel comuna : comunaCrud.findComunaModelEntities()) {
             if (comuna.getNombre().equals(comunaCandidato)) {
-                idComuna = comuna.getId();
+                idComuna = comuna.getId().toString();
             }
         }
         if (cm == null) {
             JOptionPane.showMessageDialog(this, "La comuna con nombre: " + comunaCandidato + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
-        
+        ComunaModel comuna = comunaCrud.findComunaModel(Integer.parseInt(idComuna));
+
         // Crear un objeto candidato
-        CandidatoModel candidato = new CandidatoModel();
+        CandidatoModel candidato = candidatoCrud.findCandidatoModel(Integer.parseInt(dni));
         candidato.setCiudadanoModel(c);
         candidato.setPartido(partido);
         candidato.setComuna(comuna);
+        candidato.setCategoria(categoriaCandidato);
 
         try {
             candidatoCrud.edit(candidato);
             JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " se actualizo con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtDNICandidato.setText("");
-            txtPartidoCandidato.setText("");
-            txtComunaCandidato.setText("");
             txtCategoriaCandidato.setText("");
+            cmbPartidos.setSelectedIndex(0);
+            cmbComunaLocal.setSelectedIndex(0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -508,9 +531,9 @@ public class VentanaCandidato extends javax.swing.JDialog {
                 candidatoCrud.destroy(Integer.parseInt(dni));
                 JOptionPane.showMessageDialog(this, "El candidato con DNI: " + dni + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtDNICandidato.setText("");
-                txtPartidoCandidato.setText("");
-                txtComunaCandidato.setText("");
                 txtCategoriaCandidato.setText("");
+                cmbPartidos.setSelectedIndex(0);
+                cmbComunaLocal.setSelectedIndex(0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -571,6 +594,8 @@ public class VentanaCandidato extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscarCandidato;
     private javax.swing.JButton btnEliminarCandidato;
     private javax.swing.JButton btnModificarCandidato;
+    private javax.swing.JComboBox<String> cmbComunaLocal;
+    private javax.swing.JComboBox<String> cmbPartidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -579,8 +604,6 @@ public class VentanaCandidato extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCategoriaCandidato;
-    private javax.swing.JTextField txtComunaCandidato;
     private javax.swing.JTextField txtDNICandidato;
-    private javax.swing.JTextField txtPartidoCandidato;
     // End of variables declaration//GEN-END:variables
 }

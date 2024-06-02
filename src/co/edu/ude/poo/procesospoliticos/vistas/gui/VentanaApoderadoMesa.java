@@ -5,8 +5,6 @@ import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoModelJpaController;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
 
-
-
 import java.awt.Toolkit;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,7 +24,6 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
         initComponents();
     }
     
-
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
         btnAgregarApoderado.setEnabled(agregar);
         btnBuscarApoderado.setEnabled(buscar);
@@ -224,7 +221,6 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
             txtRUTApoderado.requestFocus();
             return;
         }
-
         
         // Validar que el dni del ciudadano exista
         CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
@@ -241,7 +237,6 @@ public class VentanaApoderadoMesa extends javax.swing.JDialog {
 
         try {
             apoderadoCrud.create(a);
-            
             // Mensaje de confirmacion
             int totalApoderadosAlmacenados = apoderadoCrud.getApoderadoModelCount();
             String msg = "El apoderado de mesa: " + c.getNombre() + " se guardo con éxito";

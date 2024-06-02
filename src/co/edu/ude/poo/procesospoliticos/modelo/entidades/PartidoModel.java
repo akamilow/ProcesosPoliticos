@@ -26,15 +26,14 @@ import javax.persistence.Table;
     @NamedQuery(name = "PartidoModel.findByNombre", query = "SELECT p FROM PartidoModel p WHERE p.nombre = :nombre")})
 public class PartidoModel implements Serializable {
 
-    @OneToMany(mappedBy = "partido")
-    private List<CandidatoModel> candidatoModelList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "id")
     private Integer id;
     @Column(name = "nombre")
     private String nombre;
+    @OneToMany(mappedBy = "partido")
+    private List<CandidatoModel> candidatoModelList;
 
     public PartidoModel() {
     }
@@ -57,6 +56,14 @@ public class PartidoModel implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<CandidatoModel> getCandidatoModelList() {
+        return candidatoModelList;
+    }
+
+    public void setCandidatoModelList(List<CandidatoModel> candidatoModelList) {
+        this.candidatoModelList = candidatoModelList;
     }
 
     @Override
@@ -82,14 +89,6 @@ public class PartidoModel implements Serializable {
     @Override
     public String toString() {
         return "co.edu.ude.poo.procesospoliticos.modelo.entidades.PartidoModel[ id=" + id + " ]";
-    }
-
-    public List<CandidatoModel> getCandidatoModelList() {
-        return candidatoModelList;
-    }
-
-    public void setCandidatoModelList(List<CandidatoModel> candidatoModelList) {
-        this.candidatoModelList = candidatoModelList;
     }
     
 }

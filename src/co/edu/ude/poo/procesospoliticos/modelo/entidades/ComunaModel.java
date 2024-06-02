@@ -29,7 +29,7 @@ public class ComunaModel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Column(name = "nombre")
     private String nombre;
     @OneToMany(mappedBy = "comuna")
@@ -40,15 +40,15 @@ public class ComunaModel implements Serializable {
     public ComunaModel() {
     }
 
-    public ComunaModel(String id) {
+    public ComunaModel(Integer id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -152,7 +152,7 @@ public class ComunaModelJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = comunaModel.getId();
+                Integer id = comunaModel.getId();
                 if (findComunaModel(id) == null) {
                     throw new NonexistentEntityException("The comunaModel with id " + id + " no longer exists.");
                 }
@@ -165,7 +165,7 @@ public class ComunaModelJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -220,7 +220,7 @@ public class ComunaModelJpaController implements Serializable {
         }
     }
 
-    public ComunaModel findComunaModel(String id) {
+    public ComunaModel findComunaModel(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(ComunaModel.class, id);

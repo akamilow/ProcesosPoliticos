@@ -8,15 +8,14 @@ import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalvotacionModelJpaControl
 import java.awt.Toolkit;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import javax.swing.JOptionPane;
 
 /**
  * @author camilo castellar
  */
 public class VentanaLocalVotacion extends javax.swing.JDialog {
+
     EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
-    // instacia de clase CRUD Local de votacion
     LocalvotacionModelJpaController localvotacionCrud = new LocalvotacionModelJpaController(con);
     
     public VentanaLocalVotacion(java.awt.Frame parent, boolean modal) {
@@ -33,9 +32,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
     }
 
     public void cargarComunas() {
-        // conexion a la base de datos
-        //EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
-        // instanciar la clase PartidoEntityJpaController
+        
         ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
         ComunaModel comunaModel = new ComunaModel();
 
@@ -254,17 +251,13 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         // EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
         ComunaModelJpaController comunaCrud = new ComunaModelJpaController(con);
         ComunaModel comunaModel = new ComunaModel();
-
         String idComuna = "";
-
         for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
             if (c.getNombre().equals(nombreComuna)) {
-                idComuna = c.getId();
+                idComuna = c.getId().toString();
             }
         }
-        
-        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
-
+        ComunaModel comuna = comunaCrud.findComunaModel(Integer.parseInt(idComuna));
 
         // Crear objeto LocalVotacion
         LocalvotacionModel l = new LocalvotacionModel();
@@ -273,7 +266,6 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         
         try {
             localvotacionCrud.create(l);
-            
             // Mensaje de confirmacion
             int totalLocalesAlmacenados = localvotacionCrud.getLocalvotacionModelCount();
             String msg = "La ubicación del local de votación, se guardo con éxito";
@@ -318,7 +310,6 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
         txtLocalVotacion.setText(l.getUbicacion());
         cmbComunaLocal.setSelectedItem(l.getComuna().getNombre());
         
-
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
     }//GEN-LAST:event_btnBuscarLocalVotacionActionPerformed
@@ -367,14 +358,14 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
 
         for (ComunaModel c : comunaCrud.findComunaModelEntities()) {
             if (c.getNombre().equals(nombreComuna)) {
-                idComuna = c.getId();
+                idComuna = c.getId().toString();
             }
         }
         
-        ComunaModel comuna = comunaCrud.findComunaModel(idComuna);
+        ComunaModel comuna = comunaCrud.findComunaModel(Integer.parseInt(idComuna));
 
-        // Crear objeto LocalVotacion
-        LocalvotacionModel l = new LocalvotacionModel();
+        // onbtener el objeto LocalVotacion
+        LocalvotacionModel l = localvotacionCrud.findLocalvotacionModel(Integer.parseInt(id));
         l.setUbicacion(localVotacion);
         l.setComuna(comuna);
 

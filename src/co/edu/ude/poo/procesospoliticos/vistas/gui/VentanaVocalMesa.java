@@ -218,7 +218,6 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
             return;
         }
 
-        
         // Validar que el dni del ciudadano exista
         CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
         CiudadanoModel c = ciudadanoCrud.findCiudadanoModel(Integer.parseInt(dni));
@@ -234,10 +233,9 @@ public class VentanaVocalMesa extends javax.swing.JDialog {
 
         try {
             vocalCrud.create(v);
-            
             // Mensaje de confirmacion
             int totalVocalAlmacenados = vocalCrud.getVocalmesaModelCount();
-            String msg = "El apoderado de mesa: " + v.getCiudadanoModel().getNombre() + " se guardo con éxito";
+            String msg = "El apoderado de mesa: " + c.getNombre() + " se guardo con éxito";
             msg += "\n" + " TOTAL: " + totalVocalAlmacenados;
             JOptionPane.showMessageDialog(this, msg, "RESULTADO", JOptionPane.WARNING_MESSAGE); 
             txtDNIVocal.setText("");          

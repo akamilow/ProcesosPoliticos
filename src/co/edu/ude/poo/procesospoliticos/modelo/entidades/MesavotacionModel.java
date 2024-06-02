@@ -8,8 +8,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,13 +23,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "MesavotacionModel.findByNumero", query = "SELECT m FROM MesavotacionModel m WHERE m.numero = :numero"),
     @NamedQuery(name = "MesavotacionModel.findByGenero", query = "SELECT m FROM MesavotacionModel m WHERE m.genero = :genero"),
     @NamedQuery(name = "MesavotacionModel.findByEstado", query = "SELECT m FROM MesavotacionModel m WHERE m.estado = :estado"),
+    @NamedQuery(name = "MesavotacionModel.findByLocalvotacion", query = "SELECT m FROM MesavotacionModel m WHERE m.localvotacion = :localvotacion"),
     @NamedQuery(name = "MesavotacionModel.findByVocalmesa", query = "SELECT m FROM MesavotacionModel m WHERE m.vocalmesa = :vocalmesa"),
     @NamedQuery(name = "MesavotacionModel.findByApoderadoUno", query = "SELECT m FROM MesavotacionModel m WHERE m.apoderadoUno = :apoderadoUno"),
     @NamedQuery(name = "MesavotacionModel.findByApoderadoDos", query = "SELECT m FROM MesavotacionModel m WHERE m.apoderadoDos = :apoderadoDos")})
 public class MesavotacionModel implements Serializable {
-
-    @Column(name = "estado")
-    private String estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,15 +35,16 @@ public class MesavotacionModel implements Serializable {
     private Integer numero;
     @Column(name = "genero")
     private String genero;
+    @Column(name = "estado")
+    private String estado;
+    @Column(name = "localvotacion")
+    private Integer localvotacion;
     @Column(name = "vocalmesa")
     private Integer vocalmesa;
     @Column(name = "apoderadoUno")
     private Integer apoderadoUno;
     @Column(name = "apoderadoDos")
     private Integer apoderadoDos;
-    @JoinColumn(name = "ubicacion", referencedColumnName = "id")
-    @ManyToOne
-    private LocalvotacionModel ubicacion;
 
     public MesavotacionModel() {
     }
@@ -72,6 +69,21 @@ public class MesavotacionModel implements Serializable {
         this.genero = genero;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Integer getLocalvotacion() {
+        return localvotacion;
+    }
+
+    public void setLocalvotacion(Integer localvotacion) {
+        this.localvotacion = localvotacion;
+    }
 
     public Integer getVocalmesa() {
         return vocalmesa;
@@ -97,14 +109,6 @@ public class MesavotacionModel implements Serializable {
         this.apoderadoDos = apoderadoDos;
     }
 
-    public LocalvotacionModel getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(LocalvotacionModel ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -128,14 +132,6 @@ public class MesavotacionModel implements Serializable {
     @Override
     public String toString() {
         return "co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel[ numero=" + numero + " ]";
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
     
 }

@@ -1,14 +1,18 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Comuna;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalVotacion;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesaVotacion;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.MesaVotacionCrud;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalMesa;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoMesa;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalmesaModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoModel;
+
+import co.edu.ude.poo.procesospoliticos.modelo.crud.MesavotacionModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalvotacionModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalmesaModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -17,12 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class VentanaMesa extends javax.swing.JDialog {
 
-    // instacia de clase CRUD mesa
-    MesaVotacionCrud mesaVotacionCrud = new MesaVotacionCrud();
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    MesavotacionModelJpaController mesaVotacionCrud = new MesavotacionModelJpaController(con);
     
     public VentanaMesa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarUbicaciones();
+        cargarVocales();
+        cargarApoderados();
     }
     
     public void habilitarBotones(boolean agregar, boolean buscar, boolean modificar, boolean eliminar) {
@@ -30,6 +37,53 @@ public class VentanaMesa extends javax.swing.JDialog {
         btnBuscarMesa.setEnabled(buscar);
         btnModificarMesa.setEnabled(modificar);
         btnEliminarMesa.setEnabled(eliminar);
+    }
+
+    public void cargarUbicaciones() {
+        LocalvotacionModelJpaController localvotacionCrud = new LocalvotacionModelJpaController(con);
+        LocalvotacionModel localvotacionModel = new LocalvotacionModel();
+
+        cmbUbicaciones.removeAllItems();
+        cmbUbicaciones.addItem("Seleccione una comuna");
+        for (LocalvotacionModel l : localvotacionCrud.findLocalvotacionModelEntities()) {
+            cmbUbicaciones.addItem(l.getUbicacion());
+        }
+
+        cmbUbicaciones.setSelectedIndex(0);
+    }
+
+    public void cargarVocales() {
+        VocalmesaModelJpaController vocalmesaCrud = new VocalmesaModelJpaController(con);
+        VocalmesaModel vocalmesaModel = new VocalmesaModel();
+
+        cmbVocales.removeAllItems();
+        cmbVocales.addItem("Seleccione un vocal de mesa");
+        for (VocalmesaModel v : vocalmesaCrud.findVocalmesaModelEntities()) {
+            cmbVocales.addItem(v.getCiudadanoModel().getNombre());
+        }
+
+        cmbVocales.setSelectedIndex(0);
+    }
+
+    public void cargarApoderados() {
+        ApoderadoModelJpaController apoderadoCrud = new ApoderadoModelJpaController(con);
+        ApoderadoModel apoderadoModel = new ApoderadoModel();
+
+        cmbApoderados1.removeAllItems();
+        cmbApoderados1.addItem("Seleccione un apoderado de mesa");
+        for (ApoderadoModel a1 : apoderadoCrud.findApoderadoModelEntities()) {
+            cmbApoderados1.addItem(a1.getCiudadanoModel().getNombre());
+        }
+
+        cmbApoderados1.setSelectedIndex(0);
+
+        cmbApoderados2.removeAllItems();
+        cmbApoderados2.addItem("Seleccione un apoderado de mesa");
+        for (ApoderadoModel a2 : apoderadoCrud.findApoderadoModelEntities()) {
+            cmbApoderados2.addItem(a2.getCiudadanoModel().getNombre());
+        }
+
+        cmbApoderados2.setSelectedIndex(0);
     }
     
     /**
@@ -47,19 +101,19 @@ public class VentanaMesa extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtNumeroMesa = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtLocalMesa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtVocalMesa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtApoderadoUno = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtApoderadoDos = new javax.swing.JTextField();
         radioMujer = new javax.swing.JRadioButton();
         radioHombre = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         radioAbierta = new javax.swing.JRadioButton();
         radioCerrada = new javax.swing.JRadioButton();
+        cmbUbicaciones = new javax.swing.JComboBox<>();
+        cmbVocales = new javax.swing.JComboBox<>();
+        cmbApoderados1 = new javax.swing.JComboBox<>();
+        cmbApoderados2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAgregarMesa = new javax.swing.JButton();
@@ -87,25 +141,17 @@ public class VentanaMesa extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Local de votación:");
 
-        txtLocalMesa.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Vocal de mesa:");
-
-        txtVocalMesa.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Apoderado 1");
 
-        txtApoderadoUno.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Apoderado 2");
-
-        txtApoderadoDos.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         grupoGenero.add(radioMujer);
         radioMujer.setText("MUJER");
@@ -115,7 +161,7 @@ public class VentanaMesa extends javax.swing.JDialog {
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Genero:");
+        jLabel8.setText("Genero de mesa:");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -126,6 +172,14 @@ public class VentanaMesa extends javax.swing.JDialog {
 
         grupoEstadoMesa.add(radioCerrada);
         radioCerrada.setText("CERRADA");
+
+        cmbUbicaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbVocales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbApoderados1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbApoderados2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,40 +193,42 @@ public class VentanaMesa extends javax.swing.JDialog {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtLocalMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNumeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtVocalMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbVocales, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtApoderadoUno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbApoderados1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApoderadoDos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(radioHombre, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(radioMujer, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(radioAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(radioCerrada, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(radioHombre, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioMujer, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(radioAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioCerrada, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbApoderados2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtLocalMesa, txtNumeroMesa});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,19 +240,19 @@ public class VentanaMesa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLocalMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVocalMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbVocales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApoderadoUno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbApoderados1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApoderadoDos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbApoderados2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,8 +267,6 @@ public class VentanaMesa extends javax.swing.JDialog {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtLocalMesa, txtNumeroMesa});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -308,51 +362,41 @@ public class VentanaMesa extends javax.swing.JDialog {
             return;
         }
 
-        String localVotacion = txtLocalMesa.getText();
+        // validar que el combobox de ubicaciones no este vacio
+        if (cmbUbicaciones.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una ubicación", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // obtener el valor seleccionado del combobox
+        String localMesa = cmbUbicaciones.getSelectedItem().toString();
         
-        // Validar que no este vacio el rol
-        if (localVotacion == null || localVotacion.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el rol del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtLocalMesa.setText("");
-            txtLocalMesa.requestFocus();
-            return;
-        }
-        
-        String vocalMesa = txtVocalMesa.getText();
-
-        // Validar que no este vacio el nombre
-        if (vocalMesa == null || vocalMesa.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtVocalMesa.setText("");
-            txtVocalMesa.requestFocus();
+        if(cmbVocales.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String apoderadoUno = txtApoderadoUno.getText();
+        // obtener el valor seleccionado del combobox
+        String vocalMesa = cmbVocales.getSelectedItem().toString();
 
-        // Validar que no este vacio el apellido
-
-        if (apoderadoUno == null || apoderadoUno.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el apellido del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtApoderadoUno.setText("");
-            txtApoderadoUno.requestFocus();
+        if(cmbApoderados1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un apoderado de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String apoderadoDos = txtApoderadoDos.getText();
+        // obtener el valor seleccionado del combobox
+        String apoderadoUno = cmbApoderados1.getSelectedItem().toString();
 
-        // Validar que no este vacio el apellido
-
-        if (apoderadoDos == null || apoderadoDos.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el apellido del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtApoderadoDos.setText("");
-            txtApoderadoDos.requestFocus();
+        if(cmbApoderados2.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un apoderado de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        // obtener el valor seleccionado del combobox
+        String apoderadoDos = cmbApoderados2.getSelectedItem().toString();
 
         // validar los radio button
         String genero = "";
-
         if (radioHombre.isSelected()) {
             genero = "HOMBRE";
         } else if (radioMujer.isSelected()) {
@@ -360,14 +404,12 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar los radio button no esten vacios
-
         if (genero == null || genero.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione el genero del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String estado = "";
-
         if (radioAbierta.isSelected()) {
             estado = "ABIERTA";
         } else if (radioCerrada.isSelected()) {
@@ -375,41 +417,77 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar los radio button no esten vacios
-
         if (estado == null || estado.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione el estado de la mesa de votación", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
     
-        // Con el objeto Ciudadano crea 3 personas
-        Ciudadano ciudadano1 = new Ciudadano(100, 20, "Camilo Castellar", "HOMBRE");
-        Ciudadano ciudadano2 = new Ciudadano(200, 30, "Juan Perez", "HOMBRE");
-        Ciudadano ciudadano3 = new Ciudadano(300, 40, "Maria Perez", "MUJER");
+        LocalvotacionModelJpaController localvotacionCrud = new LocalvotacionModelJpaController(con);
+        Integer idLocal = null;
+        LocalvotacionModel l = new LocalvotacionModel();
+        for (LocalvotacionModel local : localvotacionCrud.findLocalvotacionModelEntities()) {
+            if (local.getUbicacion().equals(localMesa)) {
+                idLocal = local.getId();
+            }
+        }
+        if (l == null) {
+            JOptionPane.showMessageDialog(this, "La ubicación seleccionada no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        LocalvotacionModel local = localvotacionCrud.findLocalvotacionModel(idLocal);
 
-        // crea un vocal de mesa
-        VocalMesa vocalMesa1 = new VocalMesa(ciudadano1, "Presidente");
+        VocalmesaModelJpaController vocalmesaCrud = new VocalmesaModelJpaController(con);
+        Integer idVocal = null;
+        VocalmesaModel v = new VocalmesaModel();
+        for (VocalmesaModel vocal : vocalmesaCrud.findVocalmesaModelEntities()) {
+            if (vocal.getCiudadanoModel().getNombre().equals(vocalMesa)) {
+                idVocal = vocal.getDni();
+            }
+        }
+        if (v == null) {
+            JOptionPane.showMessageDialog(this, "El vocal de mesa seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        VocalmesaModel vocal = vocalmesaCrud.findVocalmesaModel(idVocal);
 
-        // crea un apoderado de mesa
-        ApoderadoMesa apoderadoMesa1 = new ApoderadoMesa(ciudadano2, 12345);
-        ApoderadoMesa apoderadoMesa2 = new ApoderadoMesa(ciudadano3, 54321);
-        
-        // crea una comuna
-        Comuna comuna = new Comuna("Cartagena");
+        ApoderadoModelJpaController apoderadoCrud = new ApoderadoModelJpaController(con);
+        Integer idApoderadoUno = null;
+        Integer idApoderadoDos = null;
+        ApoderadoModel a1 = new ApoderadoModel();
+        ApoderadoModel a2 = new ApoderadoModel();
+        for (ApoderadoModel apoderado : apoderadoCrud.findApoderadoModelEntities()) {
+            if (apoderado.getCiudadanoModel().getNombre().equals(apoderadoUno)) {
+                idApoderadoUno = apoderado.getDni();
+            }
+            if (apoderado.getCiudadanoModel().getNombre().equals(apoderadoDos)) {
+                idApoderadoDos = apoderado.getDni();
+            }
+        }
+        if (a1 == null || a2 == null) {
+            JOptionPane.showMessageDialog(this, "El apoderado de mesa seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ApoderadoModel apoderado1 = apoderadoCrud.findApoderadoModel(idApoderadoUno);
+        ApoderadoModel apoderado2 = apoderadoCrud.findApoderadoModel(idApoderadoDos);
 
-        // crea un local de votacion
-        LocalVotacion local = new LocalVotacion(comuna, localVotacion);
-
-        // Crear un objeto de mesa de votacion
-        MesaVotacion mesaVotacion = new MesaVotacion(Integer.parseInt(numeroMesa), genero, estado, local, vocalMesa1, apoderadoMesa1, apoderadoMesa2);
-
+        MesavotacionModel mesaVotacion = new MesavotacionModel();
+        mesaVotacion.setNumero(Integer.parseInt(numeroMesa));
+        mesaVotacion.setLocalvotacion(idLocal);
+        mesaVotacion.setVocalmesa(idVocal);
+        mesaVotacion.setApoderadoUno(idApoderadoUno);
+        mesaVotacion.setApoderadoDos(idApoderadoDos);
+        mesaVotacion.setGenero(genero);
+        mesaVotacion.setEstado(estado);
+    
         try {
-            mesaVotacionCrud.agregarMesaVotacion(Integer.parseInt(numeroMesa), mesaVotacion);
+            mesaVotacionCrud.create(mesaVotacion);
             JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " se agrego con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtNumeroMesa.setText("");
-            txtLocalMesa.setText("");
-            txtVocalMesa.setText("");
-            txtApoderadoUno.setText("");
-            txtApoderadoDos.setText("");
+            cmbUbicaciones.setSelectedIndex(0);
+            cmbVocales.setSelectedIndex(0);
+            cmbApoderados1.setSelectedIndex(0);
+            cmbApoderados2.setSelectedIndex(0);
             grupoGenero.clearSelection();
             grupoEstadoMesa.clearSelection();
         } catch (Exception e) {
@@ -438,30 +516,27 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!mesaVotacionCrud.mesas.containsKey(Integer.parseInt(numeroMesa))) {
+        if (mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa)) == null) {
             JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // se recupera el objeto para mostrarlo en los campos del formulario
-        MesaVotacion mesaVotacion = mesaVotacionCrud.mesas.get(Integer.parseInt(numeroMesa));
-        txtLocalMesa.setText(mesaVotacion.getLocalVotacion().getLocalVotacion());
-        String DNIVocal = mesaVotacion.getVocalMesa().getCiudadano().getDNICiudadano().toString();
-        txtVocalMesa.setText(DNIVocal);
-        String DNIapoderadoUno = mesaVotacion.getApoderadoMesaUno().getCiudadano().getDNICiudadano().toString();
-        txtApoderadoUno.setText(DNIapoderadoUno);
-        String DNIapoderadoDos = mesaVotacion.getApoderadoMesaDos().getCiudadano().getDNICiudadano().toString();
-        txtApoderadoDos.setText(DNIapoderadoDos);
-        
-        if (mesaVotacion.getGeneroMesa().equals("HOMBRE")) {
+        MesavotacionModel mesaVotacion = mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa));
+        cmbUbicaciones.setSelectedItem(mesaVotacion.getLocalvotacion());
+        cmbVocales.setSelectedItem(mesaVotacion.getVocalmesa());
+        cmbApoderados1.setSelectedItem(mesaVotacion.getApoderadoUno());
+        cmbApoderados2.setSelectedItem(mesaVotacion.getApoderadoDos());
+
+        if (mesaVotacion.getGenero().equals("HOMBRE")) {
             radioHombre.setSelected(true);
-        } else if (mesaVotacion.getGeneroMesa().equals("MUJER")) {
+        } else if (mesaVotacion.getGenero().equals("MUJER")) {
             radioMujer.setSelected(true);
         }
         
-        if (mesaVotacion.getEstadoMesa().equals("ABIERTA")) {
+        if (mesaVotacion.getEstado().equals("ABIERTA")) {
             radioAbierta.setSelected(true);
-        } else if (mesaVotacion.getEstadoMesa().equals("CERRADA")) {
+        } else if (mesaVotacion.getEstado().equals("CERRADA")) {
             radioCerrada.setSelected(true);
         }
 
@@ -480,61 +555,41 @@ public class VentanaMesa extends javax.swing.JDialog {
             return;
         }
 
-        // validar que el contenga la llave a buscar
-        if (!mesaVotacionCrud.mesas.containsKey(Integer.parseInt(numeroMesa))) {
-            JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        // validar que el combobox de ubicaciones no este vacio
+        if (cmbUbicaciones.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una ubicación", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Datos de formulario, modificar un apoderado de mesa
-
-        String localMesa = txtLocalMesa.getText();
-
-        // Validar que no este vacio el rol
-        if (localMesa == null || localMesa.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el rol del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtLocalMesa.setText("");
-            txtLocalMesa.requestFocus();
+        // obtener el valor seleccionado del combobox
+        String localMesa = cmbUbicaciones.getSelectedItem().toString();
+        
+        if(cmbVocales.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String vocalMesa = txtVocalMesa.getText();
+        // obtener el valor seleccionado del combobox
+        String vocalMesa = cmbVocales.getSelectedItem().toString();
 
-        // Validar que no este vacio el nombre
-
-        if (vocalMesa == null || vocalMesa.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el nombre del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtVocalMesa.setText("");
-            txtVocalMesa.requestFocus();
+        if(cmbApoderados1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un apoderado de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String apoderadoUno = txtApoderadoUno.getText();
+        // obtener el valor seleccionado del combobox
+        String apoderadoUno = cmbApoderados1.getSelectedItem().toString();
 
-        // Validar que no este vacio el apellido
-
-        if (apoderadoUno == null || apoderadoUno.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el apellido del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtApoderadoUno.setText("");
-            txtApoderadoUno.requestFocus();
+        if(cmbApoderados2.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un apoderado de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String apoderadoDos = txtApoderadoDos.getText();
-
-        // Validar que no este vacio el apellido
-
-        if (apoderadoDos == null || apoderadoDos.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite el apellido del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
-            txtApoderadoDos.setText("");
-            txtApoderadoDos.requestFocus();
-            return;
-        }
+        // obtener el valor seleccionado del combobox
+        String apoderadoDos = cmbApoderados2.getSelectedItem().toString();
 
         // validar los radio button
-
         String genero = "";
-
         if (radioHombre.isSelected()) {
             genero = "HOMBRE";
         } else if (radioMujer.isSelected()) {
@@ -542,14 +597,12 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar los radio button no esten vacios
-
         if (genero == null || genero.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione el genero del vocal de mesa", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String estado = "";
-
         if (radioAbierta.isSelected()) {
             estado = "ABIERTA";
         } else if (radioCerrada.isSelected()) {
@@ -557,39 +610,77 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar los radio button no esten vacios
-
         if (estado == null || estado.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione el estado de la mesa de votación", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+    
+        LocalvotacionModelJpaController localvotacionCrud = new LocalvotacionModelJpaController(con);
+        Integer idLocal = null;
+        LocalvotacionModel l = new LocalvotacionModel();
+        for (LocalvotacionModel local : localvotacionCrud.findLocalvotacionModelEntities()) {
+            if (local.getUbicacion().equals(localMesa)) {
+                idLocal = local.getId();
+            }
+        }
+        if (l == null) {
+            JOptionPane.showMessageDialog(this, "La ubicación seleccionada no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        LocalvotacionModel local = localvotacionCrud.findLocalvotacionModel(idLocal);
 
-        // Con el objeto Ciudadano crea 3 personas
-        Ciudadano ciudadano1 = new Ciudadano(100, 20, "Camilo Castellar", "HOMBRE");
-        Ciudadano ciudadano2 = new Ciudadano(200, 30, "Juan Perez", "HOMBRE");
-        Ciudadano ciudadano3 = new Ciudadano(300, 40, "Maria Perez", "MUJER");
+        VocalmesaModelJpaController vocalmesaCrud = new VocalmesaModelJpaController(con);
+        Integer idVocal = null;
+        VocalmesaModel v = new VocalmesaModel();
+        for (VocalmesaModel vocal : vocalmesaCrud.findVocalmesaModelEntities()) {
+            if (vocal.getCiudadanoModel().getNombre().equals(vocalMesa)) {
+                idVocal = vocal.getDni();
+            }
+        }
+        if (v == null) {
+            JOptionPane.showMessageDialog(this, "El vocal de mesa seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        VocalmesaModel vocal = vocalmesaCrud.findVocalmesaModel(idVocal);
 
-        // crea un vocal de mesa
-        VocalMesa vocalMesa1 = new VocalMesa(ciudadano1, "Presidente");
+        ApoderadoModelJpaController apoderadoCrud = new ApoderadoModelJpaController(con);
+        Integer idApoderadoUno = null;
+        Integer idApoderadoDos = null;
+        ApoderadoModel a1 = new ApoderadoModel();
+        ApoderadoModel a2 = new ApoderadoModel();
+        for (ApoderadoModel apoderado : apoderadoCrud.findApoderadoModelEntities()) {
+            if (apoderado.getCiudadanoModel().getNombre().equals(apoderadoUno)) {
+                idApoderadoUno = apoderado.getDni();
+            }
+            if (apoderado.getCiudadanoModel().getNombre().equals(apoderadoDos)) {
+                idApoderadoDos = apoderado.getDni();
+            }
+        }
+        if (a1 == null || a2 == null) {
+            JOptionPane.showMessageDialog(this, "El apoderado de mesa seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ApoderadoModel apoderado1 = apoderadoCrud.findApoderadoModel(idApoderadoUno);
+        ApoderadoModel apoderado2 = apoderadoCrud.findApoderadoModel(idApoderadoDos);
 
-        // crea un apoderado de mesa
-        ApoderadoMesa apoderadoMesa1 = new ApoderadoMesa(ciudadano2, 12345);
-        ApoderadoMesa apoderadoMesa2 = new ApoderadoMesa(ciudadano3, 54321);
-        
-        // crea una comuna
-        Comuna comuna = new Comuna("Cartagena");
-
-        // crea un local de votacion
-        LocalVotacion local = new LocalVotacion(comuna, localMesa);
+        MesavotacionModel mesaVotacion = mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa));
+        mesaVotacion.setNumero(idApoderadoDos);
+        mesaVotacion.setLocalvotacion(idLocal);
+        mesaVotacion.setVocalmesa(idVocal);
+        mesaVotacion.setApoderadoUno(idApoderadoUno);
+        mesaVotacion.setApoderadoDos(idApoderadoDos);
+        mesaVotacion.setGenero(genero);
+        mesaVotacion.setEstado(estado);
 
         try {
-            mesaVotacionCrud.actualizarMesaVotacion(Integer.parseInt(numeroMesa), genero, estado, local, vocalMesa1, apoderadoMesa1, apoderadoMesa2);
+            mesaVotacionCrud.edit(mesaVotacion);
             JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " se modifico con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtNumeroMesa.setText("");
-            txtLocalMesa.setText("");
-            txtVocalMesa.setText("");
-            txtApoderadoUno.setText("");
-            txtApoderadoDos.setText("");
+            cmbUbicaciones.setSelectedIndex(0);
+            cmbVocales.setSelectedIndex(0);
+            cmbApoderados1.setSelectedIndex(0);
+            cmbApoderados2.setSelectedIndex(0);
             grupoGenero.clearSelection();
             grupoEstadoMesa.clearSelection();
         } catch (Exception e) {
@@ -609,7 +700,7 @@ public class VentanaMesa extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!mesaVotacionCrud.mesas.containsKey(Integer.parseInt(numeroMesa))) {
+        if (mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa)) == null) {
             JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -618,13 +709,13 @@ public class VentanaMesa extends javax.swing.JDialog {
         
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                mesaVotacionCrud.eliminarMesaVotacion(Integer.parseInt(numeroMesa));
+                mesaVotacionCrud.destroy(Integer.parseInt(numeroMesa));
                 JOptionPane.showMessageDialog(this, "La mesa de votación con número: " + numeroMesa + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtNumeroMesa.setText("");
-                txtLocalMesa.setText("");
-                txtVocalMesa.setText("");
-                txtApoderadoUno.setText("");
-                txtApoderadoDos.setText("");
+                cmbUbicaciones.setSelectedIndex(0);
+                cmbVocales.setSelectedIndex(0);
+                cmbApoderados1.setSelectedIndex(0);
+                cmbApoderados2.setSelectedIndex(0);
                 grupoGenero.clearSelection();
                 grupoEstadoMesa.clearSelection();
             } catch (Exception e) {
@@ -695,6 +786,10 @@ public class VentanaMesa extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscarMesa;
     private javax.swing.JButton btnEliminarMesa;
     private javax.swing.JButton btnModificarMesa;
+    private javax.swing.JComboBox<String> cmbApoderados1;
+    private javax.swing.JComboBox<String> cmbApoderados2;
+    private javax.swing.JComboBox<String> cmbUbicaciones;
+    private javax.swing.JComboBox<String> cmbVocales;
     private javax.swing.ButtonGroup grupoEstadoMesa;
     private javax.swing.ButtonGroup grupoGenero;
     private javax.swing.JLabel jLabel1;
@@ -711,10 +806,6 @@ public class VentanaMesa extends javax.swing.JDialog {
     private javax.swing.JRadioButton radioCerrada;
     private javax.swing.JRadioButton radioHombre;
     private javax.swing.JRadioButton radioMujer;
-    private javax.swing.JTextField txtApoderadoDos;
-    private javax.swing.JTextField txtApoderadoUno;
-    private javax.swing.JTextField txtLocalMesa;
     private javax.swing.JTextField txtNumeroMesa;
-    private javax.swing.JTextField txtVocalMesa;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,16 +6,15 @@ package co.edu.ude.poo.procesospoliticos.modelo.crud;
 
 import co.edu.ude.poo.procesospoliticos.modelo.crud.exceptions.NonexistentEntityException;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.exceptions.PreexistingEntityException;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -37,16 +36,7 @@ public class MesavotacionModelJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            LocalvotacionModel ubicacion = mesavotacionModel.getUbicacion();
-            if (ubicacion != null) {
-                ubicacion = em.getReference(ubicacion.getClass(), ubicacion.getId());
-                mesavotacionModel.setUbicacion(ubicacion);
-            }
             em.persist(mesavotacionModel);
-            if (ubicacion != null) {
-                ubicacion.getMesavotacionModelList().add(mesavotacionModel);
-                ubicacion = em.merge(ubicacion);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findMesavotacionModel(mesavotacionModel.getNumero()) != null) {
@@ -65,22 +55,7 @@ public class MesavotacionModelJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            MesavotacionModel persistentMesavotacionModel = em.find(MesavotacionModel.class, mesavotacionModel.getNumero());
-            LocalvotacionModel ubicacionOld = persistentMesavotacionModel.getUbicacion();
-            LocalvotacionModel ubicacionNew = mesavotacionModel.getUbicacion();
-            if (ubicacionNew != null) {
-                ubicacionNew = em.getReference(ubicacionNew.getClass(), ubicacionNew.getId());
-                mesavotacionModel.setUbicacion(ubicacionNew);
-            }
             mesavotacionModel = em.merge(mesavotacionModel);
-            if (ubicacionOld != null && !ubicacionOld.equals(ubicacionNew)) {
-                ubicacionOld.getMesavotacionModelList().remove(mesavotacionModel);
-                ubicacionOld = em.merge(ubicacionOld);
-            }
-            if (ubicacionNew != null && !ubicacionNew.equals(ubicacionOld)) {
-                ubicacionNew.getMesavotacionModelList().add(mesavotacionModel);
-                ubicacionNew = em.merge(ubicacionNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -109,11 +84,6 @@ public class MesavotacionModelJpaController implements Serializable {
                 mesavotacionModel.getNumero();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The mesavotacionModel with id " + id + " no longer exists.", enfe);
-            }
-            LocalvotacionModel ubicacion = mesavotacionModel.getUbicacion();
-            if (ubicacion != null) {
-                ubicacion.getMesavotacionModelList().remove(mesavotacionModel);
-                ubicacion = em.merge(ubicacion);
             }
             em.remove(mesavotacionModel);
             em.getTransaction().commit();
