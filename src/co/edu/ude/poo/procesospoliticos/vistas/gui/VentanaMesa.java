@@ -473,10 +473,10 @@ public class VentanaMesa extends javax.swing.JDialog {
 
         MesavotacionModel mesaVotacion = new MesavotacionModel();
         mesaVotacion.setNumero(Integer.parseInt(numeroMesa));
-        mesaVotacion.setLocalvotacion(idLocal);
-        mesaVotacion.setVocalmesa(idVocal);
-        mesaVotacion.setApoderadoUno(idApoderadoUno);
-        mesaVotacion.setApoderadoDos(idApoderadoDos);
+        mesaVotacion.setLocalvotacion(local);
+        mesaVotacion.setVocalmesa(vocal);
+        mesaVotacion.setApoderadoModel(apoderado1);
+        mesaVotacion.setApoderadoModel(apoderado2);
         mesaVotacion.setGenero(genero);
         mesaVotacion.setEstado(estado);
     
@@ -523,10 +523,10 @@ public class VentanaMesa extends javax.swing.JDialog {
 
         // se recupera el objeto para mostrarlo en los campos del formulario
         MesavotacionModel mesaVotacion = mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa));
-        cmbUbicaciones.setSelectedItem(mesaVotacion.getLocalvotacion());
-        cmbVocales.setSelectedItem(mesaVotacion.getVocalmesa());
-        cmbApoderados1.setSelectedItem(mesaVotacion.getApoderadoUno());
-        cmbApoderados2.setSelectedItem(mesaVotacion.getApoderadoDos());
+        cmbUbicaciones.setSelectedItem(mesaVotacion.getLocalvotacion().getUbicacion());
+        cmbVocales.setSelectedItem(mesaVotacion.getVocalmesa().getCiudadanoModel().getNombre());
+        cmbApoderados1.setSelectedItem(mesaVotacion.getApoderadoModel().getCiudadanoModel().getNombre());
+        cmbApoderados2.setSelectedItem(mesaVotacion.getApoderadoModel().getCiudadanoModel().getNombre());
 
         if (mesaVotacion.getGenero().equals("HOMBRE")) {
             radioHombre.setSelected(true);
@@ -665,11 +665,11 @@ public class VentanaMesa extends javax.swing.JDialog {
         ApoderadoModel apoderado2 = apoderadoCrud.findApoderadoModel(idApoderadoDos);
 
         MesavotacionModel mesaVotacion = mesaVotacionCrud.findMesavotacionModel(Integer.parseInt(numeroMesa));
-        mesaVotacion.setNumero(idApoderadoDos);
-        mesaVotacion.setLocalvotacion(idLocal);
-        mesaVotacion.setVocalmesa(idVocal);
-        mesaVotacion.setApoderadoUno(idApoderadoUno);
-        mesaVotacion.setApoderadoDos(idApoderadoDos);
+        mesaVotacion.setNumero(Integer.parseInt(numeroMesa));
+        mesaVotacion.setLocalvotacion(local);
+        mesaVotacion.setVocalmesa(vocal);
+        mesaVotacion.setApoderadoModel(apoderado1);
+        mesaVotacion.setApoderadoModel(apoderado2);
         mesaVotacion.setGenero(genero);
         mesaVotacion.setEstado(estado);
 

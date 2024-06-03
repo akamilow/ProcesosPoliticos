@@ -1,12 +1,17 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Candidato;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Ciudadano;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesaVotacion;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.Voto;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.VotoCrud;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.VotoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.VotoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.CiudadanoModelJpaController;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
+import co.edu.ude.poo.procesospoliticos.modelo.crud.MesavotacionModelJpaController;
 
 import java.awt.Toolkit;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import javax.swing.JOptionPane;
 
@@ -15,12 +20,15 @@ import javax.swing.JOptionPane;
  */
 public class VentanaVoto extends javax.swing.JDialog {
     
-    // instacia de clase CRUD Voto
-    VotoCrud votoCrud = new VotoCrud();
+    EntityManagerFactory con = Persistence.createEntityManagerFactory("ProcesosPoliticosPU");
+    VotoModelJpaController votoCrud = new VotoModelJpaController(con);
     
     public VentanaVoto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarMesas();
+        cargarCandidatos();
+        cargarCiudadanos();
     }
     
     // Metodo para habilitar botones
@@ -29,6 +37,48 @@ public class VentanaVoto extends javax.swing.JDialog {
         btnBuscarVoto.setEnabled(buscar);
         btnModificarVoto.setEnabled(modificar);
         btnEliminarVoto.setEnabled(eliminar);
+    }
+
+    public void cargarMesas() {
+        
+        MesavotacionModelJpaController mesavotacionCrud = new MesavotacionModelJpaController(con);
+        MesavotacionModel mesavotacionModel = new MesavotacionModel();
+
+        cmbMesa.removeAllItems();
+        cmbMesa.addItem("Seleccione una mesa");
+        for (MesavotacionModel m : mesavotacionCrud.findMesavotacionModelEntities()) {
+            cmbMesa.addItem(m.getNumero().toString());
+        }
+
+        cmbMesa.setSelectedIndex(0);
+    }
+
+    public void cargarCandidatos() {
+        
+        CandidatoModelJpaController candidatoCrud = new CandidatoModelJpaController(con);
+        CandidatoModel candidatoModel = new CandidatoModel();
+
+        cmbCandidato.removeAllItems();
+        cmbCandidato.addItem("Seleccione un candidato");
+        for (CandidatoModel c : candidatoCrud.findCandidatoModelEntities()) {
+            cmbCandidato.addItem(c.getCiudadanoModel().getNombre());
+        }
+
+        cmbCandidato.setSelectedIndex(0);
+    }
+
+    public void cargarCiudadanos() {
+        
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        CiudadanoModel ciudadanoModel = new CiudadanoModel();
+
+        cmbCiudadano.removeAllItems();
+        cmbCiudadano.addItem("Seleccione un ciudadano");
+        for (CiudadanoModel c : ciudadanoCrud.findCiudadanoModelEntities()) {
+            cmbCiudadano.addItem(c.getNombre());
+        }
+
+        cmbCiudadano.setSelectedIndex(0);
     }
     
     /**
@@ -44,11 +94,11 @@ public class VentanaVoto extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtIDVoto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNumeroMesa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCandidato = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtCedulaCiudadano = new javax.swing.JTextField();
+        cmbMesa = new javax.swing.JComboBox<>();
+        cmbCandidato = new javax.swing.JComboBox<>();
+        cmbCiudadano = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAgregarVoto = new javax.swing.JButton();
@@ -74,21 +124,21 @@ public class VentanaVoto extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Numero de mesa");
-
-        txtNumeroMesa.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel3.setText("Número de mesa");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Candidato:");
 
-        txtCandidato.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Cédula de ciudadano:");
+        jLabel6.setText("Ciudadano:");
 
-        txtCedulaCiudadano.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbCandidato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbCiudadano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,15 +153,12 @@ public class VentanaVoto extends javax.swing.JDialog {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNumeroMesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIDVoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCandidato, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedulaCiudadano, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIDVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtIDVoto, txtNumeroMesa});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -122,21 +169,19 @@ public class VentanaVoto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedulaCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtIDVoto, txtNumeroMesa});
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -231,22 +276,88 @@ public class VentanaVoto extends javax.swing.JDialog {
             return;
         }
 
-        // crear una mesa de votacion
-        MesaVotacion mesaVotacion = new MesaVotacion();
+        // validar que el combobox de mesas no este vacio
+        if (cmbMesa.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una mesa de votación", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        // crear un candidato
-        Candidato candidato = new Candidato();
+        String numeroMesa = cmbMesa.getSelectedItem().toString();
 
-        // crear un ciudadano
-        Ciudadano ciudadano = new Ciudadano();
+        // validar que el combobox de candidatos no este vacio
+        if (cmbCandidato.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nombreCandidato = cmbCandidato.getSelectedItem().toString();
+
+        // validar que el combobox de ciudadanos no este vacio
+        if (cmbCiudadano.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nombreCiudadano = cmbCiudadano.getSelectedItem().toString();
+
+        MesavotacionModelJpaController mesaCrud = new MesavotacionModelJpaController(con);
+        Integer idMesa = null;
+        MesavotacionModel m = new MesavotacionModel();
+        for (MesavotacionModel mesa : mesaCrud.findMesavotacionModelEntities()) {
+            if (mesa.getNumero().toString().equals(numeroMesa)) {
+                idMesa = mesa.getNumero();
+                m = mesa;
+            }
+        }
+        if (m == null) {
+            JOptionPane.showMessageDialog(this, "La mesa de votación seleccionada no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        MesavotacionModel mesa = mesaCrud.findMesavotacionModel(idMesa);
+
+        CandidatoModelJpaController candidatoCrud = new CandidatoModelJpaController(con);
+        Integer idCandidato = null;
+        CandidatoModel c = new CandidatoModel();
+        for (CandidatoModel candidato : candidatoCrud.findCandidatoModelEntities()) {
+            if (candidato.getCiudadanoModel().getNombre().equals(nombreCandidato)) {
+                idCandidato = candidato.getDni();
+                c = candidato;
+            }
+        }
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El candidato seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        CandidatoModel candidato = candidatoCrud.findCandidatoModel(idCandidato);
+
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        Integer idCiudadano = null;
+        CiudadanoModel ci = new CiudadanoModel();
+        for (CiudadanoModel ciudadano : ciudadanoCrud.findCiudadanoModelEntities()) {
+            if (ciudadano.getNombre().equals(nombreCiudadano)) {
+                idCiudadano = ciudadano.getDni();
+                ci = ciudadano;
+            }
+        }
+        if (ci == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        CiudadanoModel ciudadano = ciudadanoCrud.findCiudadanoModel(idCiudadano);
+
+        VotoModel voto = new VotoModel();
+        voto.setId(Integer.parseInt(id));
+        voto.setMesa(mesa);
+        voto.setCandidato(candidato);
+        voto.setCiudadano(ciudadano);
         
         try {
-            votoCrud.agregarVoto(Integer.parseInt(id), new Voto(mesaVotacion, ciudadano, candidato));
+            votoCrud.create(voto);
             JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " se agrego con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtIDVoto.setText("");
-            txtNumeroMesa.setText("");
-            txtCandidato.setText("");
-            txtCedulaCiudadano.setText("");
+            cmbMesa.setSelectedIndex(0);
+            cmbCandidato.setSelectedIndex(0);
+            cmbCiudadano.setSelectedIndex(0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -272,17 +383,17 @@ public class VentanaVoto extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!votoCrud.votos.containsKey(Integer.parseInt(id))) {
+        if (votoCrud.findVotoModel(Integer.parseInt(id)) == null) {
             JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         //recupera el objeto para mostrarlo en los campos del formulario
-        Voto v = votoCrud.votos.get(Integer.parseInt(id));
-        txtIDVoto.setText(id);
-        txtNumeroMesa.setText(String.valueOf(v.getMesaVotacion().getNumeroMesa()));
-        txtCandidato.setText(v.getCandidato().getNombreCompletoCiudadano());
-        txtCedulaCiudadano.setText(String.valueOf(v.getCiudadano().getDNICiudadano()));
+        VotoModel voto = votoCrud.findVotoModel(Integer.parseInt(id));
+        txtIDVoto.setText(voto.getId().toString());
+        cmbMesa.setSelectedItem(voto.getMesa().getNumero().toString());
+        cmbCandidato.setSelectedItem(voto.getCandidato().getCiudadanoModel().getNombre());
+        cmbCiudadano.setSelectedItem(voto.getCiudadano().getNombre());
 
         // habilitar botones, y deshabilitar el boton agregar
         habilitarBotones(false, true, true, true);
@@ -299,23 +410,87 @@ public class VentanaVoto extends javax.swing.JDialog {
             return;
         }
 
-        // validar que el contenga la llave a buscar
-        if (!votoCrud.votos.containsKey(Integer.parseInt(id))) {
-            JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+        // validar que el combobox de mesas no este vacio
+        if (cmbMesa.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una mesa de votación", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        MesaVotacion mesaVotacion = new MesaVotacion();
-        Candidato candidato = new Candidato();
-        Ciudadano ciudadano = new Ciudadano();
+        String numeroMesa = cmbMesa.getSelectedItem().toString();
+
+        // validar que el combobox de candidatos no este vacio
+        if (cmbCandidato.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nombreCandidato = cmbCandidato.getSelectedItem().toString();
+
+        // validar que el combobox de ciudadanos no este vacio
+        if (cmbCiudadano.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un ciudadano", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String nombreCiudadano = cmbCiudadano.getSelectedItem().toString();
+
+        MesavotacionModelJpaController mesaCrud = new MesavotacionModelJpaController(con);
+        Integer idMesa = null;
+        MesavotacionModel m = new MesavotacionModel();
+        for (MesavotacionModel mesa : mesaCrud.findMesavotacionModelEntities()) {
+            if (mesa.getNumero().toString().equals(numeroMesa)) {
+                idMesa = mesa.getNumero();
+                m = mesa;
+            }
+        }
+        if (m == null) {
+            JOptionPane.showMessageDialog(this, "La mesa de votación seleccionada no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        MesavotacionModel mesa = mesaCrud.findMesavotacionModel(idMesa);
+
+        CandidatoModelJpaController candidatoCrud = new CandidatoModelJpaController(con);
+        Integer idCandidato = null;
+        CandidatoModel c = new CandidatoModel();
+        for (CandidatoModel candidato : candidatoCrud.findCandidatoModelEntities()) {
+            if (candidato.getCiudadanoModel().getNombre().equals(nombreCandidato)) {
+                idCandidato = candidato.getDni();
+                c = candidato;
+            }
+        }
+        if (c == null) {
+            JOptionPane.showMessageDialog(this, "El candidato seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        CandidatoModel candidato = candidatoCrud.findCandidatoModel(idCandidato);
+
+        CiudadanoModelJpaController ciudadanoCrud = new CiudadanoModelJpaController(con);
+        Integer idCiudadano = null;
+        CiudadanoModel ci = new CiudadanoModel();
+        for (CiudadanoModel ciudadano : ciudadanoCrud.findCiudadanoModelEntities()) {
+            if (ciudadano.getNombre().equals(nombreCiudadano)) {
+                idCiudadano = ciudadano.getDni();
+                ci = ciudadano;
+            }
+        }
+        if (ci == null) {
+            JOptionPane.showMessageDialog(this, "El ciudadano seleccionado no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        CiudadanoModel ciudadano = ciudadanoCrud.findCiudadanoModel(idCiudadano);
+
+        VotoModel voto = votoCrud.findVotoModel(Integer.parseInt(id));
+        voto.setMesa(mesa);
+        voto.setCandidato(candidato);
+        voto.setCiudadano(ciudadano);
 
         try {
-            votoCrud.actualizarVoto(Integer.parseInt(id), mesaVotacion, ciudadano, candidato);
+            votoCrud.edit(voto);
             JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " se modifico con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
             txtIDVoto.setText("");
-            txtNumeroMesa.setText("");
-            txtCandidato.setText("");
-            txtCedulaCiudadano.setText("");
+            cmbMesa.setSelectedIndex(0);
+            cmbCandidato.setSelectedIndex(0);
+            cmbCiudadano.setSelectedIndex(0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -333,7 +508,7 @@ public class VentanaVoto extends javax.swing.JDialog {
         }
 
         // validar que el contenga la llave a buscar
-        if (!votoCrud.votos.containsKey(Integer.parseInt(id))) {
+        if (votoCrud.findVotoModel(Integer.parseInt(id)) == null) {
             JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -343,12 +518,12 @@ public class VentanaVoto extends javax.swing.JDialog {
 
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                votoCrud.eliminarVoto(Integer.parseInt(id));
+                votoCrud.destroy(Integer.parseInt(id));
                 JOptionPane.showMessageDialog(this, "El voto con ID: " + id + " se elimino con éxito", "RESULTADO", JOptionPane.WARNING_MESSAGE);
                 txtIDVoto.setText("");
-                txtNumeroMesa.setText("");
-                txtCandidato.setText("");
-                txtCedulaCiudadano.setText("");
+                cmbMesa.setSelectedIndex(0);
+                cmbCandidato.setSelectedIndex(0);
+                cmbCiudadano.setSelectedIndex(0);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -405,6 +580,9 @@ public class VentanaVoto extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscarVoto;
     private javax.swing.JButton btnEliminarVoto;
     private javax.swing.JButton btnModificarVoto;
+    private javax.swing.JComboBox<String> cmbCandidato;
+    private javax.swing.JComboBox<String> cmbCiudadano;
+    private javax.swing.JComboBox<String> cmbMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -412,9 +590,6 @@ public class VentanaVoto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCandidato;
-    private javax.swing.JTextField txtCedulaCiudadano;
     private javax.swing.JTextField txtIDVoto;
-    private javax.swing.JTextField txtNumeroMesa;
     // End of variables declaration//GEN-END:variables
 }

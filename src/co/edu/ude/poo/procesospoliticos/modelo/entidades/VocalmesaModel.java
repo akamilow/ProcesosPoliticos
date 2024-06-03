@@ -5,12 +5,14 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,6 +37,8 @@ public class VocalmesaModel implements Serializable {
     @JoinColumn(name = "dni", referencedColumnName = "dni", insertable = false, updatable = false)
     @OneToOne
     private CiudadanoModel ciudadanoModel;
+    @OneToMany(mappedBy = "vocalmesa")
+    private List<MesavotacionModel> mesavotacionModelList;
 
     public VocalmesaModel() {
     }
@@ -65,6 +69,14 @@ public class VocalmesaModel implements Serializable {
 
     public void setCiudadanoModel(CiudadanoModel ciudadanoModel) {
         this.ciudadanoModel = ciudadanoModel;
+    }
+
+    public List<MesavotacionModel> getMesavotacionModelList() {
+        return mesavotacionModelList;
+    }
+
+    public void setMesavotacionModelList(List<MesavotacionModel> mesavotacionModelList) {
+        this.mesavotacionModelList = mesavotacionModelList;
     }
 
     @Override

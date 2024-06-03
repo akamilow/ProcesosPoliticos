@@ -1,13 +1,7 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.VocalmesaModel;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.ApoderadoModel;
-import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
 import co.edu.ude.poo.procesospoliticos.modelo.crud.MesavotacionModelJpaController;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.LocalvotacionModelJpaController;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.VocalmesaModelJpaController;
 
 import java.util.List;
 import java.util.Vector;
@@ -15,8 +9,6 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import co.edu.ude.poo.procesospoliticos.modelo.crud.ApoderadoModelJpaController;
-import co.edu.ude.poo.procesospoliticos.modelo.crud.CandidatoModelJpaController;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -166,10 +158,10 @@ public class VentanaListarMesas extends javax.swing.JDialog {
             MesavotacionModel m = mesas.get(i);
             Vector<String> registro = new Vector<>();
             registro.add(m.getNumero().toString());
-            registro.add(String.valueOf(m.getLocalvotacion()));
-            registro.add(String.valueOf(m.getVocalmesa()));
-            registro.add(String.valueOf(m.getApoderadoUno()));
-            registro.add(String.valueOf(m.getApoderadoDos()));
+            registro.add(m.getLocalvotacion().getUbicacion());
+            registro.add(m.getVocalmesa().getCiudadanoModel().getNombre());
+            registro.add(m.getApoderadoModel().getCiudadanoModel().getNombre());
+            registro.add(m.getApoderadoModel().getCiudadanoModel().getNombre());
             registro.add(m.getGenero());
             registro.add(m.getEstado());
             registros.add(registro);

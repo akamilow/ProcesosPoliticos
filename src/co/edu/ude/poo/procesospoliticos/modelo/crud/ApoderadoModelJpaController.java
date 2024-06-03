@@ -13,6 +13,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +35,9 @@ public class ApoderadoModelJpaController implements Serializable {
     }
 
     public void create(ApoderadoModel apoderadoModel) throws PreexistingEntityException, Exception {
+        if (apoderadoModel.getMesavotacionModelList() == null) {
+            apoderadoModel.setMesavotacionModelList(new ArrayList<MesavotacionModel>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -42,6 +47,12 @@ public class ApoderadoModelJpaController implements Serializable {
                 ciudadanoModel = em.getReference(ciudadanoModel.getClass(), ciudadanoModel.getDni());
                 apoderadoModel.setCiudadanoModel(ciudadanoModel);
             }
+            List<MesavotacionModel> attachedMesavotacionModelList = new ArrayList<MesavotacionModel>();
+            for (MesavotacionModel mesavotacionModelListMesavotacionModelToAttach : apoderadoModel.getMesavotacionModelList()) {
+                mesavotacionModelListMesavotacionModelToAttach = em.getReference(mesavotacionModelListMesavotacionModelToAttach.getClass(), mesavotacionModelListMesavotacionModelToAttach.getNumero());
+                attachedMesavotacionModelList.add(mesavotacionModelListMesavotacionModelToAttach);
+            }
+            apoderadoModel.setMesavotacionModelList(attachedMesavotacionModelList);
             em.persist(apoderadoModel);
             if (ciudadanoModel != null) {
                 ApoderadoModel oldApoderadoModelOfCiudadanoModel = ciudadanoModel.getApoderadoModel();
@@ -51,6 +62,15 @@ public class ApoderadoModelJpaController implements Serializable {
                 }
                 ciudadanoModel.setApoderadoModel(apoderadoModel);
                 ciudadanoModel = em.merge(ciudadanoModel);
+            }
+            for (MesavotacionModel mesavotacionModelListMesavotacionModel : apoderadoModel.getMesavotacionModelList()) {
+                ApoderadoModel oldApoderadoModelOfMesavotacionModelListMesavotacionModel = mesavotacionModelListMesavotacionModel.getApoderadoModel();
+                mesavotacionModelListMesavotacionModel.setApoderadoModel(apoderadoModel);
+                mesavotacionModelListMesavotacionModel = em.merge(mesavotacionModelListMesavotacionModel);
+                if (oldApoderadoModelOfMesavotacionModelListMesavotacionModel != null) {
+                    oldApoderadoModelOfMesavotacionModelListMesavotacionModel.getMesavotacionModelList().remove(mesavotacionModelListMesavotacionModel);
+                    oldApoderadoModelOfMesavotacionModelListMesavotacionModel = em.merge(oldApoderadoModelOfMesavotacionModelListMesavotacionModel);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -73,10 +93,19 @@ public class ApoderadoModelJpaController implements Serializable {
             ApoderadoModel persistentApoderadoModel = em.find(ApoderadoModel.class, apoderadoModel.getDni());
             CiudadanoModel ciudadanoModelOld = persistentApoderadoModel.getCiudadanoModel();
             CiudadanoModel ciudadanoModelNew = apoderadoModel.getCiudadanoModel();
+            List<MesavotacionModel> mesavotacionModelListOld = persistentApoderadoModel.getMesavotacionModelList();
+            List<MesavotacionModel> mesavotacionModelListNew = apoderadoModel.getMesavotacionModelList();
             if (ciudadanoModelNew != null) {
                 ciudadanoModelNew = em.getReference(ciudadanoModelNew.getClass(), ciudadanoModelNew.getDni());
                 apoderadoModel.setCiudadanoModel(ciudadanoModelNew);
             }
+            List<MesavotacionModel> attachedMesavotacionModelListNew = new ArrayList<MesavotacionModel>();
+            for (MesavotacionModel mesavotacionModelListNewMesavotacionModelToAttach : mesavotacionModelListNew) {
+                mesavotacionModelListNewMesavotacionModelToAttach = em.getReference(mesavotacionModelListNewMesavotacionModelToAttach.getClass(), mesavotacionModelListNewMesavotacionModelToAttach.getNumero());
+                attachedMesavotacionModelListNew.add(mesavotacionModelListNewMesavotacionModelToAttach);
+            }
+            mesavotacionModelListNew = attachedMesavotacionModelListNew;
+            apoderadoModel.setMesavotacionModelList(mesavotacionModelListNew);
             apoderadoModel = em.merge(apoderadoModel);
             if (ciudadanoModelOld != null && !ciudadanoModelOld.equals(ciudadanoModelNew)) {
                 ciudadanoModelOld.setApoderadoModel(null);
@@ -90,6 +119,23 @@ public class ApoderadoModelJpaController implements Serializable {
                 }
                 ciudadanoModelNew.setApoderadoModel(apoderadoModel);
                 ciudadanoModelNew = em.merge(ciudadanoModelNew);
+            }
+            for (MesavotacionModel mesavotacionModelListOldMesavotacionModel : mesavotacionModelListOld) {
+                if (!mesavotacionModelListNew.contains(mesavotacionModelListOldMesavotacionModel)) {
+                    mesavotacionModelListOldMesavotacionModel.setApoderadoModel(null);
+                    mesavotacionModelListOldMesavotacionModel = em.merge(mesavotacionModelListOldMesavotacionModel);
+                }
+            }
+            for (MesavotacionModel mesavotacionModelListNewMesavotacionModel : mesavotacionModelListNew) {
+                if (!mesavotacionModelListOld.contains(mesavotacionModelListNewMesavotacionModel)) {
+                    ApoderadoModel oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel = mesavotacionModelListNewMesavotacionModel.getApoderadoModel();
+                    mesavotacionModelListNewMesavotacionModel.setApoderadoModel(apoderadoModel);
+                    mesavotacionModelListNewMesavotacionModel = em.merge(mesavotacionModelListNewMesavotacionModel);
+                    if (oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel != null && !oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel.equals(apoderadoModel)) {
+                        oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel.getMesavotacionModelList().remove(mesavotacionModelListNewMesavotacionModel);
+                        oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel = em.merge(oldApoderadoModelOfMesavotacionModelListNewMesavotacionModel);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -124,6 +170,11 @@ public class ApoderadoModelJpaController implements Serializable {
             if (ciudadanoModel != null) {
                 ciudadanoModel.setApoderadoModel(null);
                 ciudadanoModel = em.merge(ciudadanoModel);
+            }
+            List<MesavotacionModel> mesavotacionModelList = apoderadoModel.getMesavotacionModelList();
+            for (MesavotacionModel mesavotacionModelListMesavotacionModel : mesavotacionModelList) {
+                mesavotacionModelListMesavotacionModel.setApoderadoModel(null);
+                mesavotacionModelListMesavotacionModel = em.merge(mesavotacionModelListMesavotacionModel);
             }
             em.remove(apoderadoModel);
             em.getTransaction().commit();

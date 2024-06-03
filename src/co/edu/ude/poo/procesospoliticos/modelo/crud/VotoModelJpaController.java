@@ -11,7 +11,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.CandidatoModel;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.CiudadanoModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.VotoModel;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,15 +39,33 @@ public class VotoModelJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            CandidatoModel candidato = votoModel.getCandidato();
+            if (candidato != null) {
+                candidato = em.getReference(candidato.getClass(), candidato.getDni());
+                votoModel.setCandidato(candidato);
+            }
             CiudadanoModel ciudadano = votoModel.getCiudadano();
             if (ciudadano != null) {
                 ciudadano = em.getReference(ciudadano.getClass(), ciudadano.getDni());
                 votoModel.setCiudadano(ciudadano);
             }
+            MesavotacionModel mesa = votoModel.getMesa();
+            if (mesa != null) {
+                mesa = em.getReference(mesa.getClass(), mesa.getNumero());
+                votoModel.setMesa(mesa);
+            }
             em.persist(votoModel);
+            if (candidato != null) {
+                candidato.getVotoModelList().add(votoModel);
+                candidato = em.merge(candidato);
+            }
             if (ciudadano != null) {
                 ciudadano.getVotoModelList().add(votoModel);
                 ciudadano = em.merge(ciudadano);
+            }
+            if (mesa != null) {
+                mesa.getVotoModelList().add(votoModel);
+                mesa = em.merge(mesa);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -66,13 +86,33 @@ public class VotoModelJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             VotoModel persistentVotoModel = em.find(VotoModel.class, votoModel.getId());
+            CandidatoModel candidatoOld = persistentVotoModel.getCandidato();
+            CandidatoModel candidatoNew = votoModel.getCandidato();
             CiudadanoModel ciudadanoOld = persistentVotoModel.getCiudadano();
             CiudadanoModel ciudadanoNew = votoModel.getCiudadano();
+            MesavotacionModel mesaOld = persistentVotoModel.getMesa();
+            MesavotacionModel mesaNew = votoModel.getMesa();
+            if (candidatoNew != null) {
+                candidatoNew = em.getReference(candidatoNew.getClass(), candidatoNew.getDni());
+                votoModel.setCandidato(candidatoNew);
+            }
             if (ciudadanoNew != null) {
                 ciudadanoNew = em.getReference(ciudadanoNew.getClass(), ciudadanoNew.getDni());
                 votoModel.setCiudadano(ciudadanoNew);
             }
+            if (mesaNew != null) {
+                mesaNew = em.getReference(mesaNew.getClass(), mesaNew.getNumero());
+                votoModel.setMesa(mesaNew);
+            }
             votoModel = em.merge(votoModel);
+            if (candidatoOld != null && !candidatoOld.equals(candidatoNew)) {
+                candidatoOld.getVotoModelList().remove(votoModel);
+                candidatoOld = em.merge(candidatoOld);
+            }
+            if (candidatoNew != null && !candidatoNew.equals(candidatoOld)) {
+                candidatoNew.getVotoModelList().add(votoModel);
+                candidatoNew = em.merge(candidatoNew);
+            }
             if (ciudadanoOld != null && !ciudadanoOld.equals(ciudadanoNew)) {
                 ciudadanoOld.getVotoModelList().remove(votoModel);
                 ciudadanoOld = em.merge(ciudadanoOld);
@@ -80,6 +120,14 @@ public class VotoModelJpaController implements Serializable {
             if (ciudadanoNew != null && !ciudadanoNew.equals(ciudadanoOld)) {
                 ciudadanoNew.getVotoModelList().add(votoModel);
                 ciudadanoNew = em.merge(ciudadanoNew);
+            }
+            if (mesaOld != null && !mesaOld.equals(mesaNew)) {
+                mesaOld.getVotoModelList().remove(votoModel);
+                mesaOld = em.merge(mesaOld);
+            }
+            if (mesaNew != null && !mesaNew.equals(mesaOld)) {
+                mesaNew.getVotoModelList().add(votoModel);
+                mesaNew = em.merge(mesaNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -110,10 +158,20 @@ public class VotoModelJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The votoModel with id " + id + " no longer exists.", enfe);
             }
+            CandidatoModel candidato = votoModel.getCandidato();
+            if (candidato != null) {
+                candidato.getVotoModelList().remove(votoModel);
+                candidato = em.merge(candidato);
+            }
             CiudadanoModel ciudadano = votoModel.getCiudadano();
             if (ciudadano != null) {
                 ciudadano.getVotoModelList().remove(votoModel);
                 ciudadano = em.merge(ciudadano);
+            }
+            MesavotacionModel mesa = votoModel.getMesa();
+            if (mesa != null) {
+                mesa.getVotoModelList().remove(votoModel);
+                mesa = em.merge(mesa);
             }
             em.remove(votoModel);
             em.getTransaction().commit();

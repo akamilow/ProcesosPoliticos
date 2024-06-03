@@ -13,6 +13,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.ComunaModel;
 import co.edu.ude.poo.procesospoliticos.modelo.entidades.LocalvotacionModel;
+import co.edu.ude.poo.procesospoliticos.modelo.entidades.MesavotacionModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +35,9 @@ public class LocalvotacionModelJpaController implements Serializable {
     }
 
     public void create(LocalvotacionModel localvotacionModel) throws PreexistingEntityException, Exception {
+        if (localvotacionModel.getMesavotacionModelList() == null) {
+            localvotacionModel.setMesavotacionModelList(new ArrayList<MesavotacionModel>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -42,10 +47,25 @@ public class LocalvotacionModelJpaController implements Serializable {
                 comuna = em.getReference(comuna.getClass(), comuna.getId());
                 localvotacionModel.setComuna(comuna);
             }
+            List<MesavotacionModel> attachedMesavotacionModelList = new ArrayList<MesavotacionModel>();
+            for (MesavotacionModel mesavotacionModelListMesavotacionModelToAttach : localvotacionModel.getMesavotacionModelList()) {
+                mesavotacionModelListMesavotacionModelToAttach = em.getReference(mesavotacionModelListMesavotacionModelToAttach.getClass(), mesavotacionModelListMesavotacionModelToAttach.getNumero());
+                attachedMesavotacionModelList.add(mesavotacionModelListMesavotacionModelToAttach);
+            }
+            localvotacionModel.setMesavotacionModelList(attachedMesavotacionModelList);
             em.persist(localvotacionModel);
             if (comuna != null) {
                 comuna.getLocalvotacionModelList().add(localvotacionModel);
                 comuna = em.merge(comuna);
+            }
+            for (MesavotacionModel mesavotacionModelListMesavotacionModel : localvotacionModel.getMesavotacionModelList()) {
+                LocalvotacionModel oldLocalvotacionOfMesavotacionModelListMesavotacionModel = mesavotacionModelListMesavotacionModel.getLocalvotacion();
+                mesavotacionModelListMesavotacionModel.setLocalvotacion(localvotacionModel);
+                mesavotacionModelListMesavotacionModel = em.merge(mesavotacionModelListMesavotacionModel);
+                if (oldLocalvotacionOfMesavotacionModelListMesavotacionModel != null) {
+                    oldLocalvotacionOfMesavotacionModelListMesavotacionModel.getMesavotacionModelList().remove(mesavotacionModelListMesavotacionModel);
+                    oldLocalvotacionOfMesavotacionModelListMesavotacionModel = em.merge(oldLocalvotacionOfMesavotacionModelListMesavotacionModel);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -68,10 +88,19 @@ public class LocalvotacionModelJpaController implements Serializable {
             LocalvotacionModel persistentLocalvotacionModel = em.find(LocalvotacionModel.class, localvotacionModel.getId());
             ComunaModel comunaOld = persistentLocalvotacionModel.getComuna();
             ComunaModel comunaNew = localvotacionModel.getComuna();
+            List<MesavotacionModel> mesavotacionModelListOld = persistentLocalvotacionModel.getMesavotacionModelList();
+            List<MesavotacionModel> mesavotacionModelListNew = localvotacionModel.getMesavotacionModelList();
             if (comunaNew != null) {
                 comunaNew = em.getReference(comunaNew.getClass(), comunaNew.getId());
                 localvotacionModel.setComuna(comunaNew);
             }
+            List<MesavotacionModel> attachedMesavotacionModelListNew = new ArrayList<MesavotacionModel>();
+            for (MesavotacionModel mesavotacionModelListNewMesavotacionModelToAttach : mesavotacionModelListNew) {
+                mesavotacionModelListNewMesavotacionModelToAttach = em.getReference(mesavotacionModelListNewMesavotacionModelToAttach.getClass(), mesavotacionModelListNewMesavotacionModelToAttach.getNumero());
+                attachedMesavotacionModelListNew.add(mesavotacionModelListNewMesavotacionModelToAttach);
+            }
+            mesavotacionModelListNew = attachedMesavotacionModelListNew;
+            localvotacionModel.setMesavotacionModelList(mesavotacionModelListNew);
             localvotacionModel = em.merge(localvotacionModel);
             if (comunaOld != null && !comunaOld.equals(comunaNew)) {
                 comunaOld.getLocalvotacionModelList().remove(localvotacionModel);
@@ -80,6 +109,23 @@ public class LocalvotacionModelJpaController implements Serializable {
             if (comunaNew != null && !comunaNew.equals(comunaOld)) {
                 comunaNew.getLocalvotacionModelList().add(localvotacionModel);
                 comunaNew = em.merge(comunaNew);
+            }
+            for (MesavotacionModel mesavotacionModelListOldMesavotacionModel : mesavotacionModelListOld) {
+                if (!mesavotacionModelListNew.contains(mesavotacionModelListOldMesavotacionModel)) {
+                    mesavotacionModelListOldMesavotacionModel.setLocalvotacion(null);
+                    mesavotacionModelListOldMesavotacionModel = em.merge(mesavotacionModelListOldMesavotacionModel);
+                }
+            }
+            for (MesavotacionModel mesavotacionModelListNewMesavotacionModel : mesavotacionModelListNew) {
+                if (!mesavotacionModelListOld.contains(mesavotacionModelListNewMesavotacionModel)) {
+                    LocalvotacionModel oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel = mesavotacionModelListNewMesavotacionModel.getLocalvotacion();
+                    mesavotacionModelListNewMesavotacionModel.setLocalvotacion(localvotacionModel);
+                    mesavotacionModelListNewMesavotacionModel = em.merge(mesavotacionModelListNewMesavotacionModel);
+                    if (oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel != null && !oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel.equals(localvotacionModel)) {
+                        oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel.getMesavotacionModelList().remove(mesavotacionModelListNewMesavotacionModel);
+                        oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel = em.merge(oldLocalvotacionOfMesavotacionModelListNewMesavotacionModel);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -114,6 +160,11 @@ public class LocalvotacionModelJpaController implements Serializable {
             if (comuna != null) {
                 comuna.getLocalvotacionModelList().remove(localvotacionModel);
                 comuna = em.merge(comuna);
+            }
+            List<MesavotacionModel> mesavotacionModelList = localvotacionModel.getMesavotacionModelList();
+            for (MesavotacionModel mesavotacionModelListMesavotacionModel : mesavotacionModelList) {
+                mesavotacionModelListMesavotacionModel.setLocalvotacion(null);
+                mesavotacionModelListMesavotacionModel = em.merge(mesavotacionModelListMesavotacionModel);
             }
             em.remove(localvotacionModel);
             em.getTransaction().commit();

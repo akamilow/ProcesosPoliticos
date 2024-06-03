@@ -5,11 +5,16 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,11 +27,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "MesavotacionModel.findAll", query = "SELECT m FROM MesavotacionModel m"),
     @NamedQuery(name = "MesavotacionModel.findByNumero", query = "SELECT m FROM MesavotacionModel m WHERE m.numero = :numero"),
     @NamedQuery(name = "MesavotacionModel.findByGenero", query = "SELECT m FROM MesavotacionModel m WHERE m.genero = :genero"),
-    @NamedQuery(name = "MesavotacionModel.findByEstado", query = "SELECT m FROM MesavotacionModel m WHERE m.estado = :estado"),
-    @NamedQuery(name = "MesavotacionModel.findByLocalvotacion", query = "SELECT m FROM MesavotacionModel m WHERE m.localvotacion = :localvotacion"),
-    @NamedQuery(name = "MesavotacionModel.findByVocalmesa", query = "SELECT m FROM MesavotacionModel m WHERE m.vocalmesa = :vocalmesa"),
-    @NamedQuery(name = "MesavotacionModel.findByApoderadoUno", query = "SELECT m FROM MesavotacionModel m WHERE m.apoderadoUno = :apoderadoUno"),
-    @NamedQuery(name = "MesavotacionModel.findByApoderadoDos", query = "SELECT m FROM MesavotacionModel m WHERE m.apoderadoDos = :apoderadoDos")})
+    @NamedQuery(name = "MesavotacionModel.findByEstado", query = "SELECT m FROM MesavotacionModel m WHERE m.estado = :estado")})
 public class MesavotacionModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,14 +38,19 @@ public class MesavotacionModel implements Serializable {
     private String genero;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "localvotacion")
-    private Integer localvotacion;
-    @Column(name = "vocalmesa")
-    private Integer vocalmesa;
-    @Column(name = "apoderadoUno")
-    private Integer apoderadoUno;
-    @Column(name = "apoderadoDos")
-    private Integer apoderadoDos;
+    @JoinColumns({
+        @JoinColumn(name = "apoderadoDos", referencedColumnName = "dni"),
+        @JoinColumn(name = "apoderadoUno", referencedColumnName = "dni")})
+    @ManyToOne
+    private ApoderadoModel apoderadoModel;
+    @JoinColumn(name = "localvotacion", referencedColumnName = "id")
+    @ManyToOne
+    private LocalvotacionModel localvotacion;
+    @JoinColumn(name = "vocalmesa", referencedColumnName = "dni")
+    @ManyToOne
+    private VocalmesaModel vocalmesa;
+    @OneToMany(mappedBy = "mesa")
+    private List<VotoModel> votoModelList;
 
     public MesavotacionModel() {
     }
@@ -77,36 +83,36 @@ public class MesavotacionModel implements Serializable {
         this.estado = estado;
     }
 
-    public Integer getLocalvotacion() {
+    public ApoderadoModel getApoderadoModel() {
+        return apoderadoModel;
+    }
+
+    public void setApoderadoModel(ApoderadoModel apoderadoModel) {
+        this.apoderadoModel = apoderadoModel;
+    }
+
+    public LocalvotacionModel getLocalvotacion() {
         return localvotacion;
     }
 
-    public void setLocalvotacion(Integer localvotacion) {
+    public void setLocalvotacion(LocalvotacionModel localvotacion) {
         this.localvotacion = localvotacion;
     }
 
-    public Integer getVocalmesa() {
+    public VocalmesaModel getVocalmesa() {
         return vocalmesa;
     }
 
-    public void setVocalmesa(Integer vocalmesa) {
+    public void setVocalmesa(VocalmesaModel vocalmesa) {
         this.vocalmesa = vocalmesa;
     }
 
-    public Integer getApoderadoUno() {
-        return apoderadoUno;
+    public List<VotoModel> getVotoModelList() {
+        return votoModelList;
     }
 
-    public void setApoderadoUno(Integer apoderadoUno) {
-        this.apoderadoUno = apoderadoUno;
-    }
-
-    public Integer getApoderadoDos() {
-        return apoderadoDos;
-    }
-
-    public void setApoderadoDos(Integer apoderadoDos) {
-        this.apoderadoDos = apoderadoDos;
+    public void setVotoModelList(List<VotoModel> votoModelList) {
+        this.votoModelList = votoModelList;
     }
 
     @Override

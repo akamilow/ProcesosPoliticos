@@ -22,22 +22,22 @@ import javax.persistence.Table;
 @Table(name = "Voto")
 @NamedQueries({
     @NamedQuery(name = "VotoModel.findAll", query = "SELECT v FROM VotoModel v"),
-    @NamedQuery(name = "VotoModel.findById", query = "SELECT v FROM VotoModel v WHERE v.id = :id"),
-    @NamedQuery(name = "VotoModel.findByMesa", query = "SELECT v FROM VotoModel v WHERE v.mesa = :mesa"),
-    @NamedQuery(name = "VotoModel.findByCandidato", query = "SELECT v FROM VotoModel v WHERE v.candidato = :candidato")})
+    @NamedQuery(name = "VotoModel.findById", query = "SELECT v FROM VotoModel v WHERE v.id = :id")})
 public class VotoModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "id")
     private Integer id;
-    @Column(name = "mesa")
-    private Integer mesa;
-    @Column(name = "candidato")
-    private Integer candidato;
+    @JoinColumn(name = "candidato", referencedColumnName = "dni")
+    @ManyToOne
+    private CandidatoModel candidato;
     @JoinColumn(name = "ciudadano", referencedColumnName = "dni")
     @ManyToOne
     private CiudadanoModel ciudadano;
+    @JoinColumn(name = "mesa", referencedColumnName = "numero")
+    @ManyToOne
+    private MesavotacionModel mesa;
 
     public VotoModel() {
     }
@@ -54,19 +54,11 @@ public class VotoModel implements Serializable {
         this.id = id;
     }
 
-    public Integer getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(Integer mesa) {
-        this.mesa = mesa;
-    }
-
-    public Integer getCandidato() {
+    public CandidatoModel getCandidato() {
         return candidato;
     }
 
-    public void setCandidato(Integer candidato) {
+    public void setCandidato(CandidatoModel candidato) {
         this.candidato = candidato;
     }
 
@@ -76,6 +68,14 @@ public class VotoModel implements Serializable {
 
     public void setCiudadano(CiudadanoModel ciudadano) {
         this.ciudadano = ciudadano;
+    }
+
+    public MesavotacionModel getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(MesavotacionModel mesa) {
+        this.mesa = mesa;
     }
 
     @Override

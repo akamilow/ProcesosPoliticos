@@ -98,10 +98,10 @@
                   </Group>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtNumeroMesa" linkSize="3" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtIDVoto" linkSize="3" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtCandidato" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtCedulaCiudadano" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="txtIDVoto" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="cmbMesa" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="cmbCandidato" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="cmbCiudadano" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
@@ -113,22 +113,22 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" linkSize="1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtIDVoto" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIDVoto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" linkSize="1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtNumeroMesa" linkSize="4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="cmbMesa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtCandidato" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="cmbCandidato" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtCedulaCiudadano" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="cmbCiudadano" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -161,14 +161,7 @@
               <Font name="Dialog" size="12" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="Numero de mesa"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNumeroMesa">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="0"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de mesa"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -180,28 +173,59 @@
             <Property name="text" type="java.lang.String" value="Candidato:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCandidato">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="C&#xe9;dula de ciudadano:"/>
+            <Property name="text" type="java.lang.String" value="Ciudadano:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCedulaCiudadano">
+        <Component class="javax.swing.JComboBox" name="cmbMesa">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="0"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCandidato">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCiudadano">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

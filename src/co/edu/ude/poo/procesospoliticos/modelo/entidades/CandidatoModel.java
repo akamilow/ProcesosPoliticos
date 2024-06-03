@@ -5,6 +5,7 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +35,8 @@ public class CandidatoModel implements Serializable {
     private Integer dni;
     @Column(name = "categoria")
     private String categoria;
+    @OneToMany(mappedBy = "candidato")
+    private List<VotoModel> votoModelList;
     @JoinColumn(name = "dni", referencedColumnName = "dni", insertable = false, updatable = false)
     @OneToOne
     private CiudadanoModel ciudadanoModel;
@@ -64,6 +68,14 @@ public class CandidatoModel implements Serializable {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public List<VotoModel> getVotoModelList() {
+        return votoModelList;
+    }
+
+    public void setVotoModelList(List<VotoModel> votoModelList) {
+        this.votoModelList = votoModelList;
     }
 
     public CiudadanoModel getCiudadanoModel() {
