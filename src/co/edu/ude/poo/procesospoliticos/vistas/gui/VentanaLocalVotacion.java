@@ -261,6 +261,7 @@ public class VentanaLocalVotacion extends javax.swing.JDialog {
 
         // Crear objeto LocalVotacion
         LocalvotacionModel l = new LocalvotacionModel();
+        l.setId(Integer.parseInt(id));
         l.setUbicacion(localVotacion);
         l.setComuna(comuna);
         

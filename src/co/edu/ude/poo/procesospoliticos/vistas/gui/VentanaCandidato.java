@@ -343,6 +343,7 @@ public class VentanaCandidato extends javax.swing.JDialog {
         
         // Crear un objeto candidato
         CandidatoModel candidato = new CandidatoModel();
+        candidato.setDni(Integer.parseInt(dni));
         candidato.setCiudadanoModel(c);
         candidato.setPartido(partido);
         candidato.setComuna(comuna);
