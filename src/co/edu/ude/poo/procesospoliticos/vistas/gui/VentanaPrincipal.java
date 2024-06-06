@@ -1,6 +1,7 @@
 package co.edu.ude.poo.procesospoliticos.vistas.gui;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * @author camilo castellar
@@ -100,6 +101,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Procesos Politícos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/wave.png"))); // NOI18N
@@ -125,7 +131,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemListarUsuarios);
 
         itemInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/User-Interface-Login-icon.png"))); // NOI18N
-        itemInicioSesion.setText("Inicio Sesión");
+        itemInicioSesion.setText("Cerrar Sesion");
+        itemInicioSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemInicioSesionActionPerformed(evt);
+            }
+        });
         jMenu1.add(itemInicioSesion);
 
         BarraMenu.add(jMenu1);
@@ -889,6 +900,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_itemListarUsuariosActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        VentanaLogin ventana = new VentanaLogin(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void itemInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInicioSesionActionPerformed
+        // salir del sistema antes preguntar si desea salir con JoptionPane
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            VentanaLogin ventana = new VentanaLogin(this, true);
+            ventana.setLocationRelativeTo(this);
+            ventana.setVisible(true);
+        }
+    }//GEN-LAST:event_itemInicioSesionActionPerformed
 
     /**
      * @param args the command line arguments
