@@ -106,12 +106,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Sistema");
 
+        itemGestiionUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/Users-Add-User-icon.png"))); // NOI18N
         itemGestiionUsuarios.setText("Gestión Usuarios");
+        itemGestiionUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemGestiionUsuariosActionPerformed(evt);
+            }
+        });
         jMenu1.add(itemGestiionUsuarios);
 
+        itemListarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/list-icon.png"))); // NOI18N
         itemListarUsuarios.setText("Listar Usuarios");
+        itemListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarUsuariosActionPerformed(evt);
+            }
+        });
         jMenu1.add(itemListarUsuarios);
 
+        itemInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/User-Interface-Login-icon.png"))); // NOI18N
         itemInicioSesion.setText("Inicio Sesión");
         jMenu1.add(itemInicioSesion);
 
@@ -863,6 +876,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
         ventana.setVisible(true);
     }//GEN-LAST:event_itemListarVotoActionPerformed
+
+    private void itemGestiionUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGestiionUsuariosActionPerformed
+        VentanaUsuario ventana = new VentanaUsuario(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.habilitarBotones(true, true, false, false);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemGestiionUsuariosActionPerformed
+
+    private void itemListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarUsuariosActionPerformed
+        VentanaListarUsuarios ventana = new VentanaListarUsuarios(this, true);
+        ventana.setLocationRelativeTo(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_itemListarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments

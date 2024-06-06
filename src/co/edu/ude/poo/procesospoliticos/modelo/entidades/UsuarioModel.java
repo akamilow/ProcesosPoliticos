@@ -5,7 +5,6 @@
 package co.edu.ude.poo.procesospoliticos.modelo.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,10 +26,8 @@ public class UsuarioModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "dni")
     private Integer dni;
-    @Basic(optional = false)
     @Column(name = "contrasena")
     private String contrasena;
 
@@ -39,11 +36,6 @@ public class UsuarioModel implements Serializable {
 
     public UsuarioModel(Integer dni) {
         this.dni = dni;
-    }
-
-    public UsuarioModel(Integer dni, String contrasena) {
-        this.dni = dni;
-        this.contrasena = contrasena;
     }
 
     public Integer getDni() {
