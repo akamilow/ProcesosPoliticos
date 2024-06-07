@@ -101,7 +101,7 @@ public class VentanaLogin extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INISIO DE SESION");
+        jLabel1.setText("INICIO DE SESIÓN");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/ude/poo/procesospoliticos/vistas/iconos/Election-Vote-2-Outline-icon.png"))); // NOI18N

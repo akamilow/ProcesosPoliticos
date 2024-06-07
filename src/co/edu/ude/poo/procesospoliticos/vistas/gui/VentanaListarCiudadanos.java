@@ -140,7 +140,9 @@ public class VentanaListarCiudadanos extends javax.swing.JDialog {
         }
         Vector<String> columnas = new Vector<>();
         columnas.add("ID");
-        columnas.add("Nombre del partido");
+        columnas.add("Nombre del ciudadano");
+        columnas.add("Genero");
+        columnas.add("Edad");
         
         // vector registros
         Vector<Vector> registros = new Vector<>();

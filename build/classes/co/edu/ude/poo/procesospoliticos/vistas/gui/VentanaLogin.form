@@ -155,7 +155,7 @@
           <Font name="Dialog" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="INISIO DE SESION"/>
+        <Property name="text" type="java.lang.String" value="INICIO DE SESI&#xd3;N"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
